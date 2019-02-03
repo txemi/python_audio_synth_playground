@@ -9,7 +9,7 @@ except ImportError:  # Pyt   hon 3
 
 DEFAULTRATE = 44100
 
-la_note_frec = 440.00
+A_note_frec = 440.00
 
 
 def build_data_for_freq_1(frequency, duration, volume, sample_rate):

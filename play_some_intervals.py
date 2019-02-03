@@ -1,5 +1,5 @@
 import tone_play
-from stream_data_for_freq import la_note_frec
+from stream_data_for_freq import A_note_frec
 
 
 def intervalo(semitonos):
@@ -29,4 +29,4 @@ def probando_intervalos(tone_freq):
 
 
 if __name__ == "__main__":
-    probando_intervalos(la_note_frec)
+    probando_intervalos(A_note_frec)
