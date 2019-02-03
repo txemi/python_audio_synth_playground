@@ -9,8 +9,10 @@ except ImportError:  # Pyt   hon 3
 
 DEFAULTRATE = 44100
 
+la_note_frec = 440.00
 
-def build_data(frequency, duration, volume, sample_rate):
+
+def build_data_for_freq_1(frequency, duration, volume, sample_rate):
     n_samples = int(sample_rate * duration)
     restframes = n_samples % sample_rate
     s = lambda t: volume * math.sin(2 * math.pi * frequency * t / sample_rate)
@@ -18,7 +20,7 @@ def build_data(frequency, duration, volume, sample_rate):
     return izip(*[samples] * sample_rate), restframes
 
 
-def data_for_freq(frequency: float, time: float = None, RATE=DEFAULTRATE):
+def build_data_for_freq_2(frequency: float, time: float = None, RATE=DEFAULTRATE):
     """get frames for a fixed frequency for a specified time or
     number of frames, if frame_count is specified, the specified
     time is ignored"""

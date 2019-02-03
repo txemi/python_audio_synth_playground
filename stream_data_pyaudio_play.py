@@ -3,8 +3,8 @@ from pyaudio import PyAudio
 
 
 def play1(data, restframes, sample_rate):
-    p = PyAudio()
-    stream = p.open(format=p.get_format_from_width(1),  # 8bit
+    pyaudio_object = PyAudio()
+    stream = pyaudio_object.open(format=pyaudio_object.get_format_from_width(1),  # 8bit
                     channels=1,  # mono
                     rate=sample_rate,
                     output=True)
@@ -16,15 +16,14 @@ def play1(data, restframes, sample_rate):
 
     stream.stop_stream()
     stream.close()
-    p.terminate()
+    pyaudio_object.terminate()
 
 
-def play2(frames, RATE):
-    FORMAT = pyaudio.paInt16
-    CHANNELS = 2
-
-    p: PyAudio = pyaudio.PyAudio()
-    stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, output=True)
+def play2(frames, rate):
+    format = pyaudio.paInt16
+    channels = 2
+    pyaudio_object: PyAudio = pyaudio.PyAudio()
+    stream = pyaudio_object.open(format=format, channels=channels, rate=rate, output=True)
     stream.write(frames)
     stream.stop_stream()
     stream.close()
