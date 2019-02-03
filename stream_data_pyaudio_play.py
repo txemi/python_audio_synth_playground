@@ -5,9 +5,9 @@ from pyaudio import PyAudio
 def play1(data, restframes, sample_rate):
     pyaudio_object = PyAudio()
     stream = pyaudio_object.open(format=pyaudio_object.get_format_from_width(1),  # 8bit
-                    channels=1,  # mono
-                    rate=sample_rate,
-                    output=True)
+                                 channels=1,  # mono
+                                 rate=sample_rate,
+                                 output=True)
     for buf in data:  # write several samples at a time
         stream.write(bytes(bytearray(buf)))
 
@@ -20,10 +20,10 @@ def play1(data, restframes, sample_rate):
 
 
 def play2(frames, rate):
-    format = pyaudio.paInt16
+    audio_format = pyaudio.paInt16
     channels = 2
     pyaudio_object: PyAudio = pyaudio.PyAudio()
-    stream = pyaudio_object.open(format=format, channels=channels, rate=rate, output=True)
+    stream = pyaudio_object.open(format=audio_format, channels=channels, rate=rate, output=True)
     stream.write(frames)
     stream.stop_stream()
     stream.close()

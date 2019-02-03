@@ -3,7 +3,7 @@ from stream_data_for_freq import la_note_frec
 
 
 def intervalo(semitonos):
-    return (2 ** (semitonos / 12))
+    return 2 ** (semitonos / 12)
 
 
 def octavas(nota):

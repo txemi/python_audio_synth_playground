@@ -20,17 +20,17 @@ def build_data_for_freq_1(frequency, duration, volume, sample_rate):
     return izip(*[samples] * sample_rate), restframes
 
 
-def build_data_for_freq_2(frequency: float, time: float = None, RATE=DEFAULTRATE):
+def build_data_for_freq_2(frequency: float, time: float = None, rate=DEFAULTRATE):
     """get frames for a fixed frequency for a specified time or
     number of frames, if frame_count is specified, the specified
     time is ignored"""
-    frame_count = int(RATE * time)
+    frame_count = int(rate * time)
 
-    remainder_frames = frame_count % RATE
+    remainder_frames = frame_count % rate
     wavedata = []
 
     for i in range(frame_count):
-        a = RATE / frequency  # number of frames per wave
+        a = rate / frequency  # number of frames per wave
         b = i / a
         # explanation for b
         # considering one wave, what part of the wave should this be
