@@ -3,7 +3,7 @@ import struct
 
 try:
     from itertools import izip
-except ImportError:  # Pyt   hon 3
+except ImportError:  # Python 3
     izip = zip
     xrange = range
 

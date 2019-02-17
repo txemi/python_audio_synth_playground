@@ -2,7 +2,7 @@
 """Play a fixed frequency sound."""
 from __future__ import division
 
-from tone_play import sine_tone_play1
+from pyaudio_tone_play import sine_tone_play1
 from stream_data_for_freq import A_note_frec
 
 if __name__ == "__main__":
