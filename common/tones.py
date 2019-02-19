@@ -23,7 +23,7 @@ class Chord:
         aug = 1, 4, 8
 
     @classmethod
-    def chord_major_freqs(cls, freq, mults):
+    def freqs_mult(cls, freq, mults):
         return [float(freq) * mults[0], float(Intervals.interval_factor(mults[1]) * freq),
                 float(Intervals.interval_factor(mults[2]) * freq)]
 
