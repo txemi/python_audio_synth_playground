@@ -1,6 +1,6 @@
 from pytheory import TonedScale
 
-from common.txplay import print_and_play_tone
+from common.play.tx_pytheory_play import print_and_play_tone
 from common.txwavwrite import write_wav_for_toned_scale
 
 c4_note_str = 'C4'
