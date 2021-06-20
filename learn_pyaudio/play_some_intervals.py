@@ -1,6 +1,6 @@
 import pyaudio_tone_play
 from stream_data_for_freq import A_note_frec
-from common.tones import Intervals
+from common.txtones import Intervals
 
 
 def octave_play(tone_freq):

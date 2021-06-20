@@ -1,8 +1,8 @@
-class Tones:
+class TxTones:
     A4_freq = 440.0
 
 
-class Intervals:
+class TxIntervals:
     @staticmethod
     def interval_factor(half_steps):
         return 2 ** (half_steps / 12)
@@ -15,7 +15,7 @@ class Intervals:
         return fifth_2;
 
 
-class Chord:
+class TxChord:
     class Type:
         major = 1, 4, 7
         minor = 1, 3, 7
@@ -24,7 +24,7 @@ class Chord:
 
     @classmethod
     def freqs_mult(cls, freq, mults):
-        return [float(freq) * mults[0], float(Intervals.interval_factor(mults[1]) * freq),
-                float(Intervals.interval_factor(mults[2]) * freq)]
+        return [float(freq) * mults[0], float(TxIntervals.interval_factor(mults[1]) * freq),
+                float(TxIntervals.interval_factor(mults[2]) * freq)]
 
     C_major_chord = [261.626, 329.628, 391.996]
