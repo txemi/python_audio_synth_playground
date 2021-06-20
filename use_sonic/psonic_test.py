@@ -1,4 +1,5 @@
 from psonic import *
+# no encuentra psonic
 #https://github.com/gkvoelkl/python-sonic
 play(70) #play MIDI note 70
 

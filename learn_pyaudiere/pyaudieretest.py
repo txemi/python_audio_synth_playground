@@ -1,4 +1,4 @@
-import
+import audiere
 # not working
 d = audiere.open_device()
 t = d.create_tone(17000) # 17 KHz

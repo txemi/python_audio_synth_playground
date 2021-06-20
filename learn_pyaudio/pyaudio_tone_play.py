@@ -1,6 +1,6 @@
-from use_pyaudio.stream_data_for_freq import DEFAULTRATE
-from use_pyaudio.stream_data_for_freq import build_data_for_freq_1, build_data_for_freq_2
-from use_pyaudio.stream_data_pyaudio_play import play_1channel_8bit, play_2channels_16_bit
+from learn_pyaudio.stream_data_for_freq import DEFAULTRATE
+from learn_pyaudio.stream_data_for_freq import build_data_for_freq_1, build_data_for_freq_2
+from learn_pyaudio.stream_data_pyaudio_play import play_1channel_8bit, play_2channels_16_bit
 
 
 def sine_tone_play1(frequency, duration, volume=1, sample_rate=22050):
