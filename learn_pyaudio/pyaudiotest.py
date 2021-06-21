@@ -20,14 +20,14 @@ def data_for_freq(frequency: float, time: float = None):
     wavedata = []
 
     for i in range(frame_count):
-        a = RATE / frequency  # number of frames per wave
+        a = RATE / frequency  # number of frames per buildwave
         b = i / a
         # explanation for b
-        # considering one wave, what part of the wave should this be
-        # if we graph the sine wave in a
+        # considering one buildwave, what part of the buildwave should this be
+        # if we graph the sine buildwave in a
         # displacement vs i graph for the particle
-        # where 0 is the beginning of the sine wave and
-        # 1 the end of the sine wave
+        # where 0 is the beginning of the sine buildwave and
+        # 1 the end of the sine buildwave
         # which part is "i" is denoted by b
         # for clarity you might use
         # though this is redundant since math.sin is a looping function
@@ -37,7 +37,7 @@ def data_for_freq(frequency: float, time: float = None):
         # explanation for c
         # now we map b to between 0 and 2*math.PI
         # since 0 - 2*PI, 2*PI - 4*PI, ...
-        # are the repeating domains of the sin wave (so the decimal values will
+        # are the repeating domains of the sin buildwave (so the decimal values will
         # also be mapped accordingly,
         # and the integral values will be multiplied
         # by 2*PI and since sin(n*2*PI) is zero where n is an integer)

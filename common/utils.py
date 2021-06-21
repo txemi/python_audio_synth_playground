@@ -33,7 +33,7 @@ def get_piano_notes():
 
 def get_sine_wave(frequency, duration, sample_rate=44100, amplitude=4096):
     '''
-    Get pure sine wave. 
+    Get pure sine buildwave.
 
     Parameters
     ----------
@@ -48,7 +48,7 @@ def get_sine_wave(frequency, duration, sample_rate=44100, amplitude=4096):
 
     Returns
     -------
-    wave : TYPE
+    buildwave : TYPE
         DESCRIPTION.
 
     '''

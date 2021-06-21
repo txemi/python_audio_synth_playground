@@ -9,20 +9,20 @@ import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-dark')
-import utils
+from common import utils
 
 # Get middle C frequency
 note_freqs = utils.get_piano_notes()
 frequency = note_freqs['C4']
 
-# Pure sine wave
+# Pure sine buildwave
 sine_wave = utils.get_sine_wave(frequency, duration=2, amplitude=2048)
 wavfile.write('data/pure_c.wav', rate=44100, data=sine_wave.astype(np.int16))
 
 # Load data from wav file
 sample_rate, middle_c = wavfile.read('data/piano_c.wav')
 
-# Plot sound wave
+# Plot sound buildwave
 plt.plot(middle_c[500:2500])
 plt.xlabel('Time')
 plt.ylabel('Amplitude')
@@ -68,7 +68,7 @@ note = utils.apply_overtones(frequency, duration=2.5, factor=factor)
 
 # Apply smooth ADSR weights
 weights = utils.get_adsr_weights(frequency, duration=2.5, length=[0.05, 0.25, 0.55, 0.15],
-                           decay=[0.075,0.02,0.005,0.1], sustain_level=0.1)
+                                 decay=[0.075,0.02,0.005,0.1], sustain_level=0.1)
 
 # Write to file
 data = note*weights

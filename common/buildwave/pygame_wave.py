@@ -5,7 +5,7 @@ sample_rate = 44100
 
 
 def sine_wave(hz, peak, n_samples=sample_rate):
-    """Compute N samples of a sine wave with given frequency and peak amplitude.
+    """Compute N samples of a sine buildwave with given frequency and peak amplitude.
        Defaults to one second.
     """
     length = sample_rate / float(hz)
@@ -16,7 +16,7 @@ def sine_wave(hz, peak, n_samples=sample_rate):
 
 
 def square_wave(hz, peak, duty_cycle=.5, n_samples=sample_rate):
-    """Compute N samples of a sine wave with given frequency and peak amplitude.
+    """Compute N samples of a sine buildwave with given frequency and peak amplitude.
        Defaults to one second.
     """
     t = numpy.linspace(0, 1, 500 * 440 / hz, endpoint=False)

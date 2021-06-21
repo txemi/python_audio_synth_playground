@@ -1,3 +1,6 @@
+from beartype import beartype
+
+
 class TxTones:
     A4_freq = 440.0
 
@@ -28,3 +31,8 @@ class TxChord:
                 float(TxIntervals.interval_factor(mults[2]) * freq)]
 
     C_major_chord = [261.626, 329.628, 391.996]
+
+
+@beartype
+def katieshiqihe2pytheory(a: str):
+    return a.replace("a", "A#").replace("c", "C#").replace("d", "D#").replace("f", "F#").replace("g", "G#")

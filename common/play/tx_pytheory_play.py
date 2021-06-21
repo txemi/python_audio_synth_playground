@@ -3,7 +3,7 @@ import pytheory
 from pytheory import Tone
 
 from common.freq import getFrequency
-from common.txwavwrite import write_wav_for_note
+from common.filewrite.txwavwrite import write_wav_for_note
 
 
 def play1(tone_or_chord):

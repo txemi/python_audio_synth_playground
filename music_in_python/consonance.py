@@ -9,7 +9,7 @@ import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-dark')
-import utils
+from common import utils
 
 note_freqs = utils.get_piano_notes()
 

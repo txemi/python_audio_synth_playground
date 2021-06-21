@@ -1,5 +1,5 @@
-from common import pyaudio_tone_build_and_play
-from common.wave.stream_sin_data_for_freq import A_note_frec
+from common.play import pyaudio_tone_build_and_play
+from common.buildwave.stream_sin_data_for_freq import A_note_frec
 from common.txtones import TxIntervals
 
 import time
