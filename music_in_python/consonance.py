@@ -10,6 +10,7 @@ from scipy.io import wavfile
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-dark')
 from common import utils
+from common.play.tx_pytheory_play import playKatiNote3
 
 note_freqs = utils.get_piano_notes()
 
@@ -18,6 +19,7 @@ note_freqs = utils.get_piano_notes()
 ##############################################################################
 C4 = utils.get_sine_wave(note_freqs['C4'], 2, amplitude=2048)  # Middle C
 C5 = utils.get_sine_wave(note_freqs['C5'], 2, amplitude=2048)  # C one octave above
+playKatiNote3('C4', 'C5')
 wavfile.write('data/octave.wav', rate=44100, data=((C4+C5)/2).astype(np.int16))
 
 plt.figure(figsize=(12,4))
@@ -36,6 +38,7 @@ plt.savefig('data/octave.jpg')
 ##############################################################################
 C4 = utils.get_sine_wave(note_freqs['C4'], 2, amplitude=2048)  # Middle C
 E4 = utils.get_sine_wave(note_freqs['E4'], 2, amplitude=2048)  # E just above
+playKatiNote3('C4', 'E4')
 wavfile.write('data/major_thirds.wav', rate=44100, data=((C4+E4)/2).astype(np.int16))
 
 plt.figure(figsize=(12,4))
@@ -54,6 +57,7 @@ plt.savefig('data/major_thirds.jpg')
 ##############################################################################
 C4 = utils.get_sine_wave(note_freqs['C4'], 2, amplitude=2048)  # Middle C
 c4 = utils.get_sine_wave(note_freqs['c4'], 2, amplitude=2048)  # C sharp/D flat
+playKatiNote3('C4', 'c4')
 wavfile.write('data/minor_seconds.wav', rate=44100, data=((C4+c4)/2).astype(np.int16))
 
 plt.figure(figsize=(12,4))
