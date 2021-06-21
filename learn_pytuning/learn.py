@@ -1,0 +1,1 @@
+# https://pytuning.readthedocs.io/en/0.7.2/scales.html#the-pythagorean-scale
