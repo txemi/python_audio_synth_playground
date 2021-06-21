@@ -8,7 +8,7 @@ class TxIntervals:
     @classmethod
     def get_fifth_factor_2(cls):
         fifth_2 = cls.interval_factor(7.0)
-        return fifth_2;
+        return fifth_2
 
 
 class TxChord:
@@ -17,6 +17,7 @@ class TxChord:
         minor = 1, 3, 7
         dim = 1, 3, 6
         aug = 1, 4, 8
+        all = (major, minor, dim, aug)
 
     @classmethod
     def freqs_mult(cls, freq, mults):
@@ -24,7 +25,6 @@ class TxChord:
                 float(TxIntervals.interval_factor(mults[1]) * freq),
                 float(TxIntervals.interval_factor(mults[2]) * freq)]
 
-    C_major_chord = [261.626, 329.628, 391.996]
-
-
-
+    c3_major_chord_names = ["C3", "E3", "G3"]
+    # C4 E4 G4
+    C4_major_chord_freqs = [261.626, 329.628, 391.996]

@@ -49,18 +49,18 @@ def print_and_play_tone(tone: Tone):
 
 
 @beartype
-def playKatiNote(kati_note_str: str, note_freq: float):
+def playKatiNoteFromNameAndStr(kati_note_str: str, note_freq: float):
     print(kati_note_str + ":" + str(note_freq))
     ptnote = katieshiqihe2pytheory(kati_note_str)
     tone = Tone.from_string(ptnote)
     print_and_play_tone(tone)
 
-
+@beartype
 def playKatiNote2(note:str):
     note_freqs = common.txtone.get_piano_notes()
-    playKatiNote(note, note_freqs[note])
+    playKatiNoteFromNameAndStr(note, note_freqs[note])
 
 
-def playKatiNote3(*args):
+def playKatiNotes(*args):
     for arg in args:
         playKatiNote2(arg)
