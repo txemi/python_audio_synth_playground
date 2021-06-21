@@ -6,6 +6,6 @@ for s in Scale.all():
 s = Scale(Note('C4'), 'major')
 s.notes
 s.scales
-s.interv    als
+s.intervals
 c= Chord(Note('A'), 'M')
 print(1)

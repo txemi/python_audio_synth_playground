@@ -5,7 +5,7 @@ import mingus.core.notes as notes
 from common.txintervals import TxChord
 from mingus.containers import NoteContainer
 from mingus.containers.instrument import Instrument, Piano, Guitar
-
+from mingus.containers import Note
 aa = notes.is_valid_note("C")
 print(aa)
 
@@ -23,6 +23,13 @@ uuu = list(bla2mingus(TxChord.c3_major_chord_names))
 
 cc = NoteContainer(uuu)
 ua=cc.determine()
+ic=cc.is_consonant()
+note=cc.notes[0]
+assert isinstance(note,Note)
+
+asdf=NoteContainer(list(bla2mingus(TxChord.otro_chord_mingus)))
+asdf.determine()
+
 print(cc)
 
 p=Piano()
@@ -32,15 +39,5 @@ for uuu in rr:
 
 loil=rr[0]
 loil.augment()
-p.name
-from mingus.containers import Bar
-import mingus.extra.LilyPond as LilyPond
 
-b = Bar()
-b + "C"
-b + "E"
-b + "G"
-b + "B"
-lllll=LilyPond.from_Bar(b)
-print(lllll)
 
