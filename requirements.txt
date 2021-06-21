@@ -12,3 +12,5 @@ scipy>=1.6.3
 sympy>=1.8
 synthesizer>=0.2.0
 tones>=1.2.0
+mingus>=0.6.1
+matplotlib>=3.4.2

@@ -2,7 +2,7 @@
 # http://bspaans.github.io/python-mingus/doc/wiki/tutorialCore
 import mingus.core.chords as chords
 import mingus.core.notes as notes
-from common.txintervals import TxChord
+from common.txchord import TxChord
 from mingus.containers import NoteContainer
 from mingus.containers.instrument import Instrument, Piano, Guitar
 from mingus.containers import Note
@@ -13,12 +13,12 @@ bb = chords.major_triad("C")
 print(bb)
 
 
-def bla2mingus(a):
+def note2mingus(a):
     for b in a:
         yield b[:1] + "-" + b[-1:]
 
 
-uuu = list(bla2mingus(TxChord.c3_major_chord_names))
+uuu = list(note2mingus(TxChord.c3_major_chord_names))
 # falla cc = chords.determine(uuu)
 
 cc = NoteContainer(uuu)
@@ -27,7 +27,7 @@ ic=cc.is_consonant()
 note=cc.notes[0]
 assert isinstance(note,Note)
 
-asdf=NoteContainer(list(bla2mingus(TxChord.otro_chord_mingus)))
+asdf=NoteContainer(list(note2mingus(TxChord.otro_chord_mingus)))
 asdf.determine()
 
 print(cc)
