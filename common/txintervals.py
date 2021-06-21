@@ -20,7 +20,8 @@ class TxChord:
 
     @classmethod
     def freqs_mult(cls, freq, mults):
-        return [float(freq) * mults[0], float(TxIntervals.interval_factor(mults[1]) * freq),
+        return [float(freq) * mults[0],
+                float(TxIntervals.interval_factor(mults[1]) * freq),
                 float(TxIntervals.interval_factor(mults[2]) * freq)]
 
     C_major_chord = [261.626, 329.628, 391.996]
