@@ -6,6 +6,7 @@ PyAudio>=0.2.11
 pychord>=0.6.2
 pygame>=2.0.1
 pytheory>=0.1.2
+python-ly>=0.9.7
 PyTuning===HEAD
 scipy>=1.6.3
 sympy>=1.8
