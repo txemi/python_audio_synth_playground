@@ -1,3 +1,4 @@
+# https://github.com/kennethreitz/pytheory
 from pytheory import TonedScale, Tone
 c4_tone = Tone.from_string('C4')
 c4_pitch_s=c4_tone.pitch(symbolic=True)

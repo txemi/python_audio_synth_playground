@@ -1,5 +1,6 @@
 from pychord import Chord
 import pychord
+# https://github.com/yuma-m/pychord
 
 chord_am7 = Chord("Am7")
 chord_am7_info = chord_am7.info()
