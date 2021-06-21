@@ -70,7 +70,8 @@ def get_sine_wave(frequency: float, duration, sample_rate=sample_rates.sample_ra
     return wave
 
 
-def apply_overtones(frequency, duration, factor, sample_rate=44100, amplitude=4096):
+@beartype
+def apply_overtones(frequency: float, duration, factor, sample_rate=44100, amplitude=4096):
     '''
     Return fundamental note with overtones applied. 
 
@@ -106,7 +107,8 @@ def apply_overtones(frequency, duration, factor, sample_rate=44100, amplitude=40
     return fundamental
 
 
-def get_adsr_weights(frequency, duration, length, decay, sustain_level, sample_rate=44100):
+@beartype
+def get_adsr_weights(frequency: float, duration, length, decay, sustain_level, sample_rate=44100):
     '''
     ADSR(attack, decay, sustain, and release) envelop generator with exponential
     weights applied.
@@ -167,7 +169,8 @@ def get_adsr_weights(frequency, duration, length, decay, sustain_level, sample_r
     return weights
 
 
-def apply_pedal(note_values, bar_value):
+@beartype
+def apply_pedal(note_values, bar_value: float):
     '''
     Press and hold the sustain pedal throughout the bar.
 
