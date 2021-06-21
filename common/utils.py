@@ -5,11 +5,14 @@ Utility functions for writing music in Python.
 
 @author: khe
 """
+from beartype import beartype
 import numpy as np
+from common.txtone import TxTones
+import sample_rates
 
 
 def _get_key_freq(n):
-    base_freq = 440  # Frequency of Note A4
+    base_freq = TxTones.A4_freq  # Frequency of Note A4
     return 2 ** ((n + 1 - 49) / 12) * base_freq
 
 
@@ -40,7 +43,8 @@ def get_piano_notes():
     return note_freqs
 
 
-def get_sine_wave(frequency, duration, sample_rate=44100, amplitude=4096):
+@beartype
+def get_sine_wave(frequency: float, duration, sample_rate=sample_rates.sample_rate_44100, amplitude=4096):
     '''
     Get pure sine buildwave.
 
@@ -197,8 +201,9 @@ def apply_pedal(note_values, bar_value):
     return new_values
 
 
-def get_song_data(music_notes, note_values, bar_value, factor, length,
-                  decay, sustain_level, sample_rate=44100, amplitude=4096):
+@beartype
+def get_song_data(music_notes, note_values: list, bar_value, factor, length,
+                  decay, sustain_level, sample_rate=sample_rates.sample_rate_44100, amplitude=4096):
     '''
     Generate song from notes. 
 

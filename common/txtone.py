@@ -7,7 +7,7 @@ from common import txintervals
 
 
 class TxTones:
-    A4_freq = 440.0
+    A4_freq = 440.0 # Frequency of Note A4
 
 
 @beartype

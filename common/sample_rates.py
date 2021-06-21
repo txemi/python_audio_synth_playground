@@ -1,3 +1,3 @@
-sample_rate_1 = 44100
-sample_rate_2 = 22050
-DEFAULTRATE = sample_rate_1
+sample_rate_44100 = 44100
+sample_rate_22050 = 22050
+DEFAULTRATE = sample_rate_44100
