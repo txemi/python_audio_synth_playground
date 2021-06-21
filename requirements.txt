@@ -1,0 +1,13 @@
+beartype>=0.7.0
+eric-ide>=21.6
+musthe>=1.0.0
+numpy>=1.20.3
+PyAudio>=0.2.11
+pychord>=0.6.2
+pygame>=2.0.1
+pytheory>=0.1.2
+PyTuning===HEAD
+scipy>=1.6.3
+sympy>=1.8
+synthesizer>=0.2.0
+tones>=1.2.0
