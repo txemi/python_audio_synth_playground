@@ -21,6 +21,6 @@ player.play_wave(iu)
 player.play_wave(synthesizer.generate_chord(TxChord.C4_major_chord_freqs, 3.0))
 
 for chord1 in TxChord.Type.all:
-    rrr = txintervals.TxChord.freqs_mult(TxTones.A4_freq, chord1)
-    aaa = synthesizer.generate_chord(rrr)
-    player.play_wave(aaa, 2.0)
+    rrr =list( txintervals.TxChord.freqs_mult(TxTones.A4_freq, chord1))
+    aaa = synthesizer.generate_chord(rrr, 2.0)
+    player.play_wave(aaa)

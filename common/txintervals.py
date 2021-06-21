@@ -13,17 +13,17 @@ class TxIntervals:
 
 class TxChord:
     class Type:
-        major = 1, 4, 7
-        minor = 1, 3, 7
-        dim = 1, 3, 6
-        aug = 1, 4, 8
+        major = 0, 4, 7
+        minor = 0, 3, 7
+        dim = 0, 3, 6
+        aug = 0, 4, 8
         all = (major, minor, dim, aug)
 
     @classmethod
     def freqs_mult(cls, freq, mults):
-        return [float(freq) * mults[0],
-                float(TxIntervals.interval_factor(mults[1]) * freq),
-                float(TxIntervals.interval_factor(mults[2]) * freq)]
+        for aa in mults:
+            yield float(TxIntervals.interval_factor(aa) * freq)
+
 
     c3_major_chord_names = ["C3", "E3", "G3"]
     # C4 E4 G4
