@@ -27,4 +27,5 @@ def getFrequency(note:str, A4=TxTones.A4_freq):
 
 @beartype
 def katieshiqihe2pytheory(a: str):
+    """ katie code use lowercase for black keys """
     return a.replace("a", "A#").replace("c", "C#").replace("d", "D#").replace("f", "F#").replace("g", "G#")

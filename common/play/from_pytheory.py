@@ -48,11 +48,11 @@ def print_and_play_tone(tone: Tone):
 
 
 @beartype
-def playKatiNote(a: str, b: float):
-    print(a + ":" + str(b))
-    e = katieshiqihe2pytheory(a)
-    c = Tone.from_string(e)
-    print_and_play_tone(c)
+def playKatiNote(kati_note_str: str, note_freq: float):
+    print(kati_note_str + ":" + str(note_freq))
+    ptnote = katieshiqihe2pytheory(kati_note_str)
+    tone = Tone.from_string(ptnote)
+    print_and_play_tone(tone)
 
 
 def playKatiNote2(note:str):
