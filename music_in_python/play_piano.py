@@ -1,7 +1,8 @@
-from common import utils
+import common.txtone
+from common import utils_khe
 from common.play.from_pytheory import playKatiNote
 
-note_freqs = utils.get_piano_notes()
+note_freqs = common.txtone.get_piano_notes()
 
 for note in note_freqs:
     if not note:

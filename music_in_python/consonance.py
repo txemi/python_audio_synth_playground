@@ -8,17 +8,21 @@ Consonance and dissonance in music.
 import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
+
+import common.buildwave.from_numpy_khe
+import common.txtone
+
 plt.style.use('seaborn-dark')
-from common import utils
+from common import utils_khe
 from common.play.from_pytheory import playKatiNote3
 
-note_freqs = utils.get_piano_notes()
+note_freqs = common.txtone.get_piano_notes()
 
 ##############################################################################
 # Perfect Consonance (Octave)
 ##############################################################################
-C4 = utils.get_sine_wave(note_freqs['C4'], 2, amplitude=2048)  # Middle C
-C5 = utils.get_sine_wave(note_freqs['C5'], 2, amplitude=2048)  # C one octave above
+C4 = common.buildwave.from_numpy_khe.get_sine_wave(note_freqs['C4'], 2, amplitude=2048)  # Middle C
+C5 = common.buildwave.from_numpy_khe.get_sine_wave(note_freqs['C5'], 2, amplitude=2048)  # C one octave above
 playKatiNote3('C4', 'C5')
 wavfile.write('data/octave.wav', rate=44100, data=((C4+C5)/2).astype(np.int16))
 
@@ -36,8 +40,8 @@ plt.savefig('data/octave.jpg')
 ##############################################################################
 # Imperfect Consonance (Major Thirds)
 ##############################################################################
-C4 = utils.get_sine_wave(note_freqs['C4'], 2, amplitude=2048)  # Middle C
-E4 = utils.get_sine_wave(note_freqs['E4'], 2, amplitude=2048)  # E just above
+C4 = common.buildwave.from_numpy_khe.get_sine_wave(note_freqs['C4'], 2, amplitude=2048)  # Middle C
+E4 = common.buildwave.from_numpy_khe.get_sine_wave(note_freqs['E4'], 2, amplitude=2048)  # E just above
 playKatiNote3('C4', 'E4')
 wavfile.write('data/major_thirds.wav', rate=44100, data=((C4+E4)/2).astype(np.int16))
 
@@ -55,8 +59,8 @@ plt.savefig('data/major_thirds.jpg')
 ##############################################################################
 # Dissonance (Minor Seconds)
 ##############################################################################
-C4 = utils.get_sine_wave(note_freqs['C4'], 2, amplitude=2048)  # Middle C
-c4 = utils.get_sine_wave(note_freqs['c4'], 2, amplitude=2048)  # C sharp/D flat
+C4 = common.buildwave.from_numpy_khe.get_sine_wave(note_freqs['C4'], 2, amplitude=2048)  # Middle C
+c4 = common.buildwave.from_numpy_khe.get_sine_wave(note_freqs['c4'], 2, amplitude=2048)  # C sharp/D flat
 playKatiNote3('C4', 'c4')
 wavfile.write('data/minor_seconds.wav', rate=44100, data=((C4+c4)/2).astype(np.int16))
 

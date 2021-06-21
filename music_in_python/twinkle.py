@@ -7,7 +7,7 @@ Write `Twinkle Twinkle Little Star` from sine waves.
 """
 import numpy as np
 from scipy.io import wavfile
-from common import utils
+from common import utils_khe
 
 right_hand_notes = ['C4', 'C4', 'G4', 'G4',
                    'A4', 'A4', 'G4',
@@ -53,13 +53,13 @@ factor = [0.68, 0.26, 0.03, 0.  , 0.03]
 length = [0.01, 0.6, 0.29, 0.1]
 decay = [0.05,0.02,0.005,0.1]
 sustain_level = 0.1
-right_hand = utils.get_song_data(right_hand_notes, right_hand_duration, 2,
-                                 factor, length, decay, sustain_level)
+right_hand = utils_khe.get_song_data(right_hand_notes, right_hand_duration, 2,
+                                     factor, length, decay, sustain_level)
 factor = [0.73, 0.16, 0.06, 0.01, 0.02, 0.01  , 0.01]
 length = [0.01, 0.29, 0.6, 0.1]
 decay = [0.05,0.02,0.005,0.1]
-left_hand = utils.get_song_data(left_hand_notes, left_hand_duration, 2,
-                                factor, length, decay, sustain_level)
+left_hand = utils_khe.get_song_data(left_hand_notes, left_hand_duration, 2,
+                                    factor, length, decay, sustain_level)
 data = left_hand+right_hand
 data = data * (4096/np.max(data))
 wavfile.write('data/twinkle_star.wav', 44100, data.astype(np.int16))

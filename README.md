@@ -4,7 +4,7 @@ https://github.com/txemi/python_audio_synth_playground
 
 Playground for chord and tone synth.
 
-I wanted to learn about hot to play with tones, frecuencies, intervals, chords, scales, etc with python and learn the maths behind, so I made this compilation of libraries and examples in order to know about diferent libraries related to music in python.
+I wanted to learn about how to play with tones, frecuencies, intervals, chords, scales, etc with python and learn the maths behind, so I made this compilation of libraries and examples in order to know about diferent libraries related to music in python.
 
 You will find a lot of packages whose name stars with learn_* meaning reference to the library tested inside.
 
