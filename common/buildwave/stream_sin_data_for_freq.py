@@ -2,20 +2,14 @@ import math
 import struct
 from beartype import beartype
 
-from common.txtones import TxTones
-from typing import  Union
+from common.sample_rates import DEFAULTRATE
+from typing import Union
+
 try:
     from itertools import izip
 except ImportError:  # Python 3
     izip = zip
     xrange = range
-
-DEFAULTRATE = 44100
-
-A_note_frec = TxTones.A4_freq
-
-
-
 
 
 @beartype
@@ -27,11 +21,8 @@ def build_sin_data_for_freq_1(frequency, duration, volume, sample_rate):
     return izip(*[samples] * sample_rate), restframes
 
 
-
-
-
 @beartype
-def build_sin_data_for_freq_2(frequency: Union[float,int], time: Union[float,int] = None, rate=DEFAULTRATE):
+def build_sin_data_for_freq_2(frequency: Union[float, int], time: Union[float, int] = None, rate=DEFAULTRATE):
     """get frames for a fixed frequency for a specified time or
     number of frames, if frame_count is specified, the specified
     time is ignored"""

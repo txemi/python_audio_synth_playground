@@ -1,10 +1,6 @@
 from beartype import beartype
 
 
-class TxTones:
-    A4_freq = 440.0
-
-
 class TxIntervals:
     @staticmethod
     def interval_factor(half_steps):

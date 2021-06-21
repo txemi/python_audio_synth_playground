@@ -1,8 +1,8 @@
 from tones import SINE_WAVE, SAWTOOTH_WAVE
 from tones.mixer import Mixer
-
+from common.sample_rates import DEFAULTRATE
 # Create mixer, set sample rate and amplitude
-mixer = Mixer(44100, 0.5)
+mixer = Mixer(DEFAULTRATE, 0.5)
 
 # Create two monophonic tracks that will play simultaneously, and set
 # initial values for note attack, decay and vibrato frequency (these can
