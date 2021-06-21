@@ -1,9 +1,9 @@
 import pygame.sndarray
 
-from common.buildwave.pygame_wave import sine_wave, square_wave
-from common.play.pygame_play import play_for
+from common.buildwave.from_numpy import sine_wave, square_wave
+from common.play.from_pygame import play_for
 from common.sample_rates import sample_rate_2
-from common.freq import TxTones
+from common.txtone import TxTones
 pygame.mixer.init(frequency=sample_rate_2, size=-16, channels=1, buffer=4096)
 #pygame.mixer.Sound.set_volume(1.0)
 

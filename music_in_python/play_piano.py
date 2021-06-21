@@ -1,5 +1,5 @@
 from common import utils
-from common.play.tx_pytheory_play import playKatiNote
+from common.play.from_pytheory import playKatiNote
 
 note_freqs = utils.get_piano_notes()
 

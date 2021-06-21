@@ -1,6 +1,3 @@
-from beartype import beartype
-
-
 class TxIntervals:
     @staticmethod
     def interval_factor(half_steps):
@@ -30,6 +27,3 @@ class TxChord:
 
 
 
-@beartype
-def katieshiqihe2pytheory(a: str):
-    return a.replace("a", "A#").replace("c", "C#").replace("d", "D#").replace("f", "F#").replace("g", "G#")

@@ -3,9 +3,8 @@ import pytheory
 from pytheory import Tone
 
 from common import utils
-from common.freq import getFrequency
-from common.filewrite.txwavwrite import write_wav_for_note
-from common.txtones import katieshiqihe2pytheory
+from common.txtone import getFrequency, katieshiqihe2pytheory
+from common.filewrite.from_tones_mixer import write_wav_for_note
 
 from beartype import beartype
 

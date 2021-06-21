@@ -2,14 +2,14 @@
 """Play a fixed frequency sound."""
 from __future__ import division
 
-from common.play.pyaudio_tone_build_and_play import sine_tone_play1
-from common.freq import A_note_frec
+from common.play.build_with_math_and_play_with_pyaudio import sine_tone_play1
+from common.txtone import TxTones
 from common.sample_rates import sample_rate_2
 
 if __name__ == "__main__":
     sine_tone_play1(
         # see http://www.phy.mtu.edu/~suits/notefreqs.html
-        frequency=A_note_frec,  # Hz, waves per second A4
+        frequency=TxTones.A4_freq,  # Hz, waves per second A4
         duration=3.21,  # seconds to play sound
         volume=.01,  # 0..1 how loud it is
         # see http://en.wikipedia.org/wiki/Bit_rate#Audio

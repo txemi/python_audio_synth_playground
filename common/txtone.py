@@ -1,5 +1,5 @@
 from beartype import beartype
-from common import txtones
+from common import txintervals
 
 
 # Python to convert a string note (eg. "A4") to a frequency (eg. 440).
@@ -25,4 +25,6 @@ def getFrequency(note:str, A4=TxTones.A4_freq):
     return A4 * 2 ** ((keyNumber - 49) / 12)
 
 
-A_note_frec = TxTones.A4_freq
+@beartype
+def katieshiqihe2pytheory(a: str):
+    return a.replace("a", "A#").replace("c", "C#").replace("d", "D#").replace("f", "F#").replace("g", "G#")

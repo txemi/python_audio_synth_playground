@@ -10,7 +10,7 @@ from scipy.io import wavfile
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-dark')
 from common import utils
-from common.play.tx_pytheory_play import playKatiNote3
+from common.play.from_pytheory import playKatiNote3
 
 note_freqs = utils.get_piano_notes()
 

@@ -1,6 +1,6 @@
 from common.sample_rates import DEFAULTRATE
-from common.buildwave.stream_sin_data_for_freq import build_sin_data_for_freq_1, build_sin_data_for_freq_2
-from common.play.stream_data_pyaudio_play import play_1channel_8bit, play_2channels_16_bit
+from common.buildwave.from_math import build_sin_data_for_freq_1, build_sin_data_for_freq_2
+from common.play.from_pyaudio import play_1channel_8bit, play_2channels_16_bit
 
 from beartype import beartype
 from typing import  Union
