@@ -19,18 +19,18 @@ def play_wave(player: Player, synthesizer_instance: Synthesizer, freq, duration)
 
 
 @beartype
-def play_chord1(player1: Player, synthesizer1: Synthesizer, freqs, duration):
+def play_chord_from_freqs(player1: Player, synthesizer1: Synthesizer, freqs, duration):
     chord_wave = synthesizer1.generate_chord(freqs, duration)
     player1.play_wave(chord_wave)
 
 
 @beartype
-def play_chord2(player1: Player, synthesizer1: Synthesizer, freq, chord, duration):
+def play_chord_from_freq_and_chord(player1: Player, synthesizer1: Synthesizer, freq, chord, duration):
     freqs = list(common.txchord.TxChord.freqs_mult(freq, chord))
-    play_chord1(player1, synthesizer1, freqs, duration)
+    play_chord_from_freqs(player1, synthesizer1, freqs, duration)
 
 
 @beartype
-def play_chord3(player: Player, synthesizer_instance: Synthesizer, chords, duration):
-    wave_C3_major_chord = synthesizer_instance.generate_chord(chords, duration)
-    player.play_wave(wave_C3_major_chord)
+def play_chord_from_symbolic(player: Player, synthesizer_instance: Synthesizer, chords, duration):
+    chord_wave = synthesizer_instance.generate_chord(chords, duration)
+    player.play_wave(chord_wave)
