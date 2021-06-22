@@ -19,4 +19,4 @@ class TxChord:
     C4_major_chord_freqs = [261.626, 329.628, 391.996]
     otro_chord_mingus = ["D-4", "F#-4", "A-4"] # no pilla el #
 
-    // la menor, do mayor , mi mayor, fa mayor
+    # la menor, do mayor , mi mayor, fa mayor
