@@ -1,8 +1,12 @@
+import time
+
 from beartype import beartype
+from musthe import Scale as MustheScale
 from synthesizer import Player, Synthesizer, Waveform
 
 from common import txintervals
 from common import txtone
+from common.tx_scale import musthescale_notes
 from common.txchord import mingusChord2Notes
 
 
@@ -35,11 +39,19 @@ def play_sequence_notes(notes, duration_secs: float):
 
 
 @beartype
-def play_scale(freq: float, scale, duration_secons: float):
+def play_scale_from_freq(freq: float, scale, duration_secons: float):
     freqs = list(txintervals.freqs_mult_accumulate(freq, scale))
     tail = list(reversed(freqs))[1:]
     print(freqs)
     play_sequence_freqs(freqs + tail, duration_secons)
+
+
+@beartype
+def play_scale_from_musthescale(current_scale: MustheScale):
+    notes_in_scale, description = musthescale_notes(current_scale)
+    print(description)
+    play_sequence_notes(notes_in_scale, 0.5)
+    time.sleep(1)
 
 
 @beartype
