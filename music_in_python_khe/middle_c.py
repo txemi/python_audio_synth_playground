@@ -16,7 +16,7 @@ plt.style.use('seaborn-dark')
 from common.synt_wave import synt_song_khe
 
 # Get middle C frequency
-note_freqs = common.txtone.get_piano_notes()
+note_freqs = common.txtone.get_piano_notes_khe()
 frequency = note_freqs['C4']
 
 # Pure sine synt_wave

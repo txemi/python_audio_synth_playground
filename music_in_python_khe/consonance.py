@@ -15,7 +15,7 @@ import common.txtone
 plt.style.use('seaborn-dark')
 from common.play.from_pytheory import playKatiNotes
 
-note_freqs = common.txtone.get_piano_notes()
+note_freqs = common.txtone.get_piano_notes_khe()
 
 ##############################################################################
 # Perfect Consonance (Octave)

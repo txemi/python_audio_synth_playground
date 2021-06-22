@@ -1,6 +1,8 @@
 from beartype import beartype
 from mingus.core import chords as chords
 
+from common.txtone import C4, E4, G4
+
 
 class TxChord:
     class Type:
@@ -10,12 +12,9 @@ class TxChord:
         aug = 0, 4, 8
         all = (major, minor, dim, aug)
 
-
-
-
     c3_major_chord_names = ["C3", "E3", "G3"]
-    # C4 E4 G4
-    C4_major_chord_freqs = [261.626, 329.628, 391.996]
+
+    C4_major_chord_freqs = [C4, E4, G4]
     otro_chord_mingus = ["D-4", "F#-4", "A-4"]  # no pilla el #
 
 

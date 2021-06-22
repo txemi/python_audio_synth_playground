@@ -9,7 +9,7 @@ from beartype import beartype
 import numpy as np
 
 from common.synt_wave.from_numpy_khe import get_sine_wave
-from common.txtone import get_piano_notes
+from common.txtone import get_piano_notes_khe
 from common import sample_rates
 
 DEFAULT_AMPLITUDE = 4096
@@ -183,7 +183,7 @@ def get_song_data(music_notes, note_values: list, bar_value, factor, length,
     song : ndarray
 
     '''
-    note_freqs = get_piano_notes()
+    note_freqs = get_piano_notes_khe()
     frequencies = [note_freqs[note] for note in music_notes]
     new_values = apply_pedal(note_values, bar_value)
     duration = int(sum(note_values) * sample_rate)
