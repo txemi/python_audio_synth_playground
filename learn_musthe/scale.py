@@ -28,5 +28,3 @@ for scale3 in Scale.all(include_greek_modes=True):
 
 
 
-c = Chord(Note('A'), 'M')
-print(1)
