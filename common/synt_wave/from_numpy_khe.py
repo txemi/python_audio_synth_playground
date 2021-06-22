@@ -7,7 +7,7 @@ from common import sample_rates
 @beartype
 def get_sine_wave(frequency: float, duration, sample_rate=sample_rates.sample_rate_44100, amplitude=4096):
     '''
-    Get pure sine buildwave.
+    Get pure sine synt_wave.
 
     Parameters
     ----------
@@ -22,7 +22,7 @@ def get_sine_wave(frequency: float, duration, sample_rate=sample_rates.sample_ra
 
     Returns
     -------
-    buildwave : TYPE
+    synt_wave : TYPE
         DESCRIPTION.
 
     '''

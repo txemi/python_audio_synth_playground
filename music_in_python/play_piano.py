@@ -1,5 +1,4 @@
 import common.txtone
-from common import utils_khe
 from common.play.from_pytheory import playKatiNoteFromNameAndStr
 
 note_freqs = common.txtone.get_piano_notes()

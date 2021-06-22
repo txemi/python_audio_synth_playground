@@ -9,11 +9,10 @@ import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
 
-import common.buildwave.from_numpy_khe
+import common.synt_wave.from_numpy_khe
 import common.txtone
 
 plt.style.use('seaborn-dark')
-from common import utils_khe
 from common.play.from_pytheory import playKatiNotes
 
 note_freqs = common.txtone.get_piano_notes()

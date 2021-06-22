@@ -8,13 +8,16 @@ Utility functions for writing music in Python.
 from beartype import beartype
 import numpy as np
 
-from common.buildwave.from_numpy_khe import get_sine_wave
+from common.synt_wave.from_numpy_khe import get_sine_wave
 from common.txtone import get_piano_notes
-import sample_rates
+from common import sample_rates
+
+DEFAULT_AMPLITUDE = 4096
 
 
 @beartype
-def apply_overtones(frequency: float, duration, factor, sample_rate=44100, amplitude=4096):
+def apply_overtones(frequency: float, duration, factor, sample_rate=sample_rates.sample_rate_44100,
+                    amplitude=DEFAULT_AMPLITUDE):
     '''
     Return fundamental note with overtones applied. 
 
@@ -51,7 +54,8 @@ def apply_overtones(frequency: float, duration, factor, sample_rate=44100, ampli
 
 
 @beartype
-def get_adsr_weights(frequency: float, duration, length, decay, sustain_level, sample_rate=44100):
+def get_adsr_weights(frequency: float, duration, length, decay, sustain_level,
+                     sample_rate=sample_rates.sample_rate_44100):
     '''
     ADSR(attack, decay, sustain, and release) envelop generator with exponential
     weights applied.
@@ -113,7 +117,7 @@ def get_adsr_weights(frequency: float, duration, length, decay, sustain_level, s
 
 
 @beartype
-def apply_pedal(note_values, bar_value: float):
+def apply_pedal(note_values, bar_value: ( float,int)):
     '''
     Press and hold the sustain pedal throughout the bar.
 
@@ -149,7 +153,7 @@ def apply_pedal(note_values, bar_value: float):
 
 @beartype
 def get_song_data(music_notes, note_values: list, bar_value, factor, length,
-                  decay, sustain_level, sample_rate=sample_rates.sample_rate_44100, amplitude=4096):
+                  decay, sustain_level, sample_rate=sample_rates.sample_rate_44100, amplitude=DEFAULT_AMPLITUDE):
     '''
     Generate song from notes. 
 

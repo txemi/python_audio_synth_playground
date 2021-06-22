@@ -3,7 +3,6 @@ import pytheory
 from pytheory import Tone
 
 import common.txtone
-from common import utils_khe
 from common.txtone import getFrequency, katieshiqihe2pytheory
 from common.filewrite.from_tones_mixer import write_wav_for_note
 

@@ -9,24 +9,24 @@ import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
 
-import common.buildwave.from_numpy_khe
+import common.synt_wave.from_numpy_khe
 import common.txtone
 
 plt.style.use('seaborn-dark')
-from common import utils_khe
+from common.synt_wave import synt_song_khe
 
 # Get middle C frequency
 note_freqs = common.txtone.get_piano_notes()
 frequency = note_freqs['C4']
 
-# Pure sine buildwave
+# Pure sine synt_wave
 sine_wave = common.buildwave.from_numpy_khe.get_sine_wave(frequency, duration=2, amplitude=2048)
 wavfile.write('data/pure_c.wav', rate=44100, data=sine_wave.astype(np.int16))
 
 # Load data from wav file
 sample_rate, middle_c = wavfile.read('data/piano_c.wav')
 
-# Plot sound buildwave
+# Plot sound synt_wave
 plt.plot(middle_c[500:2500])
 plt.xlabel('Time')
 plt.ylabel('Amplitude')
@@ -68,11 +68,11 @@ for i in range(factor.shape[0]):
 factor = factor/np.sum(factor)
 
 # Construct harmonic series
-note = utils_khe.apply_overtones(frequency, duration=2.5, factor=factor)
+note = synt_song_khe.apply_overtones(frequency, duration=2.5, factor=factor)
 
 # Apply smooth ADSR weights
-weights = utils_khe.get_adsr_weights(frequency, duration=2.5, length=[0.05, 0.25, 0.55, 0.15],
-                                     decay=[0.075,0.02,0.005,0.1], sustain_level=0.1)
+weights = synt_song_khe.get_adsr_weights(frequency, duration=2.5, length=[0.05, 0.25, 0.55, 0.15],
+                                         decay=[0.075,0.02,0.005,0.1], sustain_level=0.1)
 
 # Write to file
 data = note*weights
