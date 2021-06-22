@@ -4,6 +4,7 @@ from beartype import beartype
 from synthesizer import Player, Synthesizer, Waveform
 
 from common.txchord import mingusChord2Notes
+from common.txtone import get_piano_notes
 
 
 @beartype
@@ -18,6 +19,15 @@ def play_init():
 def play_wave(player: Player, synthesizer_instance: Synthesizer, freq, duration):
     wave_A4 = synthesizer_instance.generate_constant_wave(freq, duration)
     player.play_wave(wave_A4)
+
+
+@beartype
+def play_sequence(notes):
+    player, synthesizer_instance = play_init()
+    note2freq = get_piano_notes()
+    for note in notes:
+        freq = note2freq[note]
+        play_wave(player, synthesizer_instance, freq, 1.0)
 
 
 @beartype
