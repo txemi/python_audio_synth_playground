@@ -1,13 +1,10 @@
-import common.play
-import common.txchord
 from beartype import beartype
 from synthesizer import Player, Synthesizer, Waveform
 
 from common import txintervals
-from common.txchord import mingusChord2Notes,TxChord
-from common.txtone import get_piano_notes_khe, note_sci_to_khe,get_piano_notes_sci, get_piano_notes_mingus
 from common import txtone
-from common import txchord
+from common.txchord import mingusChord2Notes
+
 
 @beartype
 def play_init():
@@ -33,7 +30,7 @@ def play_sequence_freqs(freqs, duration_seqs: float):
 @beartype
 def play_sequence_notes(notes, duration_secs: float):
     note2freq = txtone.get_piano_notes_mingus()
-    freqs = [note2freq[note] for note in notes]
+    freqs = [note2freq[txtone.notestr2mingus_int(note)] for note in notes]
     play_sequence_freqs(freqs, duration_secs)
 
 

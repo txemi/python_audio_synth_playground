@@ -4,25 +4,29 @@ from musthe import *
 from common.play import from_syntetizer
 
 
-def play_scale(scale2):
-    print(scale2)
-    a = scale2[0]
+def play_scale(current_scale):
+    print(current_scale)
+    a = current_scale[0]
     uuuuuuu = str(a)
-    ioo = [scale2[i].scientific_notation() for i in range(len(scale2))]
+    current_scale.notes
+    current_scale.scales
+    current_scale.intervals
+    ioo = [current_scale[i].scientific_notation() for i in range(len(current_scale))]
     from_syntetizer.play_sequence_notes(ioo, 0.5)
 
 
 scale1 = Scale(Note('B'), 'major')
 play_scale(scale1)
 
+scale4 = Scale(Note('C4'), 'major')
+play_scale(scale4)
+
 for scale3 in Scale.all(include_greek_modes=True):
     print(scale3)
     play_scale(scale3)
 
-scale4 = Scale(Note('C4'), 'major')
-scale4.notes
-scale4.scales
-scale4.intervals
+
+
 
 c = Chord(Note('A'), 'M')
 print(1)

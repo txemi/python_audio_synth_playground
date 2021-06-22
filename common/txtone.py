@@ -35,12 +35,15 @@ def notes2mingus(chord_notes):
 
 @beartype
 def notestr2mingus2(notestr: str):
-    aa = "".join([x for x in notestr if x.isdigit()])
-    bb = "".join([x for x in notestr if not x.isdigit()])
-    uu = MingusNote(name=bb, octave=int(aa))
-    return uu
-
-
+    digits = "".join([x for x in notestr if x.isdigit()])
+    nondigits = "".join([x for x in notestr if not x.isdigit()])
+    mingusNote = MingusNote(name=katieshiqihe2pytheory(nondigits), octave=int(digits))
+    return mingusNote
+@beartype
+def notestr2mingus_int(old_key):
+    mingus_note = notestr2mingus2(old_key)
+    mingus_note_int = int(mingus_note)
+    return mingus_note_int
 @beartype
 def note_khe_to_sci(note: str):
     if len(note) != 2:
@@ -137,8 +140,8 @@ def get_piano_notes_mingus():
     for old_key in old_dict:
         if old_key == '':
             continue
-        mingus_note = notestr2mingus2(old_key)
-        assert mingus_note not in new_dict1111
-        new_dict1111[mingus_note] = old_dict[old_key]
+        mingus_note_int = notestr2mingus_int(old_key)
+        assert mingus_note_int not in new_dict1111
+        new_dict1111[mingus_note_int] = old_dict[old_key]
 
     return new_dict1111
