@@ -17,6 +17,7 @@ class TxChord:
     c3_major_chord_names = ["C3", "E3", "G3"]
     # C4 E4 G4
     C4_major_chord_freqs = [261.626, 329.628, 391.996]
-    otro_chord_mingus = ["D-4", "F#-4", "A-4"] # no pilla el #
+    otro_chord_mingus = ["D-4", "F#-4", "A-4"]  # no pilla el #
 
     # la menor, do mayor , mi mayor, fa mayor
+    NiceChordSeqExample = ('Am', 'CM', 'EM', 'FM')

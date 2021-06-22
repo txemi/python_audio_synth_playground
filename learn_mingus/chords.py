@@ -1,11 +1,7 @@
-
-import mingus.core.chords as chords
-from mingus.midi import fluidsynth
+from common.play.from_syntetizer import play_chords_loop
+from common.txchord import TxChord
+# from mingus.midi import fluidsynth
 # la menor, do mayor, mi mayor, fa mayor
-for current_chord_name in ('Am', 'CM', 'EM', 'FM'):
-    mingus_chord=chords.from_shorthand(current_chord_name)
-    d=chords.determine(mingus_chord)
-    print(current_chord_name + " " + str(mingus_chord) + " " + str(d))
-    fluidsynth.play_Note(mingus_chord[0] + '-4')
 
+play_chords_loop(TxChord.NiceChordSeqExample, 3)
 print(1)

@@ -1,3 +1,5 @@
+from mingus.core import chords as chords
+
 import common.play
 import common.txchord
 from beartype import beartype
@@ -34,3 +36,16 @@ def play_chord_from_freq_and_chord(player1: Player, synthesizer1: Synthesizer, f
 def play_chord_from_symbolic(player: Player, synthesizer_instance: Synthesizer, chords, duration):
     chord_wave = synthesizer_instance.generate_chord(chords, duration)
     player.play_wave(chord_wave)
+
+
+@beartype
+def play_chords_loop(chordseq: list, times: int):
+    p, s = play_init()
+    for i in range(times):
+        for current_chord_name in chordseq:
+            mingus_chord = chords.from_shorthand(current_chord_name)
+            d = chords.determine(mingus_chord)
+            print(current_chord_name + " " + str(mingus_chord) + " " + str(d))
+            # fails fluidsynth.play_Note(mingus_chord[0] + '-4')
+            chord2 = [x + "4" for x in mingus_chord]
+            play_chord_from_symbolic(p, s, chord2, 1.0)
