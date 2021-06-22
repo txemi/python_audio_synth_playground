@@ -1,9 +1,9 @@
-from mingus.core import chords as chords
-
 import common.play
 import common.txchord
 from beartype import beartype
 from synthesizer import Player, Synthesizer, Waveform
+
+from common.txchord import mingusChord2Notes
 
 
 @beartype
@@ -39,13 +39,19 @@ def play_chord_from_symbolic(player: Player, synthesizer_instance: Synthesizer, 
 
 
 @beartype
-def play_chords_loop(chordseq: (list, tuple), times: int):
-    p, s = play_init()
+def play_chord_chord_notation(player: Player, synthesizer_instance: Synthesizer, current_chord_name):
+    chord_notes = mingusChord2Notes(current_chord_name)
+    play_chord_from_symbolic(player, synthesizer_instance, chord_notes, 1.0)
+
+
+@beartype
+def play_chords_chord_notation(player: Player, synthesizer_instance: Synthesizer, chordseq: (list, tuple)):
+    for current_chord_name in chordseq:
+        play_chord_chord_notation(player, synthesizer_instance, current_chord_name)
+
+
+@beartype
+def play_chords_loop_chord_notation(chordseq: (list, tuple), times: int):
+    player, synt = play_init()
     for i in range(times):
-        for current_chord_name in chordseq:
-            mingus_chord = chords.from_shorthand(current_chord_name)
-            d = chords.determine(mingus_chord)
-            print(current_chord_name + " " + str(mingus_chord) + " " + str(d))
-            # fails fluidsynth.play_Note(mingus_chord[0] + '-4')
-            chord2 = [x + "4" for x in mingus_chord]
-            play_chord_from_symbolic(p, s, chord2, 1.0)
+        play_chords_chord_notation(player, synt, chordseq)

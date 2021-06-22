@@ -2,7 +2,7 @@
 """Play a fixed frequency sound."""
 from __future__ import division
 
-from common.play.build_with_math_and_play_with_pyaudio import sine_tone_play1
+from common.play.synt_with_math_and_play_with_pyaudio import sine_tone_play1
 from common.txtone import TxTones
 from common.sample_rates import sample_rate_22050
 

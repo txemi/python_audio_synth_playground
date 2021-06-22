@@ -55,11 +55,11 @@ def playKatiNoteFromNameAndStr(kati_note_str: str, note_freq: float):
     print_and_play_tone(tone)
 
 @beartype
-def playKatiNote2(note:str):
+def playKatiNote(note:str):
     note_freqs = common.txtone.get_piano_notes()
     playKatiNoteFromNameAndStr(note, note_freqs[note])
 
 
 def playKatiNotes(*args):
     for arg in args:
-        playKatiNote2(arg)
+        playKatiNote(arg)
