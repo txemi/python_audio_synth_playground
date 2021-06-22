@@ -11,3 +11,17 @@ class TxIntervals:
         return fifth_2
 
 
+def freq_mult(freq, mult):
+    return float(TxIntervals.interval_factor(mult) * freq)
+
+
+def freqs_mult(freq, mults):
+    for mult in mults:
+        yield freq_mult(freq, mult)
+
+def freqs_mult_accumulate(freq, mults):
+    accumulated=0
+    for mult in mults:
+        added=mult+accumulated
+        yield freq_mult(freq, added)
+        accumulated=added

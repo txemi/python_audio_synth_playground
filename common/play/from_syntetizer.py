@@ -3,6 +3,7 @@ import common.txchord
 from beartype import beartype
 from synthesizer import Player, Synthesizer, Waveform
 
+from common import txintervals
 from common.txchord import mingusChord2Notes
 from common.txtone import get_piano_notes
 
@@ -22,12 +23,25 @@ def play_wave(player: Player, synthesizer_instance: Synthesizer, freq, duration)
 
 
 @beartype
-def play_sequence(notes):
+def play_sequence_freqs(freqs):
     player, synthesizer_instance = play_init()
-    note2freq = get_piano_notes()
-    for note in notes:
-        freq = note2freq[note]
+    for freq in freqs:
         play_wave(player, synthesizer_instance, freq, 1.0)
+
+
+@beartype
+def play_sequence_notes(notes):
+    note2freq = get_piano_notes()
+    aaa = [note2freq[note] for note in notes]
+    play_sequence_freqs(aaa)
+
+
+@beartype
+def play_scale(freq: float, scale):
+    freqs = list(txintervals.freqs_mult_accumulate(freq, scale))
+    tail = list(reversed(freqs))[1:]
+    print(freqs)
+    play_sequence_freqs(freqs + tail)
 
 
 @beartype

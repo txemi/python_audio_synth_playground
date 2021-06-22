@@ -1,8 +1,6 @@
 from beartype import beartype
 from mingus.core import chords as chords
 
-from common.txintervals import TxIntervals
-
 
 class TxChord:
     class Type:
@@ -12,10 +10,8 @@ class TxChord:
         aug = 0, 4, 8
         all = (major, minor, dim, aug)
 
-    @classmethod
-    def freqs_mult(cls, freq, mults):
-        for mult in mults:
-            yield float(TxIntervals.interval_factor(mult) * freq)
+
+
 
     c3_major_chord_names = ["C3", "E3", "G3"]
     # C4 E4 G4
