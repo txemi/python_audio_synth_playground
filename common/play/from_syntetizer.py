@@ -17,31 +17,31 @@ def play_init():
 
 
 @beartype
-def play_wave(player: Player, synthesizer_instance: Synthesizer, freq, duration):
-    wave_A4 = synthesizer_instance.generate_constant_wave(freq, duration)
+def play_wave(player: Player, synthesizer_instance: Synthesizer, freq, duration_in_secs: float):
+    wave_A4 = synthesizer_instance.generate_constant_wave(freq, duration_in_secs)
     player.play_wave(wave_A4)
 
 
 @beartype
-def play_sequence_freqs(freqs):
+def play_sequence_freqs(freqs, duration_seqs: float):
     player, synthesizer_instance = play_init()
     for freq in freqs:
-        play_wave(player, synthesizer_instance, freq, 1.0)
+        play_wave(player, synthesizer_instance, freq, duration_seqs)
 
 
 @beartype
-def play_sequence_notes(notes):
+def play_sequence_notes(notes, duration_secs: float):
     note2freq = get_piano_notes()
-    aaa = [note2freq[note] for note in notes]
-    play_sequence_freqs(aaa)
+    freqs = [note2freq[note] for note in notes]
+    play_sequence_freqs(freqs, duration_secs)
 
 
 @beartype
-def play_scale(freq: float, scale):
+def play_scale(freq: float, scale, duration_secons: float):
     freqs = list(txintervals.freqs_mult_accumulate(freq, scale))
     tail = list(reversed(freqs))[1:]
     print(freqs)
-    play_sequence_freqs(freqs + tail)
+    play_sequence_freqs(freqs + tail, duration_secons)
 
 
 @beartype
