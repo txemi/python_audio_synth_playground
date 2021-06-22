@@ -39,7 +39,7 @@ def play_chord_from_symbolic(player: Player, synthesizer_instance: Synthesizer, 
 
 
 @beartype
-def play_chords_loop(chordseq: list, times: int):
+def play_chords_loop(chordseq: (list, tuple), times: int):
     p, s = play_init()
     for i in range(times):
         for current_chord_name in chordseq:

@@ -4,40 +4,30 @@ import mingus.core.chords as chords
 import mingus.core.notes as notes
 from common.txchord import TxChord
 from mingus.containers import NoteContainer
-from mingus.containers.instrument import Instrument, Piano, Guitar
 from mingus.containers import Note
-aa = notes.is_valid_note("C")
-print(aa)
 
-bb = chords.major_triad("C")
-print(bb)
+from common.txtone import note2mingus
 
+c_is_valid = notes.is_valid_note("C")
+print(c_is_valid)
 
-def note2mingus(a):
-    for b in a:
-        yield b[:1] + "-" + b[-1:]
+c_chord = chords.major_triad("C")
+print(c_chord)
 
-
-uuu = list(note2mingus(TxChord.c3_major_chord_names))
+c3_major_chord_mingus = list(note2mingus(TxChord.c3_major_chord_names))
 # falla cc = chords.determine(uuu)
 
-cc = NoteContainer(uuu)
-ua=cc.determine()
-ic=cc.is_consonant()
-note=cc.notes[0]
+c3_major_container = NoteContainer(c3_major_chord_mingus)
+ua=c3_major_container.determine()
+ic=c3_major_container.is_consonant()
+note=c3_major_container.notes[0]
 assert isinstance(note,Note)
 
-asdf=NoteContainer(list(note2mingus(TxChord.otro_chord_mingus)))
-asdf.determine()
+chord_container=NoteContainer(list(TxChord.otro_chord_mingus))
+chord_container.determine()
 
-print(cc)
+print(c3_major_container)
 
-p=Piano()
-rr=p.range
-for uuu in rr:
-    print(uuu)
 
-loil=rr[0]
-loil.augment()
 
 

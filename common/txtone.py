@@ -63,3 +63,8 @@ def get_piano_notes():
     note_freqs = dict(zip(keys, [_get_key_freq(n) for n in range(len(keys))]))
     note_freqs[''] = 0.0  # stop
     return note_freqs
+
+
+def note2mingus(chord_notes):
+    for note in chord_notes:
+        yield note[:1] + "-" + note[-1:]
