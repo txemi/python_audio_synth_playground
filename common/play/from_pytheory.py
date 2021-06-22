@@ -3,7 +3,7 @@ import pytheory
 from pytheory import Tone
 
 import common.txtone
-from common.txtone import getFrequency, katieshiqihe2pytheory
+from common.txtone import get_frequency, katieshiqihe2pytheory
 from common.filewrite.from_tones_mixer import write_wav_for_note
 
 from beartype import beartype
@@ -19,7 +19,7 @@ def play1(tone_or_chord: Tone):
     pygame.mixer.pre_init(SAMPLE_RATE, -16, 1)
     pygame.mixer.init()
 
-    chord = [synth(getFrequency(tone_or_chord.full_name))]
+    chord = [synth(get_frequency(tone_or_chord.full_name))]
 
     _play_for(sum(chord), ms=t)
 
@@ -40,7 +40,7 @@ def play_with_tone(note_str: str):
 def print_and_play_tone(tone: Tone):
     print(tone)
     print("pytherory:" + str(tone.pitch()))
-    print("getFrequency:" + str(getFrequency(tone.full_name)))
+    print("getFrequency:" + str(get_frequency(tone.full_name)))
     if False:
         pytheory.play(tone)
     else:
