@@ -32,14 +32,14 @@ def build_sin_data_for_freq_2(frequency: Union[float, int], time: Union[float, i
     wavedata = []
 
     for i in range(frame_count):
-        a = rate / frequency  # number of frames per synt_wave
+        a = rate / frequency  # number of frames per wave
         b = i / a
         # explanation for b
-        # considering one synt_wave, what part of the synt_wave should this be
-        # if we graph the sine synt_wave in a
+        # considering one wave, what part of the wave should this be
+        # if we graph the sine wave in a
         # displacement vs i graph for the particle
-        # where 0 is the beginning of the sine synt_wave and
-        # 1 the end of the sine synt_wave
+        # where 0 is the beginning of the sine wave and
+        # 1 the end of the sine wave
         # which part is "i" is denoted by b
         # for clarity you might use
         # though this is redundant since math.sin is a looping function
@@ -49,7 +49,7 @@ def build_sin_data_for_freq_2(frequency: Union[float, int], time: Union[float, i
         # explanation for c
         # now we map b to between 0 and 2*math.PI
         # since 0 - 2*PI, 2*PI - 4*PI, ...
-        # are the repeating domains of the sin synt_wave (so the decimal values will
+        # are the repeating domains of the sin wave (so the decimal values will
         # also be mapped accordingly,
         # and the integral values will be multiplied
         # by 2*PI and since sin(n*2*PI) is zero where n is an integer)
