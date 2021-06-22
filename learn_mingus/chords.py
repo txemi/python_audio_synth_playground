@@ -17,8 +17,8 @@ c3_major_chord_mingus = list(notes2mingus(TxChord.c3_major_chord_names))
 # falla cc = chords.determine(uuu)
 
 c3_major_container = NoteContainer(c3_major_chord_mingus)
-ua = c3_major_container.determine()
-ic = c3_major_container.is_consonant()
+deter1 = c3_major_container.determine()
+is_conson = c3_major_container.is_consonant()
 note = c3_major_container.notes[0]
 assert isinstance(note, Note)
 
