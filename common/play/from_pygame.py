@@ -3,6 +3,8 @@ import pygame.mixer
 
 from common.synt_wave.sample_rates import sample_rate_22050
 
+on_sec_in_ms = 1_000
+
 
 def pygame_mixer_init():
     pygame.mixer.init(frequency=sample_rate_22050, size=-16, channels=1, buffer=4096)

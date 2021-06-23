@@ -1,8 +1,10 @@
-from common.play import synt_with_math_and_play_with_pyaudio
-from common.note_package import note_names_and_freq_static
-from common.interval_package.txintervals import TxIntervals
-
 import time
+
+from common.interval_package.txintervals import TxIntervals
+from common.note_package import note_names_and_freq_static
+from common.play import synt_with_math_and_play_with_pyaudio
+
+
 def octave_play(tone_freq):
     for tone_freq in tone_freq / 2, tone_freq, tone_freq * 2:
         synt_with_math_and_play_with_pyaudio.sin_tone_play_2(tone_freq, 1)
@@ -19,7 +21,14 @@ def scale2_fifth_play(tone_freq):
     synt_with_math_and_play_with_pyaudio.sin_tone_play_2(new_tone_freq, 1)
 
 
+def compare_fifth():
+    a = TxIntervals.get_fifth_factor_2()
+    b = TxIntervals.fifth_1
+    print(1)
+
+
 def play_intervals(tone_freq):
+    compare_fifth()
     octave_play(tone_freq)
     time.sleep(1)
     scale1_fifth_play(tone_freq)
@@ -28,4 +37,4 @@ def play_intervals(tone_freq):
 
 
 if __name__ == "__main__":
-    play_intervals(note_names_and_freq_static.note_A4.freq )
+    play_intervals(note_names_and_freq_static.note_A4.freq)
