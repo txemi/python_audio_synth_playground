@@ -1,4 +1,4 @@
-from common.tonepackage.note_names_and_freq_static import note_C4_name, note_C5, note_E4_name, note_c4_name
+from common.note_package.note_names_and_freq_static import note_C4_name, note_C5, note_E4_name, note_c4_name
 
 
 class TxIntervals:

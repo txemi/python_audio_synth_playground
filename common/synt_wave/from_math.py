@@ -2,7 +2,7 @@ import math
 import struct
 from beartype import beartype
 
-from common.sample_rates import DEFAULTRATE
+from common.synt_wave.sample_rates import DEFAULTRATE
 from typing import Union
 
 try:

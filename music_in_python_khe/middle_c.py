@@ -9,11 +9,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.io import wavfile
 
-import common.tonepackage.note_conversions
-import common.tonepackage.note_freq_funcs
-from common import sample_rates
-from common.synt_wave import synt_song_khe
-from common.tonepackage import note_names_and_freq_static
+import common.note_package.note_freq_funcs
+from common.synt_wave import synt_song_khe, sample_rates
+from common.note_package import note_names_and_freq_static
 
 plt.style.use('seaborn-dark')
 

@@ -1,8 +1,8 @@
 import numpy as np
 from beartype import beartype
 
-from common.tonepackage.note_names_and_freq_static import TxTones
-from common.tonepackage.note_conversions import note_khe_to_sci, notestr2mingus_int
+from common.note_package.note_names_and_freq_static import TxTones
+from common.note_package.note_conversions import note_khe_to_sci, notestr2mingus_int
 
 
 @beartype

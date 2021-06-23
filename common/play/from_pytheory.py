@@ -2,11 +2,11 @@ import pygame
 import pytheory
 from pytheory import Tone
 
-import common.tonepackage.note_freq_funcs
-import common.tonepackage.note_conversions
-from common.tonepackage.note_conversions import katieshiqihe2pytheory
-from common.tonepackage.note_freq_funcs import get_frequency
-from common.filewrite.from_tones_mixer import write_wav_for_note
+import common.note_package.note_freq_funcs
+import common.note_package.note_conversions
+from common.note_package.note_conversions import katieshiqihe2pytheory
+from common.note_package.note_freq_funcs import get_frequency
+from common.wavfile_write.from_tones_mixer import write_wav_for_note
 
 from beartype import beartype
 

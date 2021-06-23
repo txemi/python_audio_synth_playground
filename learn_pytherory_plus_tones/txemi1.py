@@ -1,7 +1,7 @@
 from pytheory import TonedScale
 
 from common.play.from_pytheory import print_and_play_tone
-from common.filewrite.from_tones_mixer import write_wav_for_toned_scale
+from common.wavfile_write.from_tones_mixer import write_wav_for_toned_scale
 
 
 def play_with_scale(note_str):

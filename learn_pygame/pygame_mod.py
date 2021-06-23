@@ -1,7 +1,7 @@
 from common.synt_wave.from_numpy import sine_wave, square_wave
-from common.sample_rates import sample_rate_4096
+from common.synt_wave.sample_rates import sample_rate_4096
 from common.play.from_pygame import play_for, pygame_mixer_init
-from common.tonepackage.note_names_and_freq_static import TxTones
+from common.note_package.note_names_and_freq_static import TxTones
 
 pygame_mixer_init()
 

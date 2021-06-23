@@ -8,8 +8,7 @@ Write `Twinkle Twinkle Little Star` from sine waves.
 import numpy as np
 from scipy.io import wavfile
 
-from common import sample_rates
-from common.synt_wave import synt_song_khe
+from common.synt_wave import synt_song_khe, sample_rates
 
 sustain_level = 0.1
 

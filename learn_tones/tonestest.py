@@ -1,6 +1,6 @@
 from tones import SINE_WAVE, SAWTOOTH_WAVE
 from tones.mixer import Mixer
-from common.sample_rates import DEFAULTRATE
+from common.synt_wave.sample_rates import DEFAULTRATE
 # Create mixer, set sample rate and amplitude
 mixer = Mixer(DEFAULTRATE, 0.5)
 

@@ -7,8 +7,8 @@ Consonance and dissonance in music.
 """
 import matplotlib.pyplot as plt
 
-import common.tonepackage.note_conversions
-import common.tonepackage.note_freq_funcs
+import common.note_package.note_conversions
+import common.note_package.note_freq_funcs
 from common.interval_package.playground import synt_and_play_and_plot_and_writewav_interval
 from common.interval_package.txintervals import interval_example_perfect_consonant_octave, \
     interval_example_imperfect_consonance_major_third, interval_example_dissonance_minor_seconds

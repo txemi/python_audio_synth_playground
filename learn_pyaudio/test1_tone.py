@@ -3,8 +3,8 @@
 from __future__ import division
 
 from common.play.synt_with_math_and_play_with_pyaudio import sine_tone_play1
-from common.tonepackage.note_names_and_freq_static import TxTones
-from common.sample_rates import sample_rate_22050
+from common.note_package.note_names_and_freq_static import TxTones
+from common.synt_wave.sample_rates import sample_rate_22050
 
 if __name__ == "__main__":
     sine_tone_play1(

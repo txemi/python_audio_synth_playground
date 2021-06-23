@@ -4,11 +4,11 @@ from beartype import beartype
 from musthe import Scale as MustheScale
 from synthesizer import Player, Synthesizer, Waveform
 
-import common.tonepackage.note_freq_funcs
+import common.note_package.note_freq_funcs
 from common.interval_package import txintervals
-from common.tonepackage import note_conversions
-from common.tx_scale import musthescale_notes
-from common.txchord import mingusChord2Notes
+from common.note_package import note_conversions
+from common.scales_package.scale_functions import musthescale_notes
+from common.chords_package.chord_conversion import mingusChord2Notes
 
 
 @beartype

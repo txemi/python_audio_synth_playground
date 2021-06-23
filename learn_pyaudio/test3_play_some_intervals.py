@@ -1,5 +1,5 @@
 from common.play import synt_with_math_and_play_with_pyaudio
-from common.tonepackage.note_names_and_freq_static import TxTones
+from common.note_package.note_names_and_freq_static import TxTones
 from common.interval_package.txintervals import TxIntervals
 
 import time

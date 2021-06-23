@@ -1,4 +1,4 @@
-from common.sample_rates import DEFAULTRATE
+from common.synt_wave.sample_rates import DEFAULTRATE
 from common.synt_wave.from_math import build_sin_data_for_freq_1, build_sin_data_for_freq_2
 from common.play.from_pyaudio import play_1channel_8bit, play_2channels_16_bit
 

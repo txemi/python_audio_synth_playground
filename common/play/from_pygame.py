@@ -1,7 +1,7 @@
 import pygame
 import pygame.mixer
 
-from common.sample_rates import sample_rate_22050
+from common.synt_wave.sample_rates import sample_rate_22050
 
 
 def pygame_mixer_init():
