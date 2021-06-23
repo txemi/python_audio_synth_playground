@@ -1,3 +1,4 @@
+# https://github.com/eriknyquist/tones
 from tones import SINE_WAVE, SAWTOOTH_WAVE
 from tones.mixer import Mixer
 from common.synt_wave.sample_rates import DEFAULTRATE
