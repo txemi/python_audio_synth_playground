@@ -5,3 +5,5 @@ mayor = (2, 2, 1, 2, 2, 2, 1)
 menor = (2, 1, 2, 2, 1, 2, 2)
 frigia = (1, 2, 2, 2, 1, 2, 2)
 cromatica = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+all = (blues, doble_armonica, mayor, menor, frigia, cromatica)

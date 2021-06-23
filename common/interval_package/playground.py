@@ -10,10 +10,10 @@ from common.synt_wave import sample_rates
 
 
 @beartype
-def synt_and_play_and_plot_and_writewav_interval(note_freqs: dict[str, float],
-                                                 consonant_interval_example: txintervals.TxInterval,
-                                                 plot_title1: str,
-                                                 plot_label1: str):
+def synth_and_play_and_plot_and_writewav_interval(note_freqs: dict[str, float],
+                                                  consonant_interval_example: txintervals.TxInterval,
+                                                  plot_title1: str,
+                                                  plot_label1: str):
     start_note_name = consonant_interval_example.start.name
     end_note_name = consonant_interval_example.end.name
     wave1 = from_numpy_khe.get_sine_wave(note_freqs[start_note_name], 2,

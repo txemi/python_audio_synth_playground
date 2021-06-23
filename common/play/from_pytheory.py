@@ -4,7 +4,7 @@ from pytheory import Tone
 
 import common.note_package.note_freq_funcs
 import common.note_package.note_convert_mingus
-from common.note_package.note_convert_khe import katieshiqihe2pytheory
+from common.note_package.note_convert_khe import khe_2_pytheory
 from common.note_package.note_freq_funcs import get_frequency
 from common.wavfile_write.from_tones_mixer import write_wav_for_note
 
@@ -52,7 +52,7 @@ def print_and_play_tone(tone: Tone):
 @beartype
 def playKatiNoteFromNameAndStr(kati_note_str: str, note_freq: float):
     print(kati_note_str + ":" + str(note_freq))
-    ptnote = katieshiqihe2pytheory(kati_note_str)
+    ptnote = khe_2_pytheory(kati_note_str)
     tone = Tone.from_string(ptnote)
     print_and_play_tone(tone)
 

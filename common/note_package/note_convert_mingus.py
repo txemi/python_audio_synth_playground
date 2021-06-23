@@ -1,7 +1,7 @@
 from beartype import beartype
 from mingus.containers import Note as MingusNote
 
-from common.note_package.note_convert_khe import katieshiqihe2pytheory
+from common.note_package.note_convert_khe import khe_2_pytheory
 
 
 def note_name_2_mingus_note_name(note):
@@ -17,7 +17,7 @@ def note_names_2_mingus_note_names(chord_notes):
 def note_name_str_2_mingus_note(notestr: str):
     digits = "".join([x for x in notestr if x.isdigit()])
     nondigits = "".join([x for x in notestr if not x.isdigit()])
-    mingusNote = MingusNote(name=katieshiqihe2pytheory(nondigits), octave=int(digits))
+    mingusNote = MingusNote(name=khe_2_pytheory(nondigits), octave=int(digits))
     return mingusNote
 
 
