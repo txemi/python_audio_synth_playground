@@ -36,7 +36,8 @@ def _get_piano_keys():
     return keys
 
 
-def get_piano_notes_khe():
+@beartype
+def get_piano_notes_khe() -> dict[str, float]:
     """
     Get the frequency in hertz for all keys on a standard piano.
 
