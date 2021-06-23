@@ -5,11 +5,11 @@ from musthe import Scale as MustheScale
 from synthesizer import Player, Synthesizer, Waveform
 
 import common.note_package.note_freq_funcs
+from common.chords_package.chord_conversion import mingusChord2Notes
 from common.interval_package import txintervals
 from common.note_package import note_conversions
 from common.scales_package.scale_functions import musthescale_notes
-from common.chords_package.chord_conversion import mingusChord2Notes
-
+from common.note_package import note_freq_funcs
 
 @beartype
 def play_init():
@@ -34,7 +34,7 @@ def play_sequence_freqs(freqs, duration_seqs: float):
 
 @beartype
 def play_sequence_notes(notes, duration_secs: float):
-    note2freq = common.tonepackage.note_freq_funcs.get_piano_notes_mingus()
+    note2freq = note_freq_funcs.get_piano_notes_mingus()
     freqs = [note2freq[note_conversions.notestr2mingus_int(note)] for note in notes]
     play_sequence_freqs(freqs, duration_secs)
 
@@ -62,7 +62,7 @@ def play_chord_from_freqs(player1: Player, synthesizer1: Synthesizer, freqs, dur
 
 
 @beartype
-def play_chord_from_freq_and_chord(player1: Player, synthesizer1: Synthesizer, freq, chord, duration):
+def play_chord_from_freq_and_chord(player1: Player, synthesizer1: Synthesizer, freq: float, chord, duration):
     freqs = list(txintervals.freqs_mult(freq, chord))
     play_chord_from_freqs(player1, synthesizer1, freqs, duration)
 

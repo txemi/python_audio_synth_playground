@@ -5,15 +5,15 @@ from scipy.io import wavfile
 
 import common.synt_wave
 from common.play.from_pytheory import playKatiNotes
-from music_in_python_khe.t30_consonance import note_freqs
-
+from common.synt_wave import from_numpy_khe
 
 @beartype
-def synt_and_play_and_plot_and_writewav_interval(consonant_interval_example, plot_title1: str, plot_label1: str):
-    wave1 = common.synt_wave.from_numpy_khe.get_sine_wave(note_freqs[consonant_interval_example[0]], 2,
-                                                       amplitude=2048)  # Middle C
-    wave2 = common.synt_wave.from_numpy_khe.get_sine_wave(note_freqs[consonant_interval_example[1]], 2,
-                                                       amplitude=2048)  # C one octave above
+def synt_and_play_and_plot_and_writewav_interval(note_freqs, consonant_interval_example, plot_title1: str,
+                                                 plot_label1: str):
+    wave1 = from_numpy_khe.get_sine_wave(note_freqs[consonant_interval_example[0]], 2,
+                                                          amplitude=2048)  # Middle C
+    wave2 = from_numpy_khe.get_sine_wave(note_freqs[consonant_interval_example[1]], 2,
+                                                          amplitude=2048)  # C one octave above
     playKatiNotes(consonant_interval_example[0], consonant_interval_example[1])
     filename = plot_label1.lower().replace(" ", "_")
     wavfile.write('data/' + filename + '.wav', rate=44100, data=((wave1 + wave2) / 2).astype(np.int16))

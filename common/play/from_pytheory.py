@@ -9,7 +9,7 @@ from common.note_package.note_freq_funcs import get_frequency
 from common.wavfile_write.from_tones_mixer import write_wav_for_note
 
 from beartype import beartype
-
+from common.note_package import note_freq_funcs
 
 @beartype
 def play1(tone_or_chord: Tone):
@@ -58,7 +58,7 @@ def playKatiNoteFromNameAndStr(kati_note_str: str, note_freq: float):
 
 @beartype
 def playKatiNote(note:str):
-    note_freqs = common.tonepackage.note_freq_funcs.get_piano_notes_khe()
+    note_freqs = note_freq_funcs.get_piano_notes_khe()
     playKatiNoteFromNameAndStr(note, note_freqs[note])
 
 

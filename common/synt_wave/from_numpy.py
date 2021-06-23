@@ -19,7 +19,7 @@ def square_wave(hz, peak, duty_cycle=.5, n_samples=sample_rate_44100):
     """Compute N samples of a sine wave with given frequency and peak amplitude.
        Defaults to one second.
     """
-    t = numpy.linspace(0, 1, 500 * 440 / hz, endpoint=False)
+    t = numpy.linspace(0, 1, int(500 * 440 / hz), endpoint=False)
     wave = scipy.signal.square(2 * numpy.pi * 5 * t, duty=duty_cycle)
     wave = numpy.resize(wave, (n_samples,))
     return (peak / 2 * wave.astype(numpy.int16))

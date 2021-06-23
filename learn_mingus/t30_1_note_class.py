@@ -10,13 +10,11 @@ note1 = Note("Cb", 4)
 print(note1)
 print(int(note1))
 note2 = Note("C#", 4)
-print(str(int(note2)) + note2.remove_redundant_accidentals())
+print(str(int(note2)))
+print(str(note2.remove_redundant_accidentals()))
 note3 = Note("Db", 4)
-print(int(note3)+note3.remove_redundant_accidentals())
+print(int(note3))
 # equal111 = (note3 == note2)
 
-mapa = {}
-mapa[note1] = 1
-mapa[note2] = 2
-mapa[note3] = 3
+
 print(1)

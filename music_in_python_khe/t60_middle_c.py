@@ -9,18 +9,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.io import wavfile
 
-import common.note_package.note_freq_funcs
-from common.synt_wave import synt_song_khe, sample_rates
+from common import synt_wave
+from common.note_package import note_freq_funcs
 from common.note_package import note_names_and_freq_static
+from common.synt_wave import synt_song_khe, sample_rates
 
 plt.style.use('seaborn-dark')
 
 # Get middle C frequency
-note_freqs = common.tonepackage.note_freq_funcs.get_piano_notes_khe()
-frequency = note_freqs[note_names_and_freq_static.note_C4_name]
+note_freqs = note_freq_funcs.get_piano_notes_khe()
+frequency = note_freqs[note_names_and_freq_static.note_C4.name]
 
 # Pure sine synt_wave
-sine_wave = common.buildwave.from_numpy_khe.get_sine_wave(frequency, duration=2, amplitude=2048)
+sine_wave = synt_wave.from_numpy_khe.get_sine_wave(frequency, duration=2, amplitude=2048)
 wavfile.write('data/pure_c.wav', rate=sample_rates.sample_rate_44100, data=sine_wave.astype(np.int16))
 
 # Load data from wav file

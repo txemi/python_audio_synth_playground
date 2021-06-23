@@ -1,5 +1,5 @@
 from common.play import synt_with_math_and_play_with_pyaudio
-from common.note_package.note_names_and_freq_static import TxTones
+from common.note_package import note_names_and_freq_static
 from common.interval_package.txintervals import TxIntervals
 
 import time
@@ -28,4 +28,4 @@ def play_intervals(tone_freq):
 
 
 if __name__ == "__main__":
-    play_intervals(TxTones.A4_freq)
+    play_intervals(note_names_and_freq_static.note_A4.freq )

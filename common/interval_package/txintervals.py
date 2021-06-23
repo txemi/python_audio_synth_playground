@@ -1,5 +1,4 @@
-from common.note_package.note_names_and_freq_static import note_C4_name, note_C5, note_E4_name, note_c4_name
-
+from common.note_package import note_names_and_freq_static
 
 class TxIntervals:
     @staticmethod
@@ -31,6 +30,6 @@ def freqs_mult_accumulate(freq, mults):
         accumulated = added
 
 
-interval_example_perfect_consonant_octave = (note_C4_name, note_C5)  # Perfect Consonance (Octave)
-interval_example_imperfect_consonance_major_third = (note_C4_name, note_E4_name)  # Imperfect Consonance (Major Thirds)
-interval_example_dissonance_minor_seconds = (note_C4_name, note_c4_name)  # Dissonance (Minor Seconds)
+interval_example_perfect_consonant_octave = (note_names_and_freq_static.note_C4.name, note_names_and_freq_static.note_C5.name)  # Perfect Consonance (Octave)
+interval_example_imperfect_consonance_major_third = (note_names_and_freq_static.note_C4.name, note_names_and_freq_static.note_E4.name)  # Imperfect Consonance (Major Thirds)
+interval_example_dissonance_minor_seconds = (note_names_and_freq_static.note_C4.name, note_names_and_freq_static.note_c4.name)  # Dissonance (Minor Seconds)

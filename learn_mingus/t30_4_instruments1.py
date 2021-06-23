@@ -1,10 +1,10 @@
 from mingus.containers import Piano
 
-p=Piano()
-rr=p.range
-loil=rr[0]
+piano = Piano()
+piano_range = piano.range
+piano_range_init = piano_range[0]
 
-for c3_major_chord_mingus in rr:
+for c3_major_chord_mingus in piano_range:
     print(c3_major_chord_mingus)
 
-loil.augment()
+piano_range_init.augment()

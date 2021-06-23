@@ -1,12 +1,17 @@
-class TxTones:
-    A4_freq = 440.0  # Frequency of Note A4
-    A4 = ["A4"]
+class TxNote:
+    def __init__(self, name, freq=None):
+        self.freq = freq
+        self.name = name
 
 
-note_C4_freq = 261.626
-note_E4_freq = 329.628
-note_G4_freq = 391.996
-note_C4_name = 'C4'  # Middle C
-note_C5 = 'C5'  # C one octave above
-note_E4_name = 'E4'
-note_c4_name = 'c4'
+note_C3 = TxNote('C3')
+note_E3 = TxNote('E3')
+note_G3 = TxNote('G3')
+
+note_A4 = TxNote('A4', 440.0)  # Frequency of Note A4
+note_C4 = TxNote('C4', 261.626)  # Middle C
+note_G4 = TxNote('G4', 391.996)
+note_E4 = TxNote('E4', 329.628)
+note_c4 = TxNote('c4')
+
+note_C5 = TxNote('C5')  # C one octave above
