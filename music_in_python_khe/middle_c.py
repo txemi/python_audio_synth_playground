@@ -5,23 +5,25 @@ Mimic a middle C on the piano.
 
 @author: khe
 """
+import matplotlib.pyplot as plt
 import numpy as np
 from scipy.io import wavfile
-import matplotlib.pyplot as plt
 
-import common.tonepackage.note_freq_funcs
 import common.tonepackage.note_conversions
+import common.tonepackage.note_freq_funcs
+from common import sample_rates
+from common.synt_wave import synt_song_khe
+from common.tonepackage import note_names_and_freq_static
 
 plt.style.use('seaborn-dark')
-from common.synt_wave import synt_song_khe
 
 # Get middle C frequency
 note_freqs = common.tonepackage.note_freq_funcs.get_piano_notes_khe()
-frequency = note_freqs['C4']
+frequency = note_freqs[note_names_and_freq_static.note_C4_name]
 
 # Pure sine synt_wave
 sine_wave = common.buildwave.from_numpy_khe.get_sine_wave(frequency, duration=2, amplitude=2048)
-wavfile.write('data/pure_c.wav', rate=44100, data=sine_wave.astype(np.int16))
+wavfile.write('data/pure_c.wav', rate=sample_rates.sample_rate_44100, data=sine_wave.astype(np.int16))
 
 # Load data from wav file
 sample_rate, middle_c = wavfile.read('data/piano_c.wav')
@@ -36,8 +38,8 @@ plt.savefig('data/piano_sound_wave.jpg')
 
 # FFT
 t = np.arange(middle_c.shape[0])
-freq = np.fft.fftfreq(t.shape[-1])*sample_rate
-sp = np.fft.fft(middle_c) 
+freq = np.fft.fftfreq(t.shape[-1]) * sample_rate
+sp = np.fft.fft(middle_c)
 
 # Plot spectrum
 plt.plot(freq, abs(sp.real))
@@ -58,23 +60,23 @@ sort = np.argsort(-abs(sp.real))[:100]
 dom_freq = freq[sort]
 
 # Round and calculate amplitude ratio
-freq_ratio = np.round(dom_freq/frequency)
+freq_ratio = np.round(dom_freq / frequency)
 unique_freq_ratio = np.unique(freq_ratio)
-amp_ratio = abs(sp.real[sort]/np.sum(sp.real[sort]))
-factor = np.zeros((int(unique_freq_ratio[-1]), ))
+amp_ratio = abs(sp.real[sort] / np.sum(sp.real[sort]))
+factor = np.zeros((int(unique_freq_ratio[-1]),))
 for i in range(factor.shape[0]):
-    idx = np.where(freq_ratio==i+1)[0]
+    idx = np.where(freq_ratio == i + 1)[0]
     factor[i] = np.sum(amp_ratio[idx])
-factor = factor/np.sum(factor)
+factor = factor / np.sum(factor)
 
 # Construct harmonic series
 note = synt_song_khe.apply_overtones(frequency, duration=2.5, factor=factor)
 
 # Apply smooth ADSR weights
 weights = synt_song_khe.get_adsr_weights(frequency, duration=2.5, length=[0.05, 0.25, 0.55, 0.15],
-                                         decay=[0.075,0.02,0.005,0.1], sustain_level=0.1)
+                                         decay=[0.075, 0.02, 0.005, 0.1], sustain_level=0.1)
 
 # Write to file
-data = note*weights
-data = data*(4096/np.max(data)) # Adjusting the Amplitude 
+data = note * weights
+data = data * (4096 / np.max(data))  # Adjusting the Amplitude
 wavfile.write('data/synthetic_c.wav', sample_rate, data.astype(np.int16))
