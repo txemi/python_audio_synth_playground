@@ -1,7 +1,7 @@
 from mingus.core import scales
 
-from common.scales_package import scale_static_examples
-from common.scales_package.scale_mingus import scale_to_notenames, find_scale_by_name, get_semitones_from_mingus_scale, \
+from txpymusiclib.scales_package import scale_static_examples
+from txpymusiclib.scales_package.scale_mingus import scale_to_notenames, find_scale_by_name, get_semitones_from_mingus_scale, \
     find_scale_by_semitones
 
 determine_example = scales.determine(['A', 'Bb', 'E', 'F#', 'G'])

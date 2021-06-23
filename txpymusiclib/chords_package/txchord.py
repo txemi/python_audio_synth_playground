@@ -1,4 +1,4 @@
-from common.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import note_names_and_freq_static
 
 
 class TxChord:

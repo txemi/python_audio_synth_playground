@@ -7,10 +7,10 @@ Consonance and dissonance in music.
 """
 import matplotlib.pyplot as plt
 
-from common.interval_package.playground import synth_and_play_and_plot_and_writewav_interval
-from common.interval_package.txintervals import interval_example_perfect_consonant_octave, \
+from txpymusiclib.interval_package.playground import synth_and_play_and_plot_and_writewav_interval
+from txpymusiclib.interval_package.txintervals import interval_example_perfect_consonant_octave, \
     interval_example_imperfect_consonance_major_third, interval_example_dissonance_minor_seconds
-from common.note_package import note_freq_funcs
+from txpymusiclib.note_package import note_freq_funcs
 
 plt.style.use('seaborn-dark')
 

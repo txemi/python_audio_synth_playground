@@ -3,10 +3,10 @@ from beartype import beartype
 from matplotlib import pyplot as plt
 from scipy.io import wavfile
 
-from common.interval_package import txintervals
-from common.play.from_pytheory import playKatiNotes
-from common.synt_wave import from_numpy_khe
-from common.synt_wave import sample_rates
+from txpymusiclib.interval_package import txintervals
+from txpymusiclib.play.from_pytheory import playKatiNotes
+from txpymusiclib.synt_wave import from_numpy_khe
+from txpymusiclib.synt_wave import sample_rates
 
 
 @beartype

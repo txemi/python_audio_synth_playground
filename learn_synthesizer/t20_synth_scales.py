@@ -1,9 +1,9 @@
 # https://github.com/yuma-m/synthesizer
 import time
 
-from common.note_package import note_names_and_freq_static
-from common.play.from_syntetizer import play_sequence_notes, play_scale_from_freq
-from common.scales_package import scale_static_examples
+from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.play.from_syntetizer import play_sequence_notes, play_scale_from_freq
+from txpymusiclib.scales_package import scale_static_examples
 
 play_sequence_notes(scale_static_examples.c_major_scale, 0.3)
 time.sleep(1)

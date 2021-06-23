@@ -4,8 +4,8 @@ import mingus.core.chords as chords
 from mingus.containers import Note
 from mingus.containers import NoteContainer
 
-from common.chords_package.txchord import TxChord
-from common.note_package.note_convert_mingus import note_names_2_mingus_note_names
+from txpymusiclib.chords_package.txchord import TxChord
+from txpymusiclib.note_package.note_convert_mingus import note_names_2_mingus_note_names
 
 c_chord = chords.major_triad("C")
 print(c_chord)

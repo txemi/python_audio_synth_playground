@@ -1,7 +1,7 @@
 # https://github.com/kennethreitz/pytheory
 from pytheory import TonedScale
 
-from common.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import note_names_and_freq_static
 
 # From scale
 ts = TonedScale(tonic=note_names_and_freq_static.note_C4.name)

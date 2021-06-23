@@ -1,8 +1,8 @@
 import time
 
-from common.interval_package.txintervals import TxIntervals
-from common.note_package import note_names_and_freq_static
-from common.play import synt_with_math_and_play_with_pyaudio
+from txpymusiclib.interval_package.txintervals import TxIntervals
+from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.play import synt_with_math_and_play_with_pyaudio
 
 
 def octave_play(tone_freq):

@@ -1,5 +1,5 @@
-from common.chords_package import chord_examples
-from common.play import from_syntetizer
+from txpymusiclib.chords_package import chord_examples
+from txpymusiclib.play import from_syntetizer
 
 # from mingus.midi import fluidsynth
 # la menor, do mayor, mi mayor, fa mayor

@@ -1,7 +1,7 @@
 # https://github.com/kennethreitz/pytheory
 from pytheory import Tone
 
-from common.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import note_names_and_freq_static
 
 c4_tone = Tone.from_string(note_names_and_freq_static.note_C4.name)
 c4_pitch_s = c4_tone.pitch(symbolic=True)

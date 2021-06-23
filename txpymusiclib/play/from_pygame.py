@@ -1,7 +1,7 @@
 import pygame
 import pygame.mixer
 
-from common.synt_wave.sample_rates import sample_rate_22050
+from txpymusiclib.synt_wave.sample_rates import sample_rate_22050
 
 on_sec_in_ms = 1_000
 

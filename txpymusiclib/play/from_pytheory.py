@@ -2,14 +2,14 @@ import pygame
 import pytheory
 from pytheory import Tone
 
-import common.note_package.note_freq_funcs
-import common.note_package.note_convert_mingus
-from common.note_package.note_convert_khe import khe_2_pytheory
-from common.note_package.note_freq_funcs import get_frequency
-from common.wavfile_write.from_tones_mixer import write_wav_for_note
+import txpymusiclib.note_package.note_freq_funcs
+import txpymusiclib.note_package.note_convert_mingus
+from txpymusiclib.note_package.note_convert_khe import khe_2_pytheory
+from txpymusiclib.note_package.note_freq_funcs import get_frequency
+from txpymusiclib.wavfile_write.from_tones_mixer import write_wav_for_note
 
 from beartype import beartype
-from common.note_package import note_freq_funcs
+from txpymusiclib.note_package import note_freq_funcs
 
 @beartype
 def play1(tone_or_chord: Tone):

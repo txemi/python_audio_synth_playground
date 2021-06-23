@@ -5,11 +5,11 @@ from mingus.containers import NoteContainer as MingusNoteContainer
 from musthe import Scale as MustheScale
 from synthesizer import Player, Synthesizer, Waveform
 
-from common.chords_package import chord_conversion
-from common.interval_package import txintervals
-from common.note_package import note_convert_mingus
-from common.note_package import note_freq_funcs
-from common.scales_package.scale_musthe import musthescale_notes
+from txpymusiclib.chords_package import chord_conversion
+from txpymusiclib.interval_package import txintervals
+from txpymusiclib.note_package import note_convert_mingus
+from txpymusiclib.note_package import note_freq_funcs
+from txpymusiclib.scales_package.scale_musthe import musthescale_notes
 
 
 @beartype

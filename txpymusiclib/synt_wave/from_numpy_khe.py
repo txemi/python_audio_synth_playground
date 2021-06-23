@@ -1,7 +1,7 @@
 import numpy as np
 from beartype import beartype
 
-from common.synt_wave import sample_rates
+from txpymusiclib.synt_wave import sample_rates
 
 
 @beartype

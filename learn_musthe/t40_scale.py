@@ -2,7 +2,7 @@
 
 from musthe import *
 
-from common.play.from_syntetizer import play_scale_from_musthescale
+from txpymusiclib.play.from_syntetizer import play_scale_from_musthescale
 
 scale_C4_major = Scale(Note('C4'), 'major')
 play_scale_from_musthescale(scale_C4_major)

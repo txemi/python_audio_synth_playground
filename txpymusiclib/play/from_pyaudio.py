@@ -3,7 +3,7 @@ import math
 import pyaudio
 from pyaudio import PyAudio
 
-from common.synt_wave.sample_rates import sample_rate_16000
+from txpymusiclib.synt_wave.sample_rates import sample_rate_16000
 
 
 def play_1channel_8bit(data, restframes, rate):

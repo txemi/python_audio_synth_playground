@@ -1,8 +1,8 @@
 from pytheory import TonedScale
 
-from common.note_package import note_names_and_freq_static
-from common.play.from_pytheory import print_and_play_tone
-from common.wavfile_write.from_tones_mixer import write_wav_for_toned_scale
+from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.play.from_pytheory import print_and_play_tone
+from txpymusiclib.wavfile_write.from_tones_mixer import write_wav_for_toned_scale
 
 
 def play_with_scale(note_str):

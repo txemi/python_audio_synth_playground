@@ -1,5 +1,5 @@
-from common.note_package import note_freq_funcs
-from common.play.from_pytheory import playKatiNoteFromNameAndStr
+from txpymusiclib.note_package import note_freq_funcs
+from txpymusiclib.play.from_pytheory import playKatiNoteFromNameAndStr
 
 note_freqs = note_freq_funcs.get_piano_notes_khe()
 

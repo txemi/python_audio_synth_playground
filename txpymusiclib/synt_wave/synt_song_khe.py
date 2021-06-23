@@ -8,9 +8,9 @@ Utility functions for writing music in Python.
 from beartype import beartype
 import numpy as np
 
-from common.synt_wave.from_numpy_khe import get_sine_wave
-from common.note_package.note_freq_funcs import get_piano_notes_khe
-from common.synt_wave import sample_rates
+from txpymusiclib.synt_wave.from_numpy_khe import get_sine_wave
+from txpymusiclib.note_package.note_freq_funcs import get_piano_notes_khe
+from txpymusiclib.synt_wave import sample_rates
 
 DEFAULT_AMPLITUDE = 4096
 

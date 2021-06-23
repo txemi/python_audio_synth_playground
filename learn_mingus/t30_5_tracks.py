@@ -1,6 +1,6 @@
 from mingus import containers
 
-from common.chords_package import chord_examples
+from txpymusiclib.chords_package import chord_examples
 
 
 def aa():

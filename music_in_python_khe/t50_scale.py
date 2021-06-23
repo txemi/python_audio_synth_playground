@@ -7,10 +7,10 @@ C major scale with and without sustain.
 """
 import numpy as np
 from scipy.io import wavfile
-from common.synt_wave import synt_song_khe
+from txpymusiclib.synt_wave import synt_song_khe
 
 # Define scale and piano characteristics
-from common.scales_package.scale_static_examples import c_major_scale
+from txpymusiclib.scales_package.scale_static_examples import c_major_scale
 
 note_values = [0.5]*8
 factor = [0.68, 0.26, 0.03, 0.  , 0.03]

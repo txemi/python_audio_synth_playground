@@ -1,7 +1,7 @@
 from beartype import beartype
 from musthe import Scale as MustheScale
 
-from common.scales_package.scale_functions import semitones_scale_to_diffs
+from txpymusiclib.scales_package.scale_functions import semitones_scale_to_diffs
 
 
 @beartype

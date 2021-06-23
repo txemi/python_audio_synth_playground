@@ -1,7 +1,7 @@
-from common.note_package import note_names_and_freq_static
-from common.play.from_pygame import play_for, pygame_mixer_init, on_sec_in_ms
-from common.synt_wave.from_numpy import sine_wave, square_wave
-from common.synt_wave.sample_rates import sample_rate_4096
+from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.play.from_pygame import play_for, pygame_mixer_init, on_sec_in_ms
+from txpymusiclib.synt_wave.from_numpy import sine_wave, square_wave
+from txpymusiclib.synt_wave.sample_rates import sample_rate_4096
 
 pygame_mixer_init()
 # Play A (440Hz) for 1 second as a sine wave:

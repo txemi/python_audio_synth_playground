@@ -1,9 +1,9 @@
 import numpy as np
 from beartype import beartype
 
-from common.note_package import note_names_and_freq_static
-from common.note_package.note_convert_mingus import note_name_str_2_mingus_note_int
-from common.note_package.note_convert_khe import note_khe_to_sci
+from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.note_package.note_convert_mingus import note_name_str_2_mingus_note_int
+from txpymusiclib.note_package.note_convert_khe import note_khe_to_sci
 
 
 @beartype

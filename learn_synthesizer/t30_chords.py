@@ -1,7 +1,7 @@
 # https://github.com/yuma-m/synthesizer
-from common.chords_package.txchord import TxChord
-from common.note_package import note_names_and_freq_static
-from common.play.from_syntetizer import play_chord_from_freq_and_chord, play_init, play_chord_from_symbolic, \
+from txpymusiclib.chords_package.txchord import TxChord
+from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.play.from_syntetizer import play_chord_from_freq_and_chord, play_init, play_chord_from_symbolic, \
     play_chord_from_freqs
 
 player, synthesizer_instance = play_init()

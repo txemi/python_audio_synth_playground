@@ -2,7 +2,7 @@ import math
 import struct
 from beartype import beartype
 
-from common.synt_wave.sample_rates import DEFAULTRATE
+from txpymusiclib.synt_wave.sample_rates import DEFAULTRATE
 from typing import Union
 
 try:
