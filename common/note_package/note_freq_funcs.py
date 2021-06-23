@@ -2,7 +2,8 @@ import numpy as np
 from beartype import beartype
 
 from common.note_package import note_names_and_freq_static
-from common.note_package.note_conversions import note_khe_to_sci, notestr2mingus_int
+from common.note_package.note_convert_mingus import note_name_str_2_mingus_note_int
+from common.note_package.note_convert_khe import note_khe_to_sci
 
 
 @beartype
@@ -70,7 +71,7 @@ def get_piano_notes_mingus():
     for old_key in old_dict:
         if old_key == '':
             continue
-        mingus_note_int = notestr2mingus_int(old_key)
+        mingus_note_int = note_name_str_2_mingus_note_int(old_key)
         assert mingus_note_int not in new_dict1111
         new_dict1111[mingus_note_int] = old_dict[old_key]
 

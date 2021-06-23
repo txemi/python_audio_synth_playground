@@ -5,7 +5,7 @@ from common.play import from_syntetizer
 # la menor, do mayor, mi mayor, fa mayor
 
 
-from_syntetizer.play8(chord_examples.Example2)
+from_syntetizer.play_progressions(chord_examples.Example2)
 
 from_syntetizer.play_chords_loop_chord_notation(chord_examples.LordOfRings, 3)
 

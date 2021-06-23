@@ -7,9 +7,9 @@ from synthesizer import Player, Synthesizer, Waveform
 
 from common.chords_package import chord_conversion
 from common.interval_package import txintervals
-from common.note_package import note_conversions
+from common.note_package import note_convert_mingus
 from common.note_package import note_freq_funcs
-from common.scales_package.scale_functions import musthescale_notes
+from common.scales_package.scale_musthe import musthescale_notes
 
 
 @beartype
@@ -36,7 +36,7 @@ def play_sequence_freqs(freqs, duration_seqs: float):
 @beartype
 def play_sequence_notes(notes, duration_secs: float):
     note2freq = note_freq_funcs.get_piano_notes_mingus()
-    freqs = [note2freq[note_conversions.notestr2mingus_int(note)] for note in notes]
+    freqs = [note2freq[note_convert_mingus.note_name_str_2_mingus_note_int(note)] for note in notes]
     play_sequence_freqs(freqs, duration_secs)
 
 
@@ -94,8 +94,8 @@ def play_chords_loop_chord_notation(chordseq: (list[str], tuple), times: int):
     for i in range(times):
         play_chords_chord_notation(player, synt, chordseq)
 
-
-def play8(progressions: tuple[str]):
+@beartype
+def play_progressions(progressions: tuple[str]):
     player, synthesizer_instance = play_init()
     for prog in progressions:
         nc = chord_conversion.mingus_progression_to_notes(prog)

@@ -3,8 +3,8 @@ import pytheory
 from pytheory import Tone
 
 import common.note_package.note_freq_funcs
-import common.note_package.note_conversions
-from common.note_package.note_conversions import katieshiqihe2pytheory
+import common.note_package.note_convert_mingus
+from common.note_package.note_convert_khe import katieshiqihe2pytheory
 from common.note_package.note_freq_funcs import get_frequency
 from common.wavfile_write.from_tones_mixer import write_wav_for_note
 

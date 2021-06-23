@@ -5,12 +5,12 @@ from mingus.containers import Note
 from mingus.containers import NoteContainer
 
 from common.chords_package.txchord import TxChord
-from common.note_package.note_conversions import notes2mingus
+from common.note_package.note_convert_mingus import note_names_2_mingus_note_names
 
 c_chord = chords.major_triad("C")
 print(c_chord)
 
-c3_major_chord_mingus = list(notes2mingus(TxChord.c3_major_chord_names))
+c3_major_chord_mingus = list(note_names_2_mingus_note_names(TxChord.c3_major_chord_names))
 # falla cc = chords.determine(uuu)
 
 c3_major_container = NoteContainer(c3_major_chord_mingus)
