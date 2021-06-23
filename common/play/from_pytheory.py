@@ -2,8 +2,10 @@ import pygame
 import pytheory
 from pytheory import Tone
 
-import common.txtone
-from common.txtone import get_frequency, katieshiqihe2pytheory
+import common.tonepackage.note_freq_funcs
+import common.tonepackage.note_conversions
+from common.tonepackage.note_conversions import katieshiqihe2pytheory
+from common.tonepackage.note_freq_funcs import get_frequency
 from common.filewrite.from_tones_mixer import write_wav_for_note
 
 from beartype import beartype
@@ -56,7 +58,7 @@ def playKatiNoteFromNameAndStr(kati_note_str: str, note_freq: float):
 
 @beartype
 def playKatiNote(note:str):
-    note_freqs = common.txtone.get_piano_notes_khe()
+    note_freqs = common.tonepackage.note_freq_funcs.get_piano_notes_khe()
     playKatiNoteFromNameAndStr(note, note_freqs[note])
 
 

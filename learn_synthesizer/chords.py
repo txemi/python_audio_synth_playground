@@ -1,7 +1,7 @@
 # https://github.com/yuma-m/synthesizer
 from common.txchord import TxChord
-from common.txtone import TxTones
-from common.play.from_syntetizer import play_chord_from_freq_and_chord, play_init, play_wave, play_chord_from_symbolic, play_chord_from_freqs
+from common.tonepackage.note_names_and_freq_static import TxTones
+from common.play.from_syntetizer import play_chord_from_freq_and_chord, play_init, play_chord_from_symbolic, play_chord_from_freqs
 
 player, synthesizer_instance = play_init()
 

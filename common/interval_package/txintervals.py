@@ -1,3 +1,6 @@
+from common.tonepackage.note_names_and_freq_static import note_C4_name, note_C5, note_E4_name, note_c4_name
+
+
 class TxIntervals:
     @staticmethod
     def interval_factor(half_steps):
@@ -26,3 +29,8 @@ def freqs_mult_accumulate(freq, mults):
         added = mult + accumulated
         yield freq_mult(freq, added)
         accumulated = added
+
+
+interval_example_perfect_consonant_octave = (note_C4_name, note_C5)  # Perfect Consonance (Octave)
+interval_example_imperfect_consonance_major_third = (note_C4_name, note_E4_name)  # Imperfect Consonance (Major Thirds)
+interval_example_dissonance_minor_seconds = (note_C4_name, note_c4_name)  # Dissonance (Minor Seconds)

@@ -1,12 +1,11 @@
 # https://wiki.python.org/moin/PythonInMusic
 # http://bspaans.github.io/python-mingus/doc/wiki/tutorialCore
 import mingus.core.chords as chords
-import mingus.core.notes as notes
 from common.txchord import TxChord
 from mingus.containers import NoteContainer
 from mingus.containers import Note
 
-from common.txtone import notes2mingus
+from common.tonepackage.note_conversions import notes2mingus
 
 
 

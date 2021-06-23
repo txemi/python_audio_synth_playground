@@ -9,14 +9,14 @@ import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
 
-import common.synt_wave.from_numpy_khe
-import common.txtone
+import common.tonepackage.note_freq_funcs
+import common.tonepackage.note_conversions
 
 plt.style.use('seaborn-dark')
 from common.synt_wave import synt_song_khe
 
 # Get middle C frequency
-note_freqs = common.txtone.get_piano_notes_khe()
+note_freqs = common.tonepackage.note_freq_funcs.get_piano_notes_khe()
 frequency = note_freqs['C4']
 
 # Pure sine synt_wave

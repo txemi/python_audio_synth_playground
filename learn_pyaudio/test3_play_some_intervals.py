@@ -1,6 +1,6 @@
 from common.play import synt_with_math_and_play_with_pyaudio
-from common.txtone import TxTones
-from common.txintervals import TxIntervals
+from common.tonepackage.note_names_and_freq_static import TxTones
+from common.interval_package.txintervals import TxIntervals
 
 import time
 def octave_play(tone_freq):

@@ -4,8 +4,9 @@ from beartype import beartype
 from musthe import Scale as MustheScale
 from synthesizer import Player, Synthesizer, Waveform
 
-from common import txintervals
-from common import txtone
+import common.tonepackage.note_freq_funcs
+from common.interval_package import txintervals
+from common.tonepackage import note_conversions
 from common.tx_scale import musthescale_notes
 from common.txchord import mingusChord2Notes
 
@@ -33,8 +34,8 @@ def play_sequence_freqs(freqs, duration_seqs: float):
 
 @beartype
 def play_sequence_notes(notes, duration_secs: float):
-    note2freq = txtone.get_piano_notes_mingus()
-    freqs = [note2freq[txtone.notestr2mingus_int(note)] for note in notes]
+    note2freq = common.tonepackage.note_freq_funcs.get_piano_notes_mingus()
+    freqs = [note2freq[note_conversions.notestr2mingus_int(note)] for note in notes]
     play_sequence_freqs(freqs, duration_secs)
 
 

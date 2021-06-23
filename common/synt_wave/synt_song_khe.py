@@ -9,7 +9,7 @@ from beartype import beartype
 import numpy as np
 
 from common.synt_wave.from_numpy_khe import get_sine_wave
-from common.txtone import get_piano_notes_khe
+from common.tonepackage.note_freq_funcs import get_piano_notes_khe
 from common import sample_rates
 
 DEFAULT_AMPLITUDE = 4096
