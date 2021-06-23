@@ -30,7 +30,6 @@ def generate_all_scales() -> typing.Generator[int, None, None]:
 
 def find_scale_by_name(scale_name):
     for current_scale in generate_all_scales():
-        scale_dir = dir(current_scale)
         if current_scale.name == scale_name:
             return current_scale
 
@@ -38,10 +37,26 @@ def find_scale_by_name(scale_name):
 def get_semitones_from_mingus_scale(mingus_scale):
     ascending = mingus_scale.ascending()
     last = -1
+    modifier = 0
     for note_str in ascending:
-        uu = Note().from_shorthand(note_str)
-        cur = int(uu)
+        mingus_note = Note().from_shorthand(note_str)
+        cur = int(mingus_note) + modifier
         if last != -1:
             diff = cur - last
+            if diff < 0:
+                modifier = 12
+                cur = cur + modifier
+                diff = cur - last
             yield diff
         last = cur
+
+
+def find_scale_by_semitones(scale_interval_semitones):
+    for current_scale in generate_all_scales():
+        current_scale_semitones = list(get_semitones_from_mingus_scale(current_scale))
+        if current_scale_semitones == list(scale_interval_semitones):
+            raise NotImplementedError()
+
+        raise NotImplementedError()
+        if current_scale.name == scale_interval_semitones:
+            return current_scale
