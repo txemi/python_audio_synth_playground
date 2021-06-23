@@ -1,9 +1,14 @@
 from common.chords_package import chord_examples
-from common.play.from_syntetizer import play_chords_loop_chord_notation
+from common.play import from_syntetizer
 
 # from mingus.midi import fluidsynth
 # la menor, do mayor, mi mayor, fa mayor
-play_chords_loop_chord_notation(chord_examples.LordOfRings, 3)
 
-play_chords_loop_chord_notation(chord_examples.NiceChordSeqExample, 3)
+
+from_syntetizer.play8(chord_examples.Example2)
+
+from_syntetizer.play_chords_loop_chord_notation(chord_examples.LordOfRings, 3)
+
+from_syntetizer.play_chords_loop_chord_notation(chord_examples.NiceChordSeqExample, 3)
+
 print(1)

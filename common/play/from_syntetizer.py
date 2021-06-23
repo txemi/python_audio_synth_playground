@@ -1,12 +1,11 @@
 import time
 
 from beartype import beartype
-from mingus.containers import Note as MingusNote
 from mingus.containers import NoteContainer as MingusNoteContainer
 from musthe import Scale as MustheScale
 from synthesizer import Player, Synthesizer, Waveform
 
-from common.chords_package.chord_conversion import mingus_chord_to_notes
+from common.chords_package import chord_conversion
 from common.interval_package import txintervals
 from common.note_package import note_conversions
 from common.note_package import note_freq_funcs
@@ -70,7 +69,8 @@ def play_chord_from_freq_and_chord(player1: Player, synthesizer1: Synthesizer, f
 
 
 @beartype
-def play_chord_from_symbolic(player: Player, synthesizer_instance: Synthesizer, chords: MingusNoteContainer, duration):
+def play_chord_from_symbolic(player: Player, synthesizer_instance: Synthesizer, chords: MingusNoteContainer,
+                             duration=1.0):
     hz = [a.to_hertz() for a in chords.notes]
     chord_wave = synthesizer_instance.generate_chord(hz, duration)
     player.play_wave(chord_wave)
@@ -78,7 +78,7 @@ def play_chord_from_symbolic(player: Player, synthesizer_instance: Synthesizer, 
 
 @beartype
 def play_chord_chord_notation(player: Player, synthesizer_instance: Synthesizer, current_chord_name: str):
-    chord_notes = mingus_chord_to_notes(current_chord_name)
+    chord_notes = chord_conversion.mingus_chord_to_notes(current_chord_name)
     play_chord_from_symbolic(player, synthesizer_instance, chord_notes, 1.0)
 
 
@@ -89,7 +89,14 @@ def play_chords_chord_notation(player: Player, synthesizer_instance: Synthesizer
 
 
 @beartype
-def play_chords_loop_chord_notation(chordseq: (list, tuple), times: int):
+def play_chords_loop_chord_notation(chordseq: (list[str], tuple), times: int):
     player, synt = play_init()
     for i in range(times):
         play_chords_chord_notation(player, synt, chordseq)
+
+
+def play8(progressions: tuple[str]):
+    player, synthesizer_instance = play_init()
+    for prog in progressions:
+        nc = chord_conversion.mingus_progression_to_notes(prog)
+        play_chord_from_symbolic(player, synthesizer_instance, nc)
