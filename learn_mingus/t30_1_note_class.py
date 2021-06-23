@@ -16,5 +16,8 @@ note3 = Note("Db", 4)
 print(int(note3))
 # equal111 = (note3 == note2)
 
+a = Note("A")
+a.transpose("3")
 
+b= a.to_hertz()
 print(1)
