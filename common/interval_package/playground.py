@@ -3,27 +3,31 @@ from beartype import beartype
 from matplotlib import pyplot as plt
 from scipy.io import wavfile
 
+from common.interval_package import txintervals
 from common.play.from_pytheory import playKatiNotes
 from common.synt_wave import from_numpy_khe
 from common.synt_wave import sample_rates
 
 
 @beartype
-def synt_and_play_and_plot_and_writewav_interval(note_freqs: dict[str, float], consonant_interval_example,
+def synt_and_play_and_plot_and_writewav_interval(note_freqs: dict[str, float],
+                                                 consonant_interval_example: txintervals.TxInterval,
                                                  plot_title1: str,
                                                  plot_label1: str):
-    wave1 = from_numpy_khe.get_sine_wave(note_freqs[consonant_interval_example[0]], 2,
+    start_note_name = consonant_interval_example.start.name
+    end_note_name = consonant_interval_example.end.name
+    wave1 = from_numpy_khe.get_sine_wave(note_freqs[start_note_name], 2,
                                          amplitude=2048)  # Middle C
-    wave2 = from_numpy_khe.get_sine_wave(note_freqs[consonant_interval_example[1]], 2,
+    wave2 = from_numpy_khe.get_sine_wave(note_freqs[end_note_name], 2,
                                          amplitude=2048)  # C one octave above
-    playKatiNotes(consonant_interval_example[0], consonant_interval_example[1])
+    playKatiNotes(start_note_name, end_note_name)
     filename = plot_label1.lower().replace(" ", "_")
     wavfile.write('data/' + filename + '.wav', rate=sample_rates.sample_rate_44100,
                   data=((wave1 + wave2) / 2).astype(np.int16))
 
     plt.figure(figsize=(12, 4))
-    plt.plot(wave1[:2500], label=consonant_interval_example[1])
-    plt.plot(wave2[:2500], label=consonant_interval_example[1])
+    plt.plot(wave1[:2500], label=start_note_name)
+    plt.plot(wave2[:2500], label=end_note_name)
     plt.plot((wave1 + wave2)[:2500], label=plot_label1)
     plt.xlabel('Time')
     plt.ylabel('Amplitude')
