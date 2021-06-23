@@ -25,7 +25,7 @@ def freqs_mult(freq, mults):
 
 def freqs_mult_accumulate(freq, mults):
     accumulated = 0
-    for mult in mults:
+    for mult in (0,) + mults:
         added = mult + accumulated
         yield freq_mult(freq, added)
         accumulated = added

@@ -41,8 +41,8 @@ def play_sequence_notes(notes, duration_secs: float):
 
 
 @beartype
-def play_scale_from_freq(freq: float, scale, duration_secons: float):
-    freqs = list(txintervals.freqs_mult_accumulate(freq, scale))
+def play_scale_from_freq(freq: float, scale_semitone_intervals: tuple[int, ...], duration_secons: float):
+    freqs = list(txintervals.freqs_mult_accumulate(freq, scale_semitone_intervals))
     tail = list(reversed(freqs))[1:]
     print(freqs)
     play_sequence_freqs(freqs + tail, duration_secons)
@@ -93,6 +93,7 @@ def play_chords_loop_chord_notation(chordseq: (list[str], tuple), times: int):
     player, synt = play_init()
     for i in range(times):
         play_chords_chord_notation(player, synt, chordseq)
+
 
 @beartype
 def play_progressions(progressions: tuple[str]):

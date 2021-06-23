@@ -1,6 +1,7 @@
 import typing
 
 from mingus import containers
+from mingus.containers import Note
 from mingus.core import scales
 
 
@@ -27,8 +28,20 @@ def generate_all_scales() -> typing.Generator[int, None, None]:
                 yield scale(scales.get_notes(key[1])[0])
 
 
-def find_scale(scale_name):
+def find_scale_by_name(scale_name):
     for current_scale in generate_all_scales():
         scale_dir = dir(current_scale)
         if current_scale.name == scale_name:
             return current_scale
+
+
+def get_semitones_from_mingus_scale(mingus_scale):
+    ascending = mingus_scale.ascending()
+    last = -1
+    for note_str in ascending:
+        uu = Note().from_shorthand(note_str)
+        cur = int(uu)
+        if last != -1:
+            diff = cur - last
+            yield diff
+        last = cur
