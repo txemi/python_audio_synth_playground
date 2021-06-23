@@ -1,12 +1,12 @@
 from beartype import beartype
-from mingus.core import chords as chords
+from mingus.containers import NoteContainer
 
 
 @beartype
-def mingusChord2Notes(current_chord_name: str):
-    mingus_chord = chords.from_shorthand(current_chord_name)
-    d = chords.determine(mingus_chord)
-    print(current_chord_name + " " + str(mingus_chord) + " " + str(d))
+def mingus_chord_to_notes(current_chord_name: str) -> NoteContainer:
+    nc = NoteContainer().from_chord_shorthand(current_chord_name)
+    # NoteContainer.from_progression_shorthand()
+    determined = nc.determine()
+    print(current_chord_name + " " + str(nc) + " " + str(determined))
     # failed_libs fluidsynth.play_Note(mingus_chord[0] + '-4')
-    chord_notes = [x + "4" for x in mingus_chord]
-    return chord_notes
+    return nc

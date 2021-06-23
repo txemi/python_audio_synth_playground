@@ -28,11 +28,15 @@ def notestr2mingus2(notestr: str):
     nondigits = "".join([x for x in notestr if not x.isdigit()])
     mingusNote = MingusNote(name=katieshiqihe2pytheory(nondigits), octave=int(digits))
     return mingusNote
+
+
 @beartype
 def notestr2mingus_int(old_key):
     mingus_note = notestr2mingus2(old_key)
     mingus_note_int = int(mingus_note)
     return mingus_note_int
+
+
 @beartype
 def note_khe_to_sci(note: str):
     if len(note) != 2:
@@ -63,5 +67,3 @@ def note_sci_to_khe(note: str):
     if middle == "#":
         return note[0].lower() + note[2]
     return note
-
-

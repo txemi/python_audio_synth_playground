@@ -1,13 +1,11 @@
 # https://wiki.python.org/moin/PythonInMusic
 # http://bspaans.github.io/python-mingus/doc/wiki/tutorialCore
 import mingus.core.chords as chords
-from common.chords_package.txchord import TxChord
-from mingus.containers import NoteContainer
 from mingus.containers import Note
+from mingus.containers import NoteContainer
 
+from common.chords_package.txchord import TxChord
 from common.note_package.note_conversions import notes2mingus
-
-
 
 c_chord = chords.major_triad("C")
 print(c_chord)

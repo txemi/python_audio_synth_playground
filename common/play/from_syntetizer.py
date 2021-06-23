@@ -1,15 +1,17 @@
 import time
 
 from beartype import beartype
+from mingus.containers import Note as MingusNote
+from mingus.containers import NoteContainer as MingusNoteContainer
 from musthe import Scale as MustheScale
 from synthesizer import Player, Synthesizer, Waveform
 
-import common.note_package.note_freq_funcs
-from common.chords_package.chord_conversion import mingusChord2Notes
+from common.chords_package.chord_conversion import mingus_chord_to_notes
 from common.interval_package import txintervals
 from common.note_package import note_conversions
-from common.scales_package.scale_functions import musthescale_notes
 from common.note_package import note_freq_funcs
+from common.scales_package.scale_functions import musthescale_notes
+
 
 @beartype
 def play_init():
@@ -21,8 +23,8 @@ def play_init():
 
 @beartype
 def play_wave(player: Player, synthesizer_instance: Synthesizer, freq, duration_in_secs: float):
-    wave_A4 = synthesizer_instance.generate_constant_wave(freq, duration_in_secs)
-    player.play_wave(wave_A4)
+    wave_data = synthesizer_instance.generate_constant_wave(freq, duration_in_secs)
+    player.play_wave(wave_data)
 
 
 @beartype
@@ -68,14 +70,15 @@ def play_chord_from_freq_and_chord(player1: Player, synthesizer1: Synthesizer, f
 
 
 @beartype
-def play_chord_from_symbolic(player: Player, synthesizer_instance: Synthesizer, chords, duration):
-    chord_wave = synthesizer_instance.generate_chord(chords, duration)
+def play_chord_from_symbolic(player: Player, synthesizer_instance: Synthesizer, chords: MingusNoteContainer, duration):
+    hz = [a.to_hertz() for a in chords.notes]
+    chord_wave = synthesizer_instance.generate_chord(hz, duration)
     player.play_wave(chord_wave)
 
 
 @beartype
-def play_chord_chord_notation(player: Player, synthesizer_instance: Synthesizer, current_chord_name):
-    chord_notes = mingusChord2Notes(current_chord_name)
+def play_chord_chord_notation(player: Player, synthesizer_instance: Synthesizer, current_chord_name: str):
+    chord_notes = mingus_chord_to_notes(current_chord_name)
     play_chord_from_symbolic(player, synthesizer_instance, chord_notes, 1.0)
 
 
