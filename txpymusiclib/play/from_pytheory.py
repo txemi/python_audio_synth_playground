@@ -50,18 +50,18 @@ def print_and_play_tone(tone: Tone):
 
 
 @beartype
-def playKatiNoteFromNameAndStr(kati_note_str: str, note_freq: float):
+def print_and_play_khe_tone_from_name_and_freq(kati_note_str: str, note_freq: float):
     print(kati_note_str + ":" + str(note_freq))
     ptnote = khe_2_pytheory(kati_note_str)
     tone = Tone.from_string(ptnote)
     print_and_play_tone(tone)
 
 @beartype
-def playKatiNote(note:str):
+def print_and_play_khe_tone_from_name(note:str):
     note_freqs = note_freq_funcs.get_piano_notes_khe()
-    playKatiNoteFromNameAndStr(note, note_freqs[note])
+    print_and_play_khe_tone_from_name_and_freq(note, note_freqs[note])
 
 
-def playKatiNotes(*args):
+def print_and_play_khe_tones_from_names(*args):
     for arg in args:
-        playKatiNote(arg)
+        print_and_play_khe_tone_from_name(arg)

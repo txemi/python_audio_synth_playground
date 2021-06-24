@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from scipy.io import wavfile
 
 from txpymusiclib.interval_package import txintervals
-from txpymusiclib.play.from_pytheory import playKatiNotes
+from txpymusiclib.play.from_pytheory import print_and_play_khe_tones_from_names
 from txpymusiclib.synt_wave import from_numpy_khe
 from txpymusiclib.synt_wave import sample_rates
 
@@ -20,7 +20,7 @@ def synth_and_play_and_plot_and_writewav_interval(note_freqs: dict[str, float],
                                          amplitude=2048)  # Middle C
     wave2 = from_numpy_khe.get_sine_wave(note_freqs[end_note_name], 2,
                                          amplitude=2048)  # C one octave above
-    playKatiNotes(start_note_name, end_note_name)
+    print_and_play_khe_tones_from_names(start_note_name, end_note_name)
     filename = plot_label1.lower().replace(" ", "_")
     wavfile.write('data/' + filename + '.wav', rate=sample_rates.sample_rate_44100,
                   data=((wave1 + wave2) / 2).astype(np.int16))
