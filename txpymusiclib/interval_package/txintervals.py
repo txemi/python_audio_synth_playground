@@ -2,14 +2,15 @@ from txpymusiclib.note_package import note_names_and_freq_static
 
 
 class TxIntervals:
+    # TODO: this class is not needed
     @staticmethod
     def interval_factor(half_steps):
         return 2 ** (half_steps / 12)
 
-    fifth_1 = 3 / 2
+    fifth_factor_rational = 3 / 2
 
     @classmethod
-    def get_fifth_factor_2(cls):
+    def get_fifth_factor_non_rational(cls):
         fifth_2 = cls.interval_factor(7.0)
         return fifth_2
 

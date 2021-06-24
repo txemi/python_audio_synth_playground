@@ -8,7 +8,7 @@ This code is WORK IN PROGRESS.  No released yet.
 
 I wanted to learn about how to play with tones, frecuencies, intervals, chords, scales, etc with python and learn the maths behind, so I made this compilation of libraries and examples in order to know about diferent libraries related to music in python.
 
-You will find a lot of packages whose name stars with learn_* meaning reference to the library tested inside.
+You will find here a lot of packages whose name stars with learn_* meaning reference to the library tested inside.
 
 I also move common functionality to txpymusiclib package in order to merge and build a biggest framework in witch you can find different ways to achieve the same objective and choose wich one fit best.
 

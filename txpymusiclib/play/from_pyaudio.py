@@ -1,11 +1,13 @@
 import math
 
 import pyaudio
+from beartype import beartype
 from pyaudio import PyAudio
 
 from txpymusiclib.synt_wave.sample_rates import sample_rate_16000
 
 
+@beartype
 def play_1channel_8bit(data, restframes, rate):
     pyaudio_object = PyAudio()
     stream = pyaudio_object.open(format=pyaudio_object.get_format_from_width(1),  # 8bit
@@ -23,6 +25,7 @@ def play_1channel_8bit(data, restframes, rate):
     pyaudio_object.terminate()
 
 
+@beartype
 def play_1channel_8bit_bis(FREQUENCY):
     PyAudio = pyaudio.PyAudio  # initialize pyaudio
 
@@ -57,6 +60,7 @@ def play_1channel_8bit_bis(FREQUENCY):
     p.terminate()
 
 
+@beartype
 def play_2channels_16_bit(frames, rate):
     audio_format = pyaudio.paInt16
     channels = 2

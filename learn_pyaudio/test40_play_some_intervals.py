@@ -12,18 +12,18 @@ def octave_play(tone_freq):
 
 def scale1_fifth_play(nota):
     synt_with_math_and_play_with_pyaudio.sin_tone_play_2(nota, 1)
-    synt_with_math_and_play_with_pyaudio.sin_tone_play_2(nota * TxIntervals.fifth_1, 1)
+    synt_with_math_and_play_with_pyaudio.sin_tone_play_2(nota * TxIntervals.fifth_factor_rational, 1)
 
 
 def scale2_fifth_play(tone_freq):
-    new_tone_freq = tone_freq * TxIntervals.get_fifth_factor_2()
+    new_tone_freq = tone_freq * TxIntervals.get_fifth_factor_non_rational()
     synt_with_math_and_play_with_pyaudio.sin_tone_play_2(tone_freq, 1)
     synt_with_math_and_play_with_pyaudio.sin_tone_play_2(new_tone_freq, 1)
 
 
 def compare_fifth():
-    a = TxIntervals.get_fifth_factor_2()
-    b = TxIntervals.fifth_1
+    a = TxIntervals.get_fifth_factor_non_rational()
+    b = TxIntervals.fifth_factor_rational
     print(1)
 
 

@@ -11,7 +11,7 @@ def pygame_mixer_init():
     # pygame.mixer.Sound.set_volume(1.0)
 
 
-def play_for(sample_wave, ms):
+def play_for(sample_wave, ms: int):
     """Play the given NumPy array, as a sound, for ms milliseconds."""
     sound = pygame.sndarray.make_sound(sample_wave)
     sound.play(-1)

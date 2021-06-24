@@ -1,9 +1,10 @@
 import math
 import struct
+from typing import Union
+
 from beartype import beartype
 
 from txpymusiclib.synt_wave.sample_rates import DEFAULTRATE
-from typing import Union
 
 try:
     from itertools import izip
@@ -13,7 +14,7 @@ except ImportError:  # Python 3
 
 
 @beartype
-def build_sin_data_for_freq_1(frequency, duration, volume, sample_rate):
+def build_sin_data_for_freq_1(frequency, duration, volume, sample_rate:int):
     n_samples = int(sample_rate * duration)
     restframes = n_samples % sample_rate
     s = lambda t: volume * math.sin(2 * math.pi * frequency * t / sample_rate)
@@ -22,7 +23,7 @@ def build_sin_data_for_freq_1(frequency, duration, volume, sample_rate):
 
 
 @beartype
-def build_sin_data_for_freq_2(frequency: Union[float, int], time: Union[float, int] = None, rate=DEFAULTRATE):
+def build_sin_data_for_freq_2(frequency: Union[float, int], time: Union[float, int] = None, rate: int = DEFAULTRATE):
     """get frames for a fixed frequency for a specified time or
     number of frames, if frame_count is specified, the specified
     time is ignored"""
