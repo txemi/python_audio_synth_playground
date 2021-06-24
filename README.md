@@ -4,7 +4,7 @@ https://github.com/txemi/txpymusiclib
 
 Playground and library for music theory and synthesis.
 
-This code is WORK IN PROGRESS.  No release yet
+This code is WORK IN PROGRESS.  No released yet.
 
 I wanted to learn about how to play with tones, frecuencies, intervals, chords, scales, etc with python and learn the maths behind, so I made this compilation of libraries and examples in order to know about diferent libraries related to music in python.
 
@@ -14,15 +14,15 @@ I also move common functionality to txpymusiclib package in order to merge and b
 
 Different libraries use different naming conventions for notes so I plan to make converters when needed.
 
-I assume using python3 to take advantage of new features as type checking and also use often absolute route to packages so you often need to configure your IDE or start python on top level folder. These decisions are in order to focus on audio and music, not on python troubleshooting.
+I assume using python3 to take advantage of new features as type checking and also use often absolute route to packages so you often need to configure your IDE or start python on top level folder. These decisions are taken in order to focus on audio and music, not on python troubleshooting.
 
 A requirements.txt that worked for me is provided to make easy to start using this code inside a new virtualenv with requirements installed.
 
 I am using pycharm as IDE as it allows to debug inside dependent libraries what is useful for understanding how do they work inside.
 
-I plan to license GPL with the exception of previously licensed borrowed code that I will agree with mainstream author.
+I plan to license GPL with the exception of previously licensed borrowed code that I will agree with mainstream authors.
 
-Now I mention libreries I tried in order of my actual preference, it could change:
+Now I mention libraries I tried in order of my actual preference, it could change:
 
 For music theory:
 - mingus: Very complete, I use this one if I can
