@@ -1,12 +1,10 @@
 # txpymusiclib playground
 
-https://github.com/txemi/python_audio_synth_playground
+https://github.com/txemi/txpymusiclib
 
 Playground and library for music theory and synthesis.
 
 This code is WORK IN PROGRESS.  No release yet
-
-
 
 I wanted to learn about how to play with tones, frecuencies, intervals, chords, scales, etc with python and learn the maths behind, so I made this compilation of libraries and examples in order to know about diferent libraries related to music in python.
 
