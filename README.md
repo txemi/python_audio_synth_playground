@@ -37,7 +37,7 @@ For audio playing:
 - pyaudio: for audio playing
 
 Other:
-- music_in_python_kde: I learnt a lot with this code from katiehe and I used some parts in txpymusiclib. it builds some songs from scratch, generating tones. Thanks a lot.
+- music_in_python_khe: I learnt a lot with this code from katiehe and I used some parts in txpymusiclib. it builds some songs from scratch, generating tones. Thanks a lot.
 - tones: wav writing
 
 Libraries that did not work for me:
