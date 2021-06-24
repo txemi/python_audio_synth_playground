@@ -11,15 +11,13 @@ from txpymusiclib.scales_package.musical_mode_examples import TxMusicalMode
 
 
 @beartype
-def scale_to_mingus_notes(scale_notes: Iterable[str]):
+def mingus_names_to_notes(scale_notes: Iterable[str]):
     for note_str in scale_notes:
-        yield containers.Note().from_shorthand(note_str)
+        mingus_note = containers.Note().from_shorthand(note_str)
+        mingus_note.octave = int(note_str[1])
+        yield mingus_note
 
 
-@beartype
-def scale_to_notenames(scale_notes: Iterable[str]):
-    for mingus_note in scale_to_mingus_notes(scale_notes):
-        yield mingus_note.name
 
 
 @beartype
@@ -72,6 +70,7 @@ def get_semitones_from_mingus_scale(mingus_scale: scales._Scale):
                 diff = cur - last
             yield diff
         last = cur
+
 
 @beartype
 def get_semitones_from_mingus_scale_2(c_major_1):

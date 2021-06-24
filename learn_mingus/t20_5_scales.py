@@ -2,13 +2,15 @@ from mingus.core import scales
 
 import txpymusiclib.scales_package.scale_static_examples_from_note_names
 from txpymusiclib.scales_package import musical_mode_examples
-from txpymusiclib.scales_package.scale_mingus import scale_to_notenames, find_scale_by_name, get_semitones_from_mingus_scale,get_semitones_from_mingus_scale_2, \
+from txpymusiclib.scales_package import scale_mingus
+from txpymusiclib.scales_package.scale_mingus import find_scale_by_name, \
+    get_semitones_from_mingus_scale_2, \
     find_scale_by_semitones
-from txpymusiclib.scales_package.musical_mode_examples import TxMusicalMode
+
 determine_example = scales.determine(['A', 'Bb', 'E', 'F#', 'G'])
 
-c_major_determined = scales.determine(list(scale_to_notenames(
-    txpymusiclib.scales_package.scale_static_examples_from_note_names.c_major_scale)))
+c_major_scale_notes = list(scale_mingus.mingus_names_to_notes(
+    txpymusiclib.scales_package.scale_static_examples_from_note_names.c_major_scale))
 
 
 def find_hardcoded_scales():
