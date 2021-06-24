@@ -4,13 +4,13 @@ import txpymusiclib.scales_package.scale_static_examples_from_note_names
 from txpymusiclib.scales_package import musical_mode_examples
 from txpymusiclib.scales_package import scale_mingus
 from txpymusiclib.scales_package.scale_mingus import find_scale_by_name, \
-    get_semitones_from_mingus_scale_2, \
+    get_semitones_from_mingus_scale, \
     find_scale_by_semitones
 
 determine_example = scales.determine(['A', 'Bb', 'E', 'F#', 'G'])
 
-c_major_scale_notes = list(scale_mingus.mingus_names_to_notes(
-    txpymusiclib.scales_package.scale_static_examples_from_note_names.c_major_scale))
+c_major_scale_notes = scale_mingus.mingus_names_to_notes(
+    txpymusiclib.scales_package.scale_static_examples_from_note_names.c_major_scale)
 
 
 def find_hardcoded_scales():
@@ -32,7 +32,7 @@ def check_hardcoded_scale():
     c_major_2_ascending = c_major_2.ascending()
     c_major_2_degree_3 = c_major_2.degree(3)
 
-    calculated_semitones = get_semitones_from_mingus_scale_2(c_major_1)
+    calculated_semitones = get_semitones_from_mingus_scale(c_major_1)
     if calculated_semitones != hardcoded_semitones:
         raise Exception()
 
