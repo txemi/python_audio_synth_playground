@@ -1,15 +1,13 @@
 import pygame
 import pytheory
+from beartype import beartype
 from pytheory import Tone
 
-import txpymusiclib.note_package.note_freq_funcs
-import txpymusiclib.note_package.note_convert_mingus
+from txpymusiclib.note_package import note_freq_funcs
 from txpymusiclib.note_package.note_convert_khe import khe_2_pytheory
 from txpymusiclib.note_package.note_freq_funcs import get_frequency
 from txpymusiclib.wavfile_write.from_tones_mixer import write_wav_for_note
 
-from beartype import beartype
-from txpymusiclib.note_package import note_freq_funcs
 
 @beartype
 def play1(tone_or_chord: Tone):
@@ -56,8 +54,9 @@ def print_and_play_khe_tone_from_name_and_freq(kati_note_str: str, note_freq: fl
     tone = Tone.from_string(ptnote)
     print_and_play_tone(tone)
 
+
 @beartype
-def print_and_play_khe_tone_from_name(note:str):
+def print_and_play_khe_tone_from_name(note: str):
     note_freqs = note_freq_funcs.get_piano_notes_khe()
     print_and_play_khe_tone_from_name_and_freq(note, note_freqs[note])
 

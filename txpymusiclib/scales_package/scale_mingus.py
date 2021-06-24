@@ -1,21 +1,29 @@
 import typing
+from collections.abc import Iterable
 
+from beartype import beartype
 from mingus import containers
 from mingus.containers import Note
 from mingus.core import scales
 
+from txpymusiclib.scales_package import musical_mode_examples
+from txpymusiclib.scales_package.musical_mode_examples import TxMusicalMode
 
-def scale_to_mingus_notes(scale_notes: tuple[str]):
+
+@beartype
+def scale_to_mingus_notes(scale_notes: Iterable[str]):
     for note_str in scale_notes:
         yield containers.Note().from_shorthand(note_str)
 
 
-def scale_to_notenames(scale_notes: tuple[str]):
+@beartype
+def scale_to_notenames(scale_notes: Iterable[str]):
     for mingus_note in scale_to_mingus_notes(scale_notes):
         yield mingus_note.name
 
 
-def generate_all_scales() -> typing.Generator[int, None, None]:
+@beartype
+def generate_all_scales() -> typing.Generator[scales._Scale, None, None]:
     """
     """
 
@@ -28,13 +36,15 @@ def generate_all_scales() -> typing.Generator[int, None, None]:
                 yield scale(scales.get_notes(key[1])[0])
 
 
-def find_scale_by_name(scale_name):
+@beartype
+def find_scale_by_name(scale_name: str):
     for current_scale in generate_all_scales():
         if current_scale.name == scale_name:
             return current_scale
 
 
-def get_semitones_from_mingus_scale(mingus_scale):
+@beartype
+def get_semitones_from_mingus_scale(mingus_scale: scales._Scale):
     ascending = mingus_scale.ascending()
     last = -1
     modifier = 0
@@ -46,10 +56,10 @@ def get_semitones_from_mingus_scale(mingus_scale):
                 raise NotImplementedError()
 
             mingus_note = Note().from_shorthand(note_str[:1])
-            for aaaaa in note_str[1:]:
-                if aaaaa == 'b':
+            for note_decorator in note_str[1:]:
+                if note_decorator == 'b':
                     mingus_note.diminish()
-                elif aaaaa == '#':
+                elif note_decorator == '#':
                     mingus_note.augment()
                 else:
                     raise NotImplementedError()
@@ -63,9 +73,14 @@ def get_semitones_from_mingus_scale(mingus_scale):
             yield diff
         last = cur
 
+@beartype
+def get_semitones_from_mingus_scale_2(c_major_1):
+    return TxMusicalMode(list(get_semitones_from_mingus_scale(c_major_1)))
 
-def find_scale_by_semitones(scale_interval_semitones):
+
+@beartype
+def find_scale_by_semitones(scale_interval_semitones: musical_mode_examples.TxMusicalMode):
     for current_scale in generate_all_scales():
-        current_scale_semitones = list(get_semitones_from_mingus_scale(current_scale))
-        if current_scale_semitones == list(scale_interval_semitones):
+        current_scale_semitones = get_semitones_from_mingus_scale_2(current_scale)
+        if current_scale_semitones == scale_interval_semitones:
             yield current_scale
