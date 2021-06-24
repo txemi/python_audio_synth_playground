@@ -49,5 +49,7 @@ You can also look for the functionality you need in txpymusiclib and use it, it 
 
 For future I would like to play with lilypond code or musicxml not to store scripts in python arrays and use a better language representation.
 
-
+TODO: 
+- scale examples revisit (more code in txpymusiclib, better wrapping)
+- jupyter revisit
 
