@@ -52,4 +52,5 @@ For future I would like to play with lilypond code or musicxml not to store scri
 TODO: 
 - scale examples revisit (more code in txpymusiclib, better wrapping)
 - jupyter revisit
+- lilypond or musicxml integration
 
