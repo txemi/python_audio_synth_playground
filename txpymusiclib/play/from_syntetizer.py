@@ -7,9 +7,9 @@ from synthesizer import Player, Synthesizer, Waveform
 
 from txpymusiclib.chords_package import chord_conversion
 from txpymusiclib.interval_package import txintervals
-from txpymusiclib.note_package import note_convert_mingus
-from txpymusiclib.note_package import note_freq_funcs
+from txpymusiclib.scales_package.musical_mode_examples import TxMusicalMode
 from txpymusiclib.scales_package.scale_musthe import musthescale_notes
+from txpymusiclib.scales_package.scale_static_examples_from_note_names import TxNoteContainer
 
 
 @beartype
@@ -34,15 +34,14 @@ def play_sequence_freqs(freqs, duration_seqs: float):
 
 
 @beartype
-def play_sequence_notes(notes, duration_secs: float):
-    note2freq = note_freq_funcs.get_piano_notes_mingus()
-    freqs = [note2freq[note_convert_mingus.note_name_str_2_mingus_note_int(note)] for note in notes]
+def play_sequence_notes(notes: TxNoteContainer, duration_secs: float):
+    freqs = [note.get_freq() for note in notes.get_txnotes()]
     play_sequence_freqs(freqs, duration_secs)
 
 
 @beartype
-def play_scale_from_freq(freq: float, scale_semitone_intervals: tuple[int, ...], duration_secons: float):
-    freqs = list(txintervals.freqs_mult_accumulate(freq, scale_semitone_intervals))
+def play_scale_from_freq(freq: float, scale_semitone_intervals: TxMusicalMode, duration_secons: float):
+    freqs = list(txintervals.freqs_mult_accumulate(freq, scale_semitone_intervals.semitones))
     tail = list(reversed(freqs))[1:]
     print(freqs)
     play_sequence_freqs(freqs + tail, duration_secons)

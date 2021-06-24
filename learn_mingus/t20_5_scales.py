@@ -1,16 +1,11 @@
 from mingus.core import scales
 
-import txpymusiclib.scales_package.scale_static_examples_from_note_names
 from txpymusiclib.scales_package import musical_mode_examples
-from txpymusiclib.scales_package import scale_mingus
 from txpymusiclib.scales_package.scale_mingus import find_scale_by_name, \
     get_semitones_from_mingus_scale, \
     find_scale_by_semitones
 
 determine_example = scales.determine(['A', 'Bb', 'E', 'F#', 'G'])
-
-c_major_scale_notes = scale_mingus.mingus_names_to_notes(
-    txpymusiclib.scales_package.scale_static_examples_from_note_names.c_major_scale)
 
 
 def find_hardcoded_scales():

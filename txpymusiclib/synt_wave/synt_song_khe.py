@@ -5,12 +5,12 @@ Utility functions for writing music in Python.
 
 @author: khe
 """
-from beartype import beartype
 import numpy as np
+from beartype import beartype
 
-from txpymusiclib.synt_wave.from_numpy_khe import get_sine_wave
-from txpymusiclib.note_package.note_freq_funcs import get_piano_notes_khe
+from txpymusiclib.scales_package.scale_static_examples_from_note_names import TxNoteContainer
 from txpymusiclib.synt_wave import sample_rates
+from txpymusiclib.synt_wave.from_numpy_khe import get_sine_wave
 
 DEFAULT_AMPLITUDE = 4096
 
@@ -117,7 +117,7 @@ def get_adsr_weights(frequency: float, duration, length, decay, sustain_level,
 
 
 @beartype
-def apply_pedal(note_values, bar_value: ( float,int)):
+def apply_pedal(note_values, bar_value: (float, int)):
     '''
     Press and hold the sustain pedal throughout the bar.
 
@@ -152,7 +152,7 @@ def apply_pedal(note_values, bar_value: ( float,int)):
 
 
 @beartype
-def get_song_data(music_notes, note_values: list, bar_value, factor, length,
+def get_song_data(music_notes: TxNoteContainer, note_values: list, bar_value, factor, length,
                   decay, sustain_level, sample_rate=sample_rates.sample_rate_44100, amplitude=DEFAULT_AMPLITUDE):
     '''
     Generate song from notes. 
@@ -183,8 +183,7 @@ def get_song_data(music_notes, note_values: list, bar_value, factor, length,
     song : ndarray
 
     '''
-    note_freqs = get_piano_notes_khe()
-    frequencies = [note_freqs[note] for note in music_notes]
+    frequencies = [note.get_freq() for note in music_notes.get_txnotes()]
     new_values = apply_pedal(note_values, bar_value)
     duration = int(sum(note_values) * sample_rate)
     end_idx = np.cumsum(np.array(note_values) * sample_rate).astype(int)
