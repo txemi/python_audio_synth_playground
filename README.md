@@ -22,7 +22,7 @@ I am using pycharm as IDE as it allows to debug inside dependent libraries what 
 
 I plan to license GPL with the exception of previously licensed borrowed code that I will agree with mainstream authors.
 
-Now I mention libraries I tried in order of my actual preference, it could change:
+Now I mention  libraries I tried in order of my actual preference, it could change:
 
 For music theory:
 - mingus: Very complete, I use this one if I can
@@ -39,6 +39,11 @@ For audio playing:
 Other:
 - music_in_python_kde: I learnt a lot with this code from katiehe and I used some parts in txpymusiclib. it builds some songs from scratch, generating tones. Thanks a lot.
 - tones: wav writing
+
+Libraries that did not work for me:
+- pippi
+- pyaudiere
+- sonic
 
 You can also look for the functionality you need in txpymusiclib and use it, it will automatically use one of previous libraries as I am moving common functionality there.
 
