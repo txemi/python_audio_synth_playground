@@ -1,7 +1,7 @@
 import pygame
 import pytheory
 from beartype import beartype
-from pytheory import Tone
+from pytheory import Tone as PyTheoryTone
 
 from txpymusiclib.note_package import note_freq_funcs
 from txpymusiclib.note_package.note_convert_khe import khe_2_pytheory
@@ -10,7 +10,7 @@ from txpymusiclib.wavfile_write.from_tones_mixer import write_wav_for_note
 
 
 @beartype
-def play1(tone_or_chord: Tone):
+def play1(tone_or_chord: PyTheoryTone):
     from pytheory.play import sine_wave, SAMPLE_RATE, _play_for
 
     synth = sine_wave
@@ -26,7 +26,7 @@ def play1(tone_or_chord: Tone):
 
 @beartype
 def play_with_tone(note_str: str):
-    c4_tone = Tone.from_string(note_str)
+    c4_tone = PyTheoryTone.from_string(note_str)
     c4_pitch_s = c4_tone.pitch(symbolic=True)
     met = dir(c4_pitch_s)
     c4_pitch = c4_pitch_s.evalf()
@@ -37,7 +37,7 @@ def play_with_tone(note_str: str):
 
 
 @beartype
-def print_and_play_tone(tone: Tone):
+def print_and_play_tone(tone: PyTheoryTone):
     print(tone)
     print("pytherory:" + str(tone.pitch()))
     print("getFrequency:" + str(get_frequency(tone.full_name)))
@@ -51,7 +51,7 @@ def print_and_play_tone(tone: Tone):
 def print_and_play_khe_tone_from_name_and_freq(kati_note_str: str, note_freq: float):
     print(kati_note_str + ":" + str(note_freq))
     ptnote = khe_2_pytheory(kati_note_str)
-    tone = Tone.from_string(ptnote)
+    tone = PyTheoryTone.from_string(ptnote)
     print_and_play_tone(tone)
 
 
