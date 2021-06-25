@@ -10,11 +10,11 @@ I wanted to learn about how to play with tones, frecuencies, intervals, chords, 
 
 You will find here a lot of packages whose name stars with learn_* meaning reference to the library tested inside.
 
-I also move common functionality to txpymusiclib package in order to merge and build a biggest framework in witch you can find different ways to achieve the same objective and choose wich one fit best.
+I also move common functionality to txpymusiclib package in order to merge and build a bigger framework in witch you can find different ways to achieve the same objective and choose wich one fit best.
 
 Different libraries use different naming conventions for notes so I plan to make converters when needed.
 
-I assume using python3 to take advantage of new features as type checking and also use often absolute route to packages so you often need to configure your IDE or start python on top level folder. These decisions are taken in order to focus on audio and music, not on python troubleshooting.
+I assume using python3 to take advantage of new features as type checking and also use often absolute route to packages in imports so you often need to configure your IDE or start python on top level folder. These decisions are taken in order to focus on audio and music, not on python troubleshooting.
 
 A requirements.txt that worked for me is provided to make easy to start using this code inside a new virtualenv with requirements installed.
 
