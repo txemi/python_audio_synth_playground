@@ -8,7 +8,7 @@ from mingus.containers import Note, NoteContainer
 from mingus.core import scales
 
 import txpymusiclib.scales_package.txscales
-from txpymusiclib.scales_package import musical_mode_examples
+from txpymusiclib.scales_package import txscales_examples
 from txpymusiclib.scales_package.txscales import TxScaleSt
 
 
@@ -16,7 +16,7 @@ from txpymusiclib.scales_package.txscales import TxScaleSt
 def _mingus_names_to_notes(scale_notes: Iterable[str]):
     for note_str in scale_notes:
         mingus_note = containers.Note().from_shorthand(note_str)
-        mingus_note.octave = int(note_str[1])
+        mingus_note.octave = int(note_str[-1:])
         yield mingus_note
 
 
