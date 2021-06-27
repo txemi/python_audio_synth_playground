@@ -33,18 +33,43 @@ class ScaleMergedFromLibs:
         self.mingus = None
 
     def get_semitones(self):
+        self.check_integrity()
+        for aa1 in self._get_from_pytheory, self._get_from_musthe, self._get_from_mingus:
+            aa = aa1()
+            if aa is not None:
+                return aa
+
+        raise NotImplementedError()
+
+    def _get_from_mingus(self):
         if self.mingus is not None and len(self.mingus) > 0:
             assert_that(self.mingus).is_length(1)
             return get_semitones_from_mingus_scale(self.mingus[0])
+        return None
+
+    def _get_from_musthe(self):
         if self.musthe is not None:
             musthe_semitones = musthescale_semitones(self.musthe)
             musthe_semitones.name = self.name
             return musthe_semitones
+        return None
+
+    def _get_from_pytheory(self):
         if self.pytheory is not None:
             assert isinstance(self.pytheory, pytheory.Scale)
             return scale_pytheory2mingus(self.pytheory)
+        return None
 
-        raise NotImplementedError()
+    def check_integrity(self):
+        last_semitones = None
+        for current_semitones_func in self._get_from_pytheory, self._get_from_musthe, self._get_from_mingus:
+            current_semitones = current_semitones_func()
+            if last_semitones is not None:
+                if current_semitones is not None:
+                    if current_semitones != last_semitones:
+                        raise NotImplementedError()
+            if current_semitones is not None:
+                last_semitones = current_semitones
 
 
 def mingus_iterate_scales():
@@ -151,4 +176,5 @@ def detect_same_scales():
             st2 = s2.get_semitones()
             if st1 != st2:
                 continue
+            s2.get_semitones()
             raise NotImplementedError()
