@@ -53,7 +53,10 @@ def find_scale_by_name(scale_name: str) -> scales._Scale:
 
 @beartype
 def _get_semitones_from_mingus_scale(mingus_scale: scales._Scale):
-    ascending = mingus_scale.ascending()
+    try:
+        ascending = mingus_scale.ascending()
+    except:
+        raise
     last = -1
     modifier = 0
     for note_str in ascending:
