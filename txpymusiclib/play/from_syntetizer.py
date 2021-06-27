@@ -7,9 +7,9 @@ from synthesizer import Player, Synthesizer, Waveform
 
 from txpymusiclib.chords_package import chord_conversion
 from txpymusiclib.interval_package import txintervals
-from txpymusiclib.scales_package.musical_mode_examples import TxMusicalMode
 from txpymusiclib.scales_package.scale_musthe import musthescale_notes
-from txpymusiclib.scales_package.scale_static_examples_from_note_names import TxNoteContainer
+from txpymusiclib.scales_package.txnotecontainer import TxNoteContainer
+from txpymusiclib.scales_package.txscales import TxScaleSt
 
 
 @beartype
@@ -40,7 +40,7 @@ def play_sequence_notes(notes: TxNoteContainer, duration_secs: float):
 
 
 @beartype
-def play_scale_from_freq(freq: float, scale_semitone_intervals: TxMusicalMode, duration_secons: float):
+def play_scale_from_freq(freq: float, scale_semitone_intervals: TxScaleSt, duration_secons: float):
     freqs = list(txintervals.freqs_mult_accumulate(freq, scale_semitone_intervals.semitones))
     tail = list(reversed(freqs))[1:]
     print(freqs)
@@ -50,8 +50,9 @@ def play_scale_from_freq(freq: float, scale_semitone_intervals: TxMusicalMode, d
 @beartype
 def play_scale_from_musthescale(current_scale: MustheScale):
     notes_in_scale, description = musthescale_notes(current_scale)
+    nc = TxNoteContainer(notes_in_scale)
     print(description)
-    play_sequence_notes(notes_in_scale, 0.5)
+    play_sequence_notes(nc, 0.5)
     time.sleep(1)
 
 

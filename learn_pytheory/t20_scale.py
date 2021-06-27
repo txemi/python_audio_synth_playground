@@ -8,9 +8,9 @@ ts = TonedScale(tonic=note_names_and_freq_static.note_C4.name)
 c_minor = ts['minor']
 # c_minor
 first = c_minor[0]
-pitch = first.pitch()
-aaa = c_minor["I"]
-bbb = aaa.pitch(symbolic=True)
+first_pitch = first.pitch()
+g1 = c_minor["I"]
+g1pitch = g1.pitch(symbolic=True)
 if False:
     ttt = c_minor["tonic"]
     eee = ttt.pitch(temperament='pythagorean', symbolic=True)

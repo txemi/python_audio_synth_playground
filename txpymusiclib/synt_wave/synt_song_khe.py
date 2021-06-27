@@ -8,7 +8,7 @@ Utility functions for writing music in Python.
 import numpy as np
 from beartype import beartype
 
-from txpymusiclib.scales_package.scale_static_examples_from_note_names import TxNoteContainer
+from txpymusiclib.scales_package.txnotecontainer import TxNoteContainer
 from txpymusiclib.synt_wave import sample_rates
 from txpymusiclib.synt_wave.from_numpy_khe import get_sine_wave
 

@@ -1,13 +1,15 @@
 import typing
 from collections.abc import Iterable
+from typing import Generator
 
 from beartype import beartype
 from mingus import containers
 from mingus.containers import Note, NoteContainer
 from mingus.core import scales
 
+import txpymusiclib.scales_package.txscales
 from txpymusiclib.scales_package import musical_mode_examples
-from txpymusiclib.scales_package.musical_mode_examples import TxMusicalMode
+from txpymusiclib.scales_package.txscales import TxScaleSt
 
 
 @beartype
@@ -19,7 +21,7 @@ def _mingus_names_to_notes(scale_notes: Iterable[str]):
 
 
 @beartype
-def mingus_names_to_notes(scale_notes: Iterable[str])->NoteContainer:
+def mingus_names_to_notes(scale_notes: Iterable[str]) -> NoteContainer:
     return NoteContainer(_mingus_names_to_notes(scale_notes))
 
 
@@ -35,10 +37,12 @@ def _generate_all_scales() -> typing.Generator[scales._Scale, None, None]:
 
             elif scale.type == "minor":
                 yield scale(scales.get_notes(key[1])[0])
+            else:
+                raise NotImplementedError()
 
 
 @beartype
-def find_scale_by_name(scale_name: str)->scales._Scale:
+def find_scale_by_name(scale_name: str) -> scales._Scale:
     for current_scale in _generate_all_scales():
         if current_scale.name == scale_name:
             return current_scale
@@ -76,12 +80,13 @@ def _get_semitones_from_mingus_scale(mingus_scale: scales._Scale):
 
 
 @beartype
-def get_semitones_from_mingus_scale(mingus_scale: scales._Scale) -> TxMusicalMode:
-    return TxMusicalMode(list(_get_semitones_from_mingus_scale(mingus_scale)))
+def get_semitones_from_mingus_scale(mingus_scale: scales._Scale) -> TxScaleSt:
+    return TxScaleSt(list(_get_semitones_from_mingus_scale(mingus_scale)))
 
 
 @beartype
-def find_scale_by_semitones(scale_interval_semitones: musical_mode_examples.TxMusicalMode) -> scales._Scale:
+def find_scale_by_semitones(scale_interval_semitones: txpymusiclib.scales_package.txscales.TxScaleSt) -> Generator[
+    scales._Scale, None, None]:
     for current_scale in _generate_all_scales():
         current_scale_semitones = get_semitones_from_mingus_scale(current_scale)
         if current_scale_semitones == scale_interval_semitones:
