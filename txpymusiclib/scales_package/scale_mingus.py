@@ -8,20 +8,23 @@ from mingus.containers import Note, NoteContainer
 from mingus.core import scales
 
 import txpymusiclib.scales_package.txscales
-from txpymusiclib.scales_package import txscales_examples
 from txpymusiclib.scales_package.txscales import TxScaleSt
 
 
 @beartype
 def _mingus_names_to_notes(scale_notes: Iterable[str]):
     for note_str in scale_notes:
-        mingus_note = containers.Note().from_shorthand(note_str)
-        mingus_note.octave = int(note_str[-1:])
+        if True:
+            mingus_note = containers.Note(name=note_str[:-1], octave=int(note_str[-1:]))
+        else:
+            # from_shorthand es otra cosa NO USAR
+            mingus_note = containers.Note().from_shorthand(note_str)
+            mingus_note.octave = int(note_str[-1:])
         yield mingus_note
 
 
 @beartype
-def mingus_names_to_notes(scale_notes: Iterable[str]) -> NoteContainer:
+def mingus_names_to_mingusnotes(scale_notes: Iterable[str]) -> NoteContainer:
     return NoteContainer(_mingus_names_to_notes(scale_notes))
 
 
