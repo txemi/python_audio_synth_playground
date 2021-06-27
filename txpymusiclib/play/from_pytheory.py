@@ -3,9 +3,9 @@ import pytheory
 from beartype import beartype
 from pytheory import Tone as PyTheoryTone
 
-from txpymusiclib.note_package import note_freq_funcs
+from txpymusiclib.note_package import note_freq_khe
 from txpymusiclib.note_package.note_convert_khe import khe_2_pytheory
-from txpymusiclib.note_package.note_freq_funcs import get_frequency
+from txpymusiclib.note_package.note_freq_khe import get_frequency
 from txpymusiclib.wavfile_write.from_tones_mixer import write_wav_for_note
 
 
@@ -57,7 +57,7 @@ def print_and_play_khe_tone_from_name_and_freq(kati_note_str: str, note_freq: fl
 
 @beartype
 def print_and_play_khe_tone_from_name(note: str):
-    note_freqs = note_freq_funcs.get_piano_notes_khe()
+    note_freqs = note_freq_khe.get_piano_notes_khe()
     print_and_play_khe_tone_from_name_and_freq(note, note_freqs[note])
 
 

@@ -52,28 +52,45 @@ def find_scale_by_name(scale_name: str) -> scales._Scale:
 
 
 @beartype
-def _get_semitones_from_mingus_scale(mingus_scale: scales._Scale):
-    try:
-        ascending = mingus_scale.ascending()
-    except:
-        raise
+def _get_semitones_from_mingus_notes_2(ascending):
+    last = None
+    modifier = 0
+    for mingus_note in ascending:
+        cur = int(mingus_note) + modifier
+        if last is not None:
+            diff = cur - last
+            if diff < 0:
+                modifier = 12
+                cur = cur + modifier
+                diff = cur - last
+            elif diff > 12:
+                modifier = -12
+                cur = cur + modifier
+                diff = cur - last
+            yield diff
+        last = cur
+
+
+@beartype
+def _get_semitones_from_mingus_notes(ascending):
     last = -1
     modifier = 0
     for note_str in ascending:
-        if False:
-            mingus_note = Note().from_shorthand(note_str)
-        else:
+
+        try:
             if len(note_str) < 1:
                 raise NotImplementedError()
+        except:
+            raise
 
-            mingus_note = Note().from_shorthand(note_str[:1])
-            for note_decorator in note_str[1:]:
-                if note_decorator == 'b':
-                    mingus_note.diminish()
-                elif note_decorator == '#':
-                    mingus_note.augment()
-                else:
-                    raise NotImplementedError()
+        mingus_note = Note().from_shorthand(note_str[:1])
+        for note_decorator in note_str[1:]:
+            if note_decorator == 'b':
+                mingus_note.diminish()
+            elif note_decorator == '#':
+                mingus_note.augment()
+            else:
+                raise NotImplementedError()
         cur = int(mingus_note) + modifier
         if last != -1:
             diff = cur - last
@@ -83,6 +100,15 @@ def _get_semitones_from_mingus_scale(mingus_scale: scales._Scale):
                 diff = cur - last
             yield diff
         last = cur
+
+
+@beartype
+def _get_semitones_from_mingus_scale(mingus_scale: scales._Scale):
+    try:
+        ascending = mingus_scale.ascending()
+    except:
+        raise
+    return _get_semitones_from_mingus_notes(ascending)
 
 
 @beartype

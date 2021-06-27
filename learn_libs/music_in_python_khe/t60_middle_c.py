@@ -10,14 +10,14 @@ import numpy as np
 from scipy.io import wavfile
 
 from txpymusiclib import synt_wave
-from txpymusiclib.note_package import note_freq_funcs
+from txpymusiclib.note_package import note_freq_khe
 from txpymusiclib.note_package import note_names_and_freq_static
 from txpymusiclib.synt_wave import synt_song_khe, sample_rates
 
 plt.style.use('seaborn-dark')
 
 # Get middle C frequency
-note_freqs = note_freq_funcs.get_piano_notes_khe()
+note_freqs = note_freq_khe.get_piano_notes_khe()
 frequency = note_freqs[note_names_and_freq_static.note_C4.name]
 
 # Pure sine synt_wave

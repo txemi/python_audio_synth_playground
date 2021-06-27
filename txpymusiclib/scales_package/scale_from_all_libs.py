@@ -1,10 +1,29 @@
 import musthe
 import pytheory
+from assertpy import assert_that
+from beartype import beartype
 from mingus import core as mingus_core
+from musthe import Scale as MustheScale
 
 from txpymusiclib.note_package import note_names_and_freq_static
-from txpymusiclib.scales_package.scale_mingus import get_semitones_from_mingus_scale
-from assertpy import assert_that
+from txpymusiclib.note_package.note_convert_mingus import note_name_str_2_mingus_note
+from txpymusiclib.scales_package.scale_mingus import get_semitones_from_mingus_scale, _get_semitones_from_mingus_notes_2
+from txpymusiclib.scales_package.scale_musthe import musthescale_semitones
+from txpymusiclib.scales_package.txnotecontainer import TxNoteContainer
+from txpymusiclib.scales_package.txscales import TxScaleSt
+
+
+@beartype
+def scale_pytheory2mingus(pyt: pytheory.Scale):
+    txnotes = TxNoteContainer()
+    txnotes.notes = []
+    for tone in pyt.tones:
+        mingus_note = note_name_str_2_mingus_note(tone.full_name)
+        txnotes.notes.append(mingus_note)
+
+    semitones = list(_get_semitones_from_mingus_notes_2(txnotes.notes))
+    return TxScaleSt(semitones)
+
 
 class ScaleMergedFromLibs:
     def __init__(self, name):
@@ -14,27 +33,35 @@ class ScaleMergedFromLibs:
         self.mingus = None
 
     def get_semitones(self):
-        if self.mingus is not None:
+        if self.mingus is not None and len(self.mingus) > 0:
             assert_that(self.mingus).is_length(1)
             return get_semitones_from_mingus_scale(self.mingus[0])
+        if self.musthe is not None:
+            musthe_semitones = musthescale_semitones(self.musthe)
+            musthe_semitones.name = self.name
+            return musthe_semitones
+        if self.pytheory is not None:
+            assert isinstance(self.pytheory, pytheory.Scale)
+            return scale_pytheory2mingus(self.pytheory)
+
         raise NotImplementedError()
 
 
 def mingus_iterate_scales():
-    for bbb in mingus_core.scales._Scale.__subclasses__():
-        if bbb is mingus_core.scales.Diatonic:
+    for MingusScaleSubclass in mingus_core.scales._Scale.__subclasses__():
+        if MingusScaleSubclass is mingus_core.scales.Diatonic:
             continue
 
         try:
-            uuu = bbb(note_names_and_freq_static.note_C4.name)
+            mingus_scale_instance = MingusScaleSubclass(note_names_and_freq_static.note_C4.name[0])
         except:
-            uuu = bbb(note_names_and_freq_static.note_C4.name[0])
-        yield uuu
+            mingus_scale_instance = MingusScaleSubclass(note_names_and_freq_static.note_C4.name)
+        yield mingus_scale_instance
 
 
 def mingus_scale_name(scale1):
     try:
-        current_name = scale1.name.split()[1]
+        current_name = '_'.join(scale1.name.split()[1:])
     except:
         raise
     return current_name
@@ -50,7 +77,8 @@ def musthe_get_scales_key_hashed():
     musthe_scales = musthe.Scale.scales
     musthe_scales_translated_key = {}
     for a, b in musthe_scales.items():
-        musthe_scales_translated_key[hash_scale_name(a)] = b
+        musthe_scales_translated_key[hash_scale_name(a)] = MustheScale(name=a,
+                                                                       root=note_names_and_freq_static.note_C4.name)
     return musthe_scales_translated_key
 
 
@@ -83,6 +111,9 @@ class ScaleFinder:
             current_name = hash_scale_name(mingus_scale_name(mingus_current_scale))
             if scale_to_find_name == current_name:
                 found_asdfadsf.append(mingus_current_scale)
+                assert_that(len(found_asdfadsf)).is_less_than(2)
+
+        assert_that(len(found_asdfadsf)).is_less_than(2)
         scale_merged.mingus = found_asdfadsf
 
         self.map[scale_to_find_name] = scale_merged
@@ -118,4 +149,6 @@ def detect_same_scales():
             s2 = scales.map[s2name]
             st1 = s1.get_semitones()
             st2 = s2.get_semitones()
+            if st1 != st2:
+                continue
             raise NotImplementedError()

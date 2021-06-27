@@ -10,11 +10,11 @@ import matplotlib.pyplot as plt
 from txpymusiclib.interval_package.playground import synth_and_play_and_plot_and_writewav_interval
 from txpymusiclib.interval_package.txintervals import interval_example_perfect_consonant_octave, \
     interval_example_imperfect_consonance_major_third, interval_example_dissonance_minor_seconds
-from txpymusiclib.note_package import note_freq_funcs
+from txpymusiclib.note_package import note_freq_khe
 
 plt.style.use('seaborn-dark')
 
-note_freqs = note_freq_funcs.get_piano_notes_khe()
+note_freqs = note_freq_khe.get_piano_notes_khe()
 
 synth_and_play_and_plot_and_writewav_interval(note_freqs, interval_example_perfect_consonant_octave,
                                              'Perfect Consonance (Octave)',

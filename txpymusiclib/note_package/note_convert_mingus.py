@@ -22,7 +22,7 @@ def note_name_str_2_mingus_note(notestr: str):
 
 
 @beartype
-def note_name_str_2_mingus_note_int(old_key):
+def note_name_str_2_mingus_note_int(old_key:str):
     mingus_note = note_name_str_2_mingus_note(old_key)
     mingus_note_int = int(mingus_note)
     return mingus_note_int
