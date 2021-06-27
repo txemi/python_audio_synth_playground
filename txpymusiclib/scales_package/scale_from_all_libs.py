@@ -1,7 +1,7 @@
 import musthe
+import pytheory
 from mingus import core as mingus_core
 
-from learn_scales.scales import pytheory_c4
 from txpymusiclib.note_package import note_names_and_freq_static
 
 
@@ -25,47 +25,59 @@ def mingus_iterate_scales():
         yield uuu
 
 
-def mingus_scale_name(uuu):
+def mingus_scale_name(scale1):
     try:
-        current_name = uuu.name.split()[1]
+        current_name = scale1.name.split()[1]
     except:
         raise
     return current_name
 
 
+def hash_scale_name(to_find):
+    to_find = to_find.lower()
+    to_find=to_find.replace(" ", "_")
+    return to_find
+
+
 class ScaleFinder:
-    pytheory_c4_scales = pytheory_c4._scales
+    pytheory_c4_scales = pytheory.TonedScale(tonic=note_names_and_freq_static.note_C4.name)._scales
 
     def __init__(self):
         self.map = {}
-        pass
 
     def find(self, to_find: str):
+        to_find = hash_scale_name(to_find)
+        if "harm" in to_find:
+            print(1)
         if to_find in self.map:
             return self.map[to_find]
 
-        scale_merted = ScaleMergedFromLibs(to_find)
+        scale_merged = ScaleMergedFromLibs(to_find)
 
         try:
-            scale_merted.pytheory = self.pytheory_c4_scales[to_find]
+            scale_merged.pytheory = self.pytheory_c4_scales[to_find]
         except:
             pass
 
         musthe_scales = musthe.Scale.scales
-        if to_find in musthe_scales:
-            scale_merted.musthe = musthe_scales[to_find]
+        newwww = {}
+        for a, b in musthe_scales.items():
+            newwww[hash_scale_name(a)] = b
+
+        if to_find in newwww:
+            scale_merged.musthe = musthe_scales[to_find]
         else:
-            scale_merted.musthe = None
+            scale_merged.musthe = None
 
         found_asdfadsf = []
-        for uuu in mingus_iterate_scales():
-
-            current_name = mingus_scale_name(uuu)
+        for mingus_current_scale in mingus_iterate_scales():
+            current_name = hash_scale_name(mingus_scale_name(mingus_current_scale))
             if to_find == current_name:
-                found_asdfadsf.append(uuu)
-        scale_merted.mingus = found_asdfadsf
-        self.map[to_find] = scale_merted
-        return scale_merted
+                found_asdfadsf.append(mingus_current_scale)
+        scale_merged.mingus = found_asdfadsf
+
+        self.map[to_find] = scale_merged
+        return scale_merged
 
 
 def scale_get_from_all_libs() -> ScaleFinder:
