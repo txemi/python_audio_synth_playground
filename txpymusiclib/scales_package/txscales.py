@@ -1,7 +1,12 @@
+from fluentcheck import Check
+
+
 class TxScaleSt:
-    def __init__(self, semitones, name=None):
-        if sum(semitones) != 12:
-            raise Exception()
+    def __init__(self, semitones=None, name=None):
+        Check(semitones is not None or name is not None).is_true()
+        if semitones is not None:
+            if sum(semitones) != 12:
+                raise Exception()
         self.semitones = semitones
         self.name = name
 

@@ -15,6 +15,9 @@ g1pitch = g1.pitch(symbolic=True)
 
 tsC4p = tsC4[txpymusiclib.scales_package.txscales_examples.phrygian.name]
 
+
+tsC4i = tsC4[txpymusiclib.scales_package.txscales_examples.ionian.name]
+
 if False:
     ttt = c_minor["tonic"]
     eee = ttt.pitch(temperament='pythagorean', symbolic=True)
