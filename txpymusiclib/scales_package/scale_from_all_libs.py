@@ -1,3 +1,5 @@
+from typing import Optional
+
 import musthe
 import pytheory
 from assertpy import assert_that
@@ -7,6 +9,8 @@ from musthe import Scale as MustheScale
 
 from txpymusiclib.note_package import note_names_and_freq_static
 from txpymusiclib.note_package.note_convert_mingus import note_name_str_2_mingus_note
+from txpymusiclib.play import from_syntetizer
+from txpymusiclib.scales_package import txscales_examples
 from txpymusiclib.scales_package.scale_mingus import get_semitones_from_mingus_scale, _get_semitones_from_mingus_notes_2
 from txpymusiclib.scales_package.scale_musthe import musthescale_semitones
 from txpymusiclib.scales_package.txnotecontainer import TxNoteContainer
@@ -14,7 +18,7 @@ from txpymusiclib.scales_package.txscales import TxScaleSt
 
 
 @beartype
-def scale_pytheory2mingus(pyt: pytheory.Scale):
+def scale_pytheory2mingus(pyt: pytheory.Scale) -> TxScaleSt:
     txnotes = TxNoteContainer()
     txnotes.notes = []
     for tone in pyt.tones:
@@ -25,7 +29,8 @@ def scale_pytheory2mingus(pyt: pytheory.Scale):
     return TxScaleSt(semitones)
 
 
-def mergemingus(m1, m2):
+@beartype
+def merge_mingus(m1, m2):
     if m1 is None or len(m1) == 0:
         return (True, m2)
     if m2 is None:
@@ -35,7 +40,8 @@ def mergemingus(m1, m2):
     return (True, m1)
 
 
-def mergemusthe(s1, s2):
+@beartype
+def merge_musthe(s1, s2):
     if s1 is None:
         return (True, s2)
     if s2 is None:
@@ -47,7 +53,8 @@ def mergemusthe(s1, s2):
     return (True, s1)
 
 
-def pytheory_merge(s1, s2):
+@beartype
+def merge_pytheory(s1, s2):
     if s1 == s2:
         return (True, s1)
     if s1.tones == s2.tones:
@@ -55,7 +62,17 @@ def pytheory_merge(s1, s2):
     raise NotImplementedError()
 
 
+def merge_txscale(s1, s2):
+    if s2 is None:
+        return (True, s1)
+    if s1.semitones == s2.semitones:
+        return (True, s1)
+    raise NotImplementedError()
+
+
 class ScaleMergedFromLibs:
+
+    @beartype
     def __init__(self, name: str = None):
         self.names = set()
         if name is not None:
@@ -63,35 +80,44 @@ class ScaleMergedFromLibs:
         self.pytheory = None
         self.musthe = None
         self.mingus = None
+        self.txscale = None
 
     def get_semitones(self):
         self.check_integrity()
-        for aa1 in self._get_from_pytheory, self._get_from_musthe, self._get_from_mingus:
-            aa = aa1()
-            if aa is not None:
-                return aa
+        for semitone_builder in self._get_from_pytheory, self._get_from_musthe, self._get_from_mingus, self._get_from_txscale:
+            semitones = semitone_builder()
+            if semitones is not None:
+                return semitones
 
         raise NotImplementedError()
 
-    def _get_from_mingus(self):
+    @beartype
+    def _get_from_mingus(self) -> Optional[TxScaleSt]:
         if self.mingus is not None and len(self.mingus) > 0:
             assert_that(self.mingus).is_length(1)
             return get_semitones_from_mingus_scale(self.mingus[0])
         return None
 
-    def _get_from_musthe(self):
+    @beartype
+    def _get_from_musthe(self) -> Optional[TxScaleSt]:
         if self.musthe is not None:
             musthe_semitones = musthescale_semitones(self.musthe)
             musthe_semitones.name = list(self.names)[0]
             return musthe_semitones
         return None
 
-    def _get_from_pytheory(self):
+    @beartype
+    def _get_from_pytheory(self) -> Optional[TxScaleSt]:
         if self.pytheory is not None:
             assert isinstance(self.pytheory, pytheory.Scale)
             return scale_pytheory2mingus(self.pytheory)
         return None
 
+    @beartype
+    def _get_from_txscale(self) -> Optional[TxScaleSt]:
+        return self.txscale
+
+    @beartype
     def check_integrity(self):
         last_semitones = None
         for current_semitones_func in self._get_from_pytheory, self._get_from_musthe, self._get_from_mingus:
@@ -122,30 +148,58 @@ class ScaleMergedFromLibs:
         if st1 != st2:
             return
 
-        newone = ScaleMergedFromLibs()
-        newone.names.update(s1.names)
-        newone.names.update(s2.names)
+        new_merged_scale = ScaleMergedFromLibs()
+        new_merged_scale.names.update(s1.names)
+        new_merged_scale.names.update(s2.names)
 
-        mingusresult = mergemingus(s1.mingus, s2.mingus)
-        if mingusresult[0] == False:
+        mingus_result = merge_mingus(s1.mingus, s2.mingus)
+        if mingus_result[0] == False:
             return
         else:
-            newone.mingus = mingusresult[1]
+            new_merged_scale.mingus = mingus_result[1]
 
-        musthe_merge_result = mergemusthe(s1.musthe, s2.musthe)
+        musthe_merge_result = merge_musthe(s1.musthe, s2.musthe)
         if musthe_merge_result[0] == False:
             return
         else:
-            newone.musthe = musthe_merge_result[1]
+            new_merged_scale.musthe = musthe_merge_result[1]
 
-        pyt_result = pytheory_merge(s1.pytheory, s2.pytheory)
+        pyt_result = merge_pytheory(s1.pytheory, s2.pytheory)
         if pyt_result[0] == False:
             return
         else:
-            newone.pytheory = pyt_result[1]
-        return newone
+            new_merged_scale.pytheory = pyt_result[1]
+
+        aa = merge_txscale(s1.txscale, s2.txscale)
+        if aa[0] is False:
+            return
+        else:
+            new_merged_scale.txscale = aa[1]
+
+        return new_merged_scale
+
+    def format(self):
+        formatted = str(self.names)
+        if self.txscale is not None:
+            formatted = formatted + " " + str(self.txscale.semitones)
+        if len(self.mingus) > 0:
+            formatted = formatted + " " + str(self.mingus)
+        if self.musthe is not None:
+            formatted = formatted + " " + str(self.musthe)
+        if self.pytheory is not None:
+            formatted = formatted + " " + str(self.pytheory)
+        return formatted
+
+    def play(self):
+        if self.musthe is not None:
+            from_syntetizer.play_scale_from_musthescale(self.musthe)
+        if self.mingus is not None:
+            aaaa = self.mingus[0].ascending()
+            raise NotImplementedError()
+        raise NotImplementedError()
 
 
+@beartype
 def mingus_iterate_scales():
     for MingusScaleSubclass in mingus_core.scales._Scale.__subclasses__():
         if MingusScaleSubclass is mingus_core.scales.Diatonic:
@@ -158,6 +212,7 @@ def mingus_iterate_scales():
         yield mingus_scale_instance
 
 
+@beartype
 def mingus_scale_name(scale1):
     try:
         current_name = '_'.join(scale1.name.split()[1:])
@@ -166,12 +221,14 @@ def mingus_scale_name(scale1):
     return current_name
 
 
+@beartype
 def hash_scale_name(to_find):
     to_find = to_find.lower()
     to_find = to_find.replace(" ", "_")
     return to_find
 
 
+@beartype
 def musthe_get_scales_key_hashed():
     musthe_scales = musthe.Scale.scales
     musthe_scales_translated_key = {}
@@ -187,6 +244,7 @@ class ScaleFinder:
     def __init__(self):
         self.map = {}
 
+    @beartype
     def find(self, scale_to_find_name: str):
         scale_to_find_name = hash_scale_name(scale_to_find_name)
         if scale_to_find_name in self.map:
@@ -205,20 +263,24 @@ class ScaleFinder:
         else:
             scale_merged.musthe = None
 
-        found_asdfadsf = []
+        mingus_scales_found = []
         for mingus_current_scale in mingus_iterate_scales():
             current_name = hash_scale_name(mingus_scale_name(mingus_current_scale))
             if scale_to_find_name == current_name:
-                found_asdfadsf.append(mingus_current_scale)
-                assert_that(len(found_asdfadsf)).is_less_than(2)
+                mingus_scales_found.append(mingus_current_scale)
+                assert_that(len(mingus_scales_found)).is_less_than(2)
+        assert_that(len(mingus_scales_found)).is_less_than(2)
+        scale_merged.mingus = mingus_scales_found
 
-        assert_that(len(found_asdfadsf)).is_less_than(2)
-        scale_merged.mingus = found_asdfadsf
+        for a in txscales_examples.all:
+            if a.name == scale_to_find_name:
+                scale_merged.txscale = a
 
         self.map[scale_to_find_name] = scale_merged
         return scale_merged
 
 
+@beartype
 def scale_get_from_all_libs() -> ScaleFinder:
     finder = ScaleFinder()
     for current_pytheory in ScaleFinder.pytheory_c4_scales.items():
@@ -236,10 +298,14 @@ def scale_get_from_all_libs() -> ScaleFinder:
         cur_name = mingus_scale_name(current_mingus)
         finder.find(cur_name)
 
+    for a in txscales_examples.all:
+        finder.find(a.name)
+
     return finder
 
 
-def detect_same_scales():
+@beartype
+def scales_merge_and_detect_same():
     scales = scale_get_from_all_libs()
     for s1name in scales.map:
         for s2name in scales.map:

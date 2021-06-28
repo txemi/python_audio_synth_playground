@@ -33,9 +33,9 @@ def freqs_mult_accumulate(freq, mults):
 
 
 class TxInterval:
-    def __init__(self, note_from, note_to):
-        self.start = note_from
-        self.end = note_to
+    def __init__(self, khe_note_from: str, khe_note_to: str):
+        self.start = khe_note_from
+        self.end = khe_note_to
 
 
 interval_example_perfect_consonant_octave = TxInterval(note_names_and_freq_static.note_C4,

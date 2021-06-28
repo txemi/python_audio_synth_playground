@@ -27,7 +27,7 @@ Now I mention  libraries I tried in order of my actual preference, it could chan
 For music theory:
 - mingus: Very complete, I use this one if I can
 - pytheory: less complete than mingus, but uses symbolic maths, what makes it very interesting for expressing roots and understanding where non rational numbers come from.
-- musthe: less complete than mingus, mingus preferred
+- musthe: less complete than mingus, mingus preferred. Nice thing is that it has all the tables of intervals, etc for reference.
 - pychord: less complete than mingus, mingus preferred
 - pytuning: not used very much
 
