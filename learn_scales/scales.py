@@ -19,5 +19,6 @@ play_scale_from_musthescale(musthe_phrygian_C4)
 
 # iterate all and cross find
 found = scale_get_from_all_libs()
-detect_same_scales()
+scales_merged = detect_same_scales()
+scales_2 = set(scales_merged.map.values())
 print(1)
