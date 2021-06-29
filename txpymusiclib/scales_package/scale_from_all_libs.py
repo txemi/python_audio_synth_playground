@@ -7,9 +7,10 @@ from beartype import beartype
 from mingus import core as mingus_core
 from musthe import Scale as MustheScale
 
+import txpymusiclib.play.play_musthe_in_synthetizer
 from txpymusiclib.note_package import note_names_and_freq_static
 from txpymusiclib.note_package.note_convert_mingus import note_name_str_2_mingus_note
-from txpymusiclib.play import from_syntetizer
+from txpymusiclib.play import play_floatfreqs_in_syntetizer
 from txpymusiclib.scales_package import txscales_examples
 from txpymusiclib.scales_package.scale_mingus import get_semitones_from_mingus_scale, _get_semitones_from_mingus_notes_2
 from txpymusiclib.scales_package.scale_musthe import musthescale_semitones
@@ -192,7 +193,7 @@ class ScaleMergedFromLibs:
 
     def play(self):
         if self.musthe is not None:
-            from_syntetizer.play_scale_from_musthescale(self.musthe)
+            txpymusiclib.play.play_musthe_in_synthetizer.play_scale_from_musthescale(self.musthe)
         if self.mingus is not None:
             aaaa = self.mingus[0].ascending()
             raise NotImplementedError()
