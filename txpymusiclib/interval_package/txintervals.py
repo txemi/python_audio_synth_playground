@@ -24,11 +24,11 @@ def freqs_mult(freq, mults):
         yield freq_mult(freq, mult)
 
 
-def freqs_mult_accumulate(freq, mults):
+def freqs_mult_accumulate(base_freq: float, mults):
     accumulated = 0
     for mult in (0,) + mults:
         added = mult + accumulated
-        yield freq_mult(freq, added)
+        yield freq_mult(base_freq, added)
         accumulated = added
 
 

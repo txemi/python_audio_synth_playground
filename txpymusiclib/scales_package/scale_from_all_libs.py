@@ -10,7 +10,7 @@ from musthe import Scale as MustheScale
 import txpymusiclib.play.play_musthe_in_synthetizer
 from txpymusiclib.note_package import note_names_and_freq_static
 from txpymusiclib.note_package.note_convert_mingus import note_name_str_2_mingus_note
-from txpymusiclib.play import play_floatfreqs_in_syntetizer
+from txpymusiclib.play.play_mingus_in_synthesizer import mingus_play
 from txpymusiclib.scales_package import txscales_examples
 from txpymusiclib.scales_package.scale_mingus import get_semitones_from_mingus_scale, _get_semitones_from_mingus_notes_2
 from txpymusiclib.scales_package.scale_musthe import musthescale_semitones
@@ -80,10 +80,19 @@ class ScaleMergedFromLibs:
             self.names.add(name)
         self.pytheory = None
         self.musthe = None
-        self.mingus = None
+        self.__mingus: mingus_core.scales._Scale = None
         self.txscale = None
 
-    def get_semitones(self):
+    @property
+    def mingus(self) -> mingus_core.scales._Scale:
+        return self.__mingus
+
+    @mingus.setter
+    def mingus(self, var: mingus_core.scales._Scale):
+        self.__mingus = var
+
+    @beartype
+    def get_semitones(self) -> Optional[TxScaleSt]:
         self.check_integrity()
         for semitone_builder in self._get_from_pytheory, self._get_from_musthe, self._get_from_mingus, self._get_from_txscale:
             semitones = semitone_builder()
@@ -194,8 +203,13 @@ class ScaleMergedFromLibs:
     def play(self):
         if self.musthe is not None:
             txpymusiclib.play.play_musthe_in_synthetizer.play_scale_from_musthescale(self.musthe)
+            return
         if self.mingus is not None:
-            aaaa = self.mingus[0].ascending()
+            try:
+                #assert isinstance(self.mingus, mingus_core.scales._Scale)
+                mingus_play(self.mingus)
+            except:
+                raise
             raise NotImplementedError()
         raise NotImplementedError()
 

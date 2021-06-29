@@ -35,11 +35,14 @@ def _generate_all_scales() -> typing.Generator[scales._Scale, None, None]:
 
     for key in scales.keys:
         for scale in scales._Scale.__subclasses__():
+            if "diatonic" in str(scale).lower():
+                continue
             if scale.type == "major":
                 yield scale(key[0])
-
             elif scale.type == "minor":
                 yield scale(scales.get_notes(key[1])[0])
+            elif scale.type == "ancient" or scale.type == "other":
+                yield scale(key[0])
             else:
                 raise NotImplementedError()
 
@@ -72,25 +75,40 @@ def _get_semitones_from_mingus_notes_2(ascending):
 
 
 @beartype
-def _get_semitones_from_mingus_notes(ascending):
+def mingus_note_str_to_mingus_note(note_str: str) -> Note:
+    try:
+        if len(note_str) < 1:
+            raise NotImplementedError()
+    except:
+        raise
+    mingus_note = Note().from_shorthand(note_str[:1])
+    for note_decorator in note_str[1:]:
+        if note_decorator == 'b':
+            mingus_note.diminish()
+        elif note_decorator == '#':
+            mingus_note.augment()
+        else:
+            raise NotImplementedError()
+    return mingus_note
+
+
+@beartype
+def mingus_scale_to_notes(mingus_scale) -> Generator[Note, None, None]:
+    # scales._Scale
+    try:
+        ascending = mingus_scale.ascending()
+    except:
+        raise
+    for a in ascending:
+        yield mingus_note_str_to_mingus_note(a)
+
+
+@beartype
+def _get_semitones_from_mingus_notes(ascending: Iterable[Note]):
     last = -1
     modifier = 0
-    for note_str in ascending:
+    for mingus_note in ascending:
 
-        try:
-            if len(note_str) < 1:
-                raise NotImplementedError()
-        except:
-            raise
-
-        mingus_note = Note().from_shorthand(note_str[:1])
-        for note_decorator in note_str[1:]:
-            if note_decorator == 'b':
-                mingus_note.diminish()
-            elif note_decorator == '#':
-                mingus_note.augment()
-            else:
-                raise NotImplementedError()
         cur = int(mingus_note) + modifier
         if last != -1:
             diff = cur - last
@@ -104,11 +122,7 @@ def _get_semitones_from_mingus_notes(ascending):
 
 @beartype
 def _get_semitones_from_mingus_scale(mingus_scale: scales._Scale):
-    try:
-        ascending = mingus_scale.ascending()
-    except:
-        raise
-    return _get_semitones_from_mingus_notes(ascending)
+    return _get_semitones_from_mingus_notes(mingus_scale_to_notes(mingus_scale))
 
 
 @beartype

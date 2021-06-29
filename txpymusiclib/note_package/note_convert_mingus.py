@@ -16,13 +16,13 @@ def note_names_2_mingus_note_names(chord_notes):
 @beartype
 def note_name_str_2_mingus_note(notestr: str):
     digits = "".join([x for x in notestr if x.isdigit()])
-    nondigits = "".join([x for x in notestr if not x.isdigit()])
-    mingusNote = MingusNote(name=khe_2_pytheory(nondigits), octave=int(digits))
-    return mingusNote
+    non_digits = "".join([x for x in notestr if not x.isdigit()])
+    mingus_note = MingusNote(name=khe_2_pytheory(non_digits), octave=int(digits))
+    return mingus_note
 
 
 @beartype
-def note_name_str_2_mingus_note_int(old_key:str):
+def note_name_str_2_mingus_note_int(old_key: str):
     mingus_note = note_name_str_2_mingus_note(old_key)
     mingus_note_int = int(mingus_note)
     return mingus_note_int

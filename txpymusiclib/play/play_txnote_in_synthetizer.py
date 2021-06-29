@@ -7,7 +7,7 @@ from txpymusiclib.scales_package.txscales import TxScaleSt
 
 
 @beartype
-def play_sequence_notes(notes: TxNoteContainer, duration_secs: float):
+def play_sequence_txnotes(notes: TxNoteContainer, duration_secs: float = 1):
     freqs = [note.get_freq() for note in notes.get_txnotes()]
     play_sequence_freqs(freqs, duration_secs)
 

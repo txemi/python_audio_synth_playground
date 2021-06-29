@@ -1,10 +1,14 @@
+from typing import Generator
+
+from beartype import beartype
 from mingus.containers import Note as MingusNote
 
 from txpymusiclib.note_package import note_freq_khe
 from txpymusiclib.scales_package.scale_mingus import mingus_names_to_mingusnotes
 
 
-def note_mingus_to_khe_name(mingus_name):
+@beartype
+def note_mingus_to_khe_name(mingus_name: str):
     if len(mingus_name) == 1:
         return mingus_name
     if len(mingus_name) == 2:
@@ -51,6 +55,7 @@ class TxNoteContainer:
         out = [x.name + str(x.octave) for x in self.notes.notes]
         return out
 
-    def get_txnotes(self):
+    @beartype
+    def get_txnotes(self) -> Generator[TxNote2, None, None]:
         for a in self.notes:
             yield TxNote2(a)

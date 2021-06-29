@@ -1,6 +1,6 @@
 from mingus import containers
 
-from txpymusiclib.chords_package import chord_examples
+from txpymusiclib.chords_package import chord_progression_examples
 
 
 def aa():
@@ -11,7 +11,7 @@ def aa():
 
 
 def bb():
-    t = containers.Track(containers.Piano()).from_chords(chord_examples.NiceChordSeqExample)
+    t = containers.Track(containers.Piano()).from_chords(chord_progression_examples.NiceChordSeqExample)
     b = list(t.get_notes())
     print(1)
 

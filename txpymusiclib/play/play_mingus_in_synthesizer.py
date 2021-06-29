@@ -1,9 +1,13 @@
 from beartype import beartype
+from mingus import core as mingus_core
 from mingus.containers import NoteContainer as MingusNoteContainer
 from synthesizer import Player, Synthesizer
 
 from txpymusiclib.chords_package import chord_conversion
 from txpymusiclib.play.play_floatfreqs_in_syntetizer import play_init
+from txpymusiclib.play.play_txnote_in_synthetizer import play_sequence_txnotes
+from txpymusiclib.scales_package import scale_mingus
+from txpymusiclib.scales_package import txnotecontainer
 
 
 @beartype
@@ -39,3 +43,12 @@ def play_progressions(progressions: tuple[str]):
     for prog in progressions:
         nc = chord_conversion.mingus_progression_to_notes(prog)
         play_chord_from_symbolic_mingus(player, synthesizer_instance, nc)
+
+
+@beartype
+def mingus_play(mingus_tal):
+    #assert isinstance(mingus_tal, mingus_core.scales._Scale)
+    bbb = scale_mingus.mingus_scale_to_notes(mingus_tal)
+    txnc = txnotecontainer.TxNoteContainer()
+    txnc.notes = bbb
+    play_sequence_txnotes(txnc)
