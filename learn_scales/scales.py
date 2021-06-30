@@ -22,9 +22,10 @@ play_scale_from_musthescale(musthe_phrygian_C4)
 scales_merged = scales_merge_and_detect_same()
 scales_set = set(scales_merged.map.values())
 
-for a in scales_set:
-    assert isinstance(a, ScaleMergedFromLibs)
-    print(a.format())
-    a.play()
+for current_scale in scales_set:
+    assert isinstance(current_scale, ScaleMergedFromLibs)
+    print("<" + current_scale.format() + ">")
+    current_scale.play()
+    print("\n")
 
 print(1)

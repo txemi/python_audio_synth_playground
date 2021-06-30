@@ -11,7 +11,6 @@ from txpymusiclib.scales_package.txnotecontainer import TxNoteContainer
 @beartype
 def play_scale_from_musthescale(current_scale: MustheScale):
     notes_in_scale, description = musthescale_notes(current_scale)
-    nc = TxNoteContainer(notes_in_scale)
-    print(description)
+    nc = TxNoteContainer().build_from_mingus_notes_str(notes_in_scale)
     play_sequence_txnotes(nc, 0.5)
     time.sleep(1)

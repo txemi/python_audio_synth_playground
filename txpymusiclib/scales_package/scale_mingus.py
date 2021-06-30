@@ -5,6 +5,7 @@ from typing import Generator
 from beartype import beartype
 from mingus import containers
 from mingus.containers import Note, NoteContainer
+from mingus.containers.note_container import Note as MingusNote
 from mingus.core import scales
 
 import txpymusiclib.scales_package.txscales
@@ -59,6 +60,7 @@ def _get_semitones_from_mingus_notes_2(ascending):
     last = None
     modifier = 0
     for mingus_note in ascending:
+        assert isinstance(mingus_note, MingusNote)
         cur = int(mingus_note) + modifier
         if last is not None:
             diff = cur - last

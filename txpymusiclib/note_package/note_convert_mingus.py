@@ -14,7 +14,7 @@ def note_names_2_mingus_note_names(chord_notes):
 
 
 @beartype
-def note_name_str_2_mingus_note(notestr: str):
+def note_name_str_2_mingus_note(notestr: str)->MingusNote:
     digits = "".join([x for x in notestr if x.isdigit()])
     non_digits = "".join([x for x in notestr if not x.isdigit()])
     mingus_note = MingusNote(name=khe_2_pytheory(non_digits), octave=int(digits))

@@ -2,6 +2,7 @@ from typing import Generator
 
 from beartype import beartype
 from mingus.containers import Note as MingusNote
+from mingus.containers.note_container import NoteContainer
 
 from txpymusiclib.note_package import note_freq_khe
 from txpymusiclib.scales_package.scale_mingus import mingus_names_to_mingusnotes
@@ -42,20 +43,45 @@ class TxNote2:
 
 
 class TxNoteContainer:
-    def __init__(self, notes: list[str, ...] = None):
+    @beartype
+    def __init__(self):
+        self.build_from_mingus_notes_str(None)
+
+    @beartype
+    def build_from_mingus_notes_str(self, notes):
         if notes is not None:
-            self.notes = mingus_names_to_mingusnotes(notes)
+            self.__notes = mingus_names_to_mingusnotes(notes)
             out = self.get_original()
             if not out == list(notes):
                 raise Exception()
         else:
-            self.notes = []
+            self.__notes = NoteContainer()
+        return self
 
-    def get_original(self):
-        out = [x.name + str(x.octave) for x in self.notes.notes]
+    @beartype
+    def get_original(self) -> list:
+        out = [x.name + str(x.octave) for x in self.__notes.notes]
         return out
 
     @beartype
     def get_txnotes(self) -> Generator[TxNote2, None, None]:
-        for a in self.notes:
+        for a in self.__notes:
             yield TxNote2(a)
+
+    @property
+    def notes(self):
+        if not isinstance(self.__notes, NoteContainer):
+            print(1)
+        assert isinstance(self.__notes, NoteContainer)
+        return self.__notes
+
+    @notes.setter
+    def notes(self, var):
+        if not isinstance(var, NoteContainer):
+            print(1)
+        assert isinstance(var, NoteContainer)
+        self.__notes = var
+
+    @beartype
+    def append(self, a: MingusNote):
+        self.__notes.add_note(a)

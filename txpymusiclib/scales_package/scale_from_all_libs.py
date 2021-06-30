@@ -21,10 +21,9 @@ from txpymusiclib.scales_package.txscales import TxScaleSt
 @beartype
 def scale_pytheory2mingus(pyt: pytheory.Scale) -> TxScaleSt:
     txnotes = TxNoteContainer()
-    txnotes.notes = []
     for tone in pyt.tones:
         mingus_note = note_name_str_2_mingus_note(tone.full_name)
-        txnotes.notes.append(mingus_note)
+        txnotes.append(mingus_note)
 
     semitones = list(_get_semitones_from_mingus_notes_2(txnotes.notes))
     return TxScaleSt(semitones)
@@ -78,7 +77,7 @@ class ScaleMergedFromLibs:
         self.names = set()
         if name is not None:
             self.names.add(name)
-        self.pytheory = None
+        self.pytheory: pytheory.Scale = None
         self.musthe = None
         self.__mingus: mingus_core.scales._Scale = None
         self.txscale = None
@@ -94,7 +93,7 @@ class ScaleMergedFromLibs:
     @beartype
     def get_semitones(self) -> Optional[TxScaleSt]:
         self.check_integrity()
-        for semitone_builder in self._get_from_pytheory, self._get_from_musthe, self._get_from_mingus, self._get_from_txscale:
+        for semitone_builder in self._get_TxScaleSt_from_pytheory, self._get_TxScaleSt_from_musthe, self._get_TxScaleSt_from_mingus, self._get_TxScaleSt_from_txscale:
             semitones = semitone_builder()
             if semitones is not None:
                 return semitones
@@ -102,14 +101,14 @@ class ScaleMergedFromLibs:
         raise NotImplementedError()
 
     @beartype
-    def _get_from_mingus(self) -> Optional[TxScaleSt]:
+    def _get_TxScaleSt_from_mingus(self) -> Optional[TxScaleSt]:
         if self.mingus is not None and len(self.mingus) > 0:
             assert_that(self.mingus).is_length(1)
             return get_semitones_from_mingus_scale(self.mingus[0])
         return None
 
     @beartype
-    def _get_from_musthe(self) -> Optional[TxScaleSt]:
+    def _get_TxScaleSt_from_musthe(self) -> Optional[TxScaleSt]:
         if self.musthe is not None:
             musthe_semitones = musthescale_semitones(self.musthe)
             musthe_semitones.name = list(self.names)[0]
@@ -117,31 +116,31 @@ class ScaleMergedFromLibs:
         return None
 
     @beartype
-    def _get_from_pytheory(self) -> Optional[TxScaleSt]:
+    def _get_TxScaleSt_from_pytheory(self) -> Optional[TxScaleSt]:
         if self.pytheory is not None:
             assert isinstance(self.pytheory, pytheory.Scale)
             return scale_pytheory2mingus(self.pytheory)
         return None
 
     @beartype
-    def _get_from_txscale(self) -> Optional[TxScaleSt]:
+    def _get_TxScaleSt_from_txscale(self) -> Optional[TxScaleSt]:
         return self.txscale
 
     @beartype
     def check_integrity(self):
         last_semitones = None
-        for current_semitones_func in self._get_from_pytheory, self._get_from_musthe, self._get_from_mingus:
+        for current_semitones_func in self._get_TxScaleSt_from_pytheory, self._get_TxScaleSt_from_musthe, self._get_TxScaleSt_from_mingus:
             # FIXME: disabled due to ionian not working
-            if current_semitones_func is self._get_from_pytheory or 'pytheory' in str(current_semitones_func):
+            if current_semitones_func is self._get_TxScaleSt_from_pytheory or 'pytheory' in str(current_semitones_func):
                 continue
             current_semitones = current_semitones_func()
             if last_semitones is not None:
                 if current_semitones is not None:
                     if current_semitones != last_semitones:
                         uuuu = current_semitones_func()
-                        u3 = self._get_from_musthe()
-                        u4 = self._get_from_mingus()
-                        u5 = self._get_from_pytheory()
+                        u3 = self._get_TxScaleSt_from_musthe()
+                        u4 = self._get_TxScaleSt_from_mingus()
+                        u5 = self._get_TxScaleSt_from_pytheory()
                         raise NotImplementedError()
             if current_semitones is not None:
                 last_semitones = current_semitones
@@ -189,15 +188,15 @@ class ScaleMergedFromLibs:
         return new_merged_scale
 
     def format(self):
-        formatted = str(self.names)
+        formatted = "-----------" + str(self.names) + "\n"
         if self.txscale is not None:
-            formatted = formatted + " " + str(self.txscale.semitones)
+            formatted = formatted + " txscale:" + str(self.txscale.semitones) + "\n"
         if len(self.mingus) > 0:
-            formatted = formatted + " " + str(self.mingus)
+            formatted = formatted + " mingus:" + str(self.mingus) + "\n"
         if self.musthe is not None:
-            formatted = formatted + " " + str(self.musthe)
+            formatted = formatted + " musthe:" + str(self.musthe).replace("\n", "") + "\n"
         if self.pytheory is not None:
-            formatted = formatted + " " + str(self.pytheory)
+            formatted = formatted + " pytheory:" + str(self.pytheory).replace("\n", "") + "\n"
         return formatted
 
     def play(self):
@@ -206,11 +205,11 @@ class ScaleMergedFromLibs:
             return
         if self.mingus is not None:
             try:
-                #assert isinstance(self.mingus, mingus_core.scales._Scale)
+                # assert isinstance(self.mingus, mingus_core.scales._Scale)
                 mingus_play(self.mingus)
             except:
                 raise
-            raise NotImplementedError()
+            return
         raise NotImplementedError()
 
 
