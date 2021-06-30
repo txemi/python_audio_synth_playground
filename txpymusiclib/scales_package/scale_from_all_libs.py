@@ -55,11 +55,14 @@ def merge_musthe(s1, s2):
 
 @beartype
 def merge_pytheory(s1, s2):
+    if s2 is None:
+        return (True, s1)
+    assert isinstance(s1, pytheory.Scale)
     if s1 == s2:
         return (True, s1)
     if s1.tones == s2.tones:
         return (True, s1)
-    raise NotImplementedError()
+    return (False, None)
 
 
 def merge_txscale(s1, s2):
@@ -83,17 +86,21 @@ class ScaleMergedFromLibs:
         self.txscale = None
 
     @property
+    @beartype
     def mingus(self) -> mingus_core.scales._Scale:
         return self.__mingus
 
     @mingus.setter
+    @beartype
     def mingus(self, var: mingus_core.scales._Scale):
+        assert isinstance(var, mingus_core.scales._Scale)
         self.__mingus = var
 
     @beartype
     def get_semitones(self) -> Optional[TxScaleSt]:
         self.check_integrity()
-        for semitone_builder in self._get_TxScaleSt_from_pytheory, self._get_TxScaleSt_from_musthe, self._get_TxScaleSt_from_mingus, self._get_TxScaleSt_from_txscale:
+        # FIXME: disabled due to note numbering not working self._get_TxScaleSt_from_pytheory
+        for semitone_builder in self._get_TxScaleSt_from_musthe, self._get_TxScaleSt_from_mingus, self._get_TxScaleSt_from_txscale:
             semitones = semitone_builder()
             if semitones is not None:
                 return semitones

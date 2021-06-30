@@ -95,7 +95,7 @@ def mingus_note_str_to_mingus_note(note_str: str) -> Note:
 
 
 @beartype
-def mingus_scale_to_notes(mingus_scale) -> Generator[Note, None, None]:
+def mingus_scale_to_notes(mingus_scale: scales._Scale) -> Generator[Note, None, None]:
     # scales._Scale
     try:
         ascending = mingus_scale.ascending()

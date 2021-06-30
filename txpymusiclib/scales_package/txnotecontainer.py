@@ -5,6 +5,7 @@ from mingus.containers import Note as MingusNote
 from mingus.containers.note_container import NoteContainer
 
 from txpymusiclib.note_package import note_freq_khe
+from txpymusiclib.scales_package import scale_mingus
 from txpymusiclib.scales_package.scale_mingus import mingus_names_to_mingusnotes
 
 
@@ -85,3 +86,10 @@ class TxNoteContainer:
     @beartype
     def append(self, a: MingusNote):
         self.__notes.add_note(a)
+
+    def build_from_mingus_scale(self, mingus_tal):
+        bbb = scale_mingus.mingus_scale_to_notes(mingus_tal)
+        for aaa in bbb:
+            raise NotImplementedError()
+        self.__notes = bbb
+        return self
