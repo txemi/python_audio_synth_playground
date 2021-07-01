@@ -37,3 +37,13 @@ def note_sci_to_khe(note: str):
 def khe_2_pytheory(note_name: str):
     """ katie code use lowercase for black keys """
     return note_name.replace("a", "A#").replace("c", "C#").replace("d", "D#").replace("f", "F#").replace("g", "G#")
+
+
+@beartype
+def note_mingus_to_khe_name(mingus_name: str):
+    if len(mingus_name) == 1:
+        return mingus_name
+    if len(mingus_name) == 2:
+        if mingus_name[1] == '#':
+            return mingus_name[0].lower()
+    raise NotImplementedError()

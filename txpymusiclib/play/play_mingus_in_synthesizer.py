@@ -45,9 +45,8 @@ def play_progressions(progressions: tuple[str]):
 
 
 @beartype
-def mingus_play(mingus_tal):
-    #assert isinstance(mingus_tal, mingus_core.scales._Scale)
+def mingus_play(mingus_tal: mingus_core.scales._Scale):
+    assert isinstance(mingus_tal, mingus_core.scales._Scale)
     txnc = txnotecontainer.TxNoteContainer().build_from_mingus_scale(mingus_tal)
-
 
     play_sequence_txnotes(txnc)

@@ -1,46 +1,12 @@
 from typing import Generator
 
 from beartype import beartype
+from mingus import core as mingus_core
 from mingus.containers import Note as MingusNote
 from mingus.containers.note_container import NoteContainer
 
-from txpymusiclib.note_package import note_freq_khe
-from txpymusiclib.scales_package import scale_mingus
-from txpymusiclib.scales_package.scale_mingus import mingus_names_to_mingusnotes
-
-
-@beartype
-def note_mingus_to_khe_name(mingus_name: str):
-    if len(mingus_name) == 1:
-        return mingus_name
-    if len(mingus_name) == 2:
-        if mingus_name[1] == '#':
-            return mingus_name[0].lower()
-    raise NotImplementedError()
-
-
-class TxNote2:
-    def __init__(self, mingusnote: MingusNote):
-        self.mingusnote = mingusnote
-
-    def get_freq(self):
-        note2freq_mingus = note_freq_khe.get_piano_notes_mingus()
-        freq_from_mingus = note2freq_mingus[int(self.mingusnote)]
-
-        if False:
-            # We disable this extra check, needs to implement bemols for khe table lookup, perhaps it does not worht
-            note_freqs_khe = note_freq_khe.get_piano_notes_khe()
-            mingusnote1 = self.mingusnote
-            note_mingus_to_khe_name(mingusnote1.name)
-            khe_fullname = note_mingus_to_khe_name(mingusnote1.name) + str(mingusnote1.octave)
-            try:
-                freq_from_khe = note_freqs_khe[khe_fullname]
-            except:
-                raise
-
-            if freq_from_khe != freq_from_mingus:
-                raise Exception()
-        return freq_from_mingus
+from txpymusiclib.note_package.txnote import TxNote2
+from txpymusiclib.scales_package.scale_mingus import mingus_names_to_mingusnotes, mingus_scale_to_container
 
 
 class TxNoteContainer:
@@ -87,9 +53,8 @@ class TxNoteContainer:
     def append(self, a: MingusNote):
         self.__notes.add_note(a)
 
-    def build_from_mingus_scale(self, mingus_tal):
-        bbb = scale_mingus.mingus_scale_to_notes(mingus_tal)
-        for aaa in bbb:
-            raise NotImplementedError()
-        self.__notes = bbb
+    @beartype
+    def build_from_mingus_scale(self, mingus_tal: mingus_core.scales._Scale):
+        container = mingus_scale_to_container(mingus_tal)
+        self.__notes = container
         return self

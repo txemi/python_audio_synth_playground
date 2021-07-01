@@ -3,12 +3,13 @@ from collections.abc import Iterable
 from typing import Generator
 
 from beartype import beartype
-from mingus import containers
+from mingus import containers, core as mingus_core
 from mingus.containers import Note, NoteContainer
 from mingus.containers.note_container import Note as MingusNote
 from mingus.core import scales
 
 import txpymusiclib.scales_package.txscales
+from txpymusiclib.note_package import note_names_and_freq_static
 from txpymusiclib.scales_package.txscales import TxScaleSt
 
 
@@ -139,3 +140,24 @@ def find_scale_by_semitones(scale_interval_semitones: txpymusiclib.scales_packag
         current_scale_semitones = get_semitones_from_mingus_scale(current_scale)
         if current_scale_semitones == scale_interval_semitones:
             yield current_scale
+
+
+@beartype
+def mingus_iterate_scales():
+    for MingusScaleSubclass in mingus_core.scales._Scale.__subclasses__():
+        if MingusScaleSubclass is mingus_core.scales.Diatonic:
+            continue
+
+        try:
+            mingus_scale_instance = MingusScaleSubclass(note_names_and_freq_static.note_C4.name[0])
+        except:
+            mingus_scale_instance = MingusScaleSubclass(note_names_and_freq_static.note_C4.name)
+        yield mingus_scale_instance
+
+
+def mingus_scale_to_container(mingus_tal: mingus_core.scales._Scale) -> NoteContainer:
+    mingus_notes = list(mingus_scale_to_notes(mingus_tal))
+    for mingus_note in mingus_notes:
+        assert isinstance(mingus_note, Note)
+    container = NoteContainer(mingus_notes)
+    return container

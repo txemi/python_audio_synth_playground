@@ -9,24 +9,13 @@ from musthe import Scale as MustheScale
 
 import txpymusiclib.play.play_musthe_in_synthetizer
 from txpymusiclib.note_package import note_names_and_freq_static
-from txpymusiclib.note_package.note_convert_mingus import note_name_str_2_mingus_note
 from txpymusiclib.play.play_mingus_in_synthesizer import mingus_play
+from txpymusiclib.play.play_txnote_in_synthetizer import play_txscale
 from txpymusiclib.scales_package import txscales_examples
-from txpymusiclib.scales_package.scale_mingus import get_semitones_from_mingus_scale, _get_semitones_from_mingus_notes_2
+from txpymusiclib.scales_package.scale_mingus import get_semitones_from_mingus_scale, mingus_iterate_scales
 from txpymusiclib.scales_package.scale_musthe import musthescale_semitones
-from txpymusiclib.scales_package.txnotecontainer import TxNoteContainer
+from txpymusiclib.scales_package.scale_pytheory import scale_pytheory2txscale
 from txpymusiclib.scales_package.txscales import TxScaleSt
-
-
-@beartype
-def scale_pytheory2mingus(pyt: pytheory.Scale) -> TxScaleSt:
-    txnotes = TxNoteContainer()
-    for tone in pyt.tones:
-        mingus_note = note_name_str_2_mingus_note(tone.full_name)
-        txnotes.append(mingus_note)
-
-    semitones = list(_get_semitones_from_mingus_notes_2(txnotes.notes))
-    return TxScaleSt(semitones)
 
 
 @beartype
@@ -82,18 +71,18 @@ class ScaleMergedFromLibs:
             self.names.add(name)
         self.pytheory: pytheory.Scale = None
         self.musthe = None
-        self.__mingus: mingus_core.scales._Scale = None
+        self.__mingus: list[mingus_core.scales._Scale] = None
         self.txscale = None
 
     @property
     @beartype
-    def mingus(self) -> mingus_core.scales._Scale:
+    def mingus(self) -> list[mingus_core.scales._Scale]:
         return self.__mingus
 
     @mingus.setter
     @beartype
-    def mingus(self, var: mingus_core.scales._Scale):
-        assert isinstance(var, mingus_core.scales._Scale)
+    def mingus(self, var: list[mingus_core.scales._Scale]):
+        assert isinstance(var, list)
         self.__mingus = var
 
     @beartype
@@ -126,7 +115,7 @@ class ScaleMergedFromLibs:
     def _get_TxScaleSt_from_pytheory(self) -> Optional[TxScaleSt]:
         if self.pytheory is not None:
             assert isinstance(self.pytheory, pytheory.Scale)
-            return scale_pytheory2mingus(self.pytheory)
+            return scale_pytheory2txscale(self.pytheory)
         return None
 
     @beartype
@@ -186,11 +175,11 @@ class ScaleMergedFromLibs:
         else:
             new_merged_scale.pytheory = pyt_result[1]
 
-        aa = merge_txscale(s1.txscale, s2.txscale)
-        if aa[0] is False:
+        txscales_merged = merge_txscale(s1.txscale, s2.txscale)
+        if txscales_merged[0] is False:
             return
         else:
-            new_merged_scale.txscale = aa[1]
+            new_merged_scale.txscale = txscales_merged[1]
 
         return new_merged_scale
 
@@ -210,27 +199,19 @@ class ScaleMergedFromLibs:
         if self.musthe is not None:
             txpymusiclib.play.play_musthe_in_synthetizer.play_scale_from_musthescale(self.musthe)
             return
-        if self.mingus is not None:
+        if self.mingus is not None and len(self.mingus) > 0:
+            assert len(self.mingus) == 1
             try:
                 # assert isinstance(self.mingus, mingus_core.scales._Scale)
-                mingus_play(self.mingus)
+                mingus_play(self.mingus[0])
             except:
                 raise
             return
+        if self.txscale is not None:
+            play_txscale(self.txscale)
+            return
+
         raise NotImplementedError()
-
-
-@beartype
-def mingus_iterate_scales():
-    for MingusScaleSubclass in mingus_core.scales._Scale.__subclasses__():
-        if MingusScaleSubclass is mingus_core.scales.Diatonic:
-            continue
-
-        try:
-            mingus_scale_instance = MingusScaleSubclass(note_names_and_freq_static.note_C4.name[0])
-        except:
-            mingus_scale_instance = MingusScaleSubclass(note_names_and_freq_static.note_C4.name)
-        yield mingus_scale_instance
 
 
 @beartype
