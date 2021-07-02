@@ -4,16 +4,18 @@ from matplotlib import pyplot as plt
 from scipy.io import wavfile
 
 from txpymusiclib.interval_package import txintervals
+from txpymusiclib.note_package import note_freq_khe
 from txpymusiclib.play.from_pytheory import print_and_play_khe_tones_from_names
 from txpymusiclib.synt_wave import from_numpy_khe
 from txpymusiclib.synt_wave import sample_rates
 
 
 @beartype
-def synth_and_play_and_plot_and_writewav_khe_interval(note_freqs: dict[str, float],
-                                                      consonant_interval_example: txintervals.TxInterval,
-                                                      plot_title1: str,
-                                                      plot_label1: str):
+def synth_and_play_and_plot_and_writewav_khe_interval(consonant_interval_example: txintervals.TxIntervalExample
+                                                      ):
+    note_freqs = note_freq_khe.get_piano_note_to_freq_map_from_khe_names()
+    plot_title1: str = consonant_interval_example.description
+    plot_label1: str = consonant_interval_example.sort_description
     start_note_name = consonant_interval_example.start.name
     end_note_name = consonant_interval_example.end.name
     wave1 = from_numpy_khe.get_sine_wave(note_freqs[start_note_name], 2,

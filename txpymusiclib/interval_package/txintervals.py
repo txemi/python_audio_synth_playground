@@ -1,46 +1,60 @@
+from beartype import beartype
+
 from txpymusiclib.note_package import txnote
 
 
 class TxIntervals:
-    # TODO: this class is not needed
+    # TODO: this class is not needed, this methods do not need a class
     @staticmethod
-    def interval_factor(half_steps):
+    @beartype
+    def interval_factor(half_steps: int) -> float:
         return 2 ** (half_steps / 12)
 
     fifth_factor_rational = 3 / 2
 
     @classmethod
+    @beartype
     def get_fifth_factor_non_rational(cls):
         fifth_2 = cls.interval_factor(7.0)
         return fifth_2
 
 
-def freq_mult(freq, mult):
-    return float(TxIntervals.interval_factor(mult) * freq)
+@beartype
+def do_interval_jump_to_freq(freq, interval_half_steps_count: int) -> float:
+    return float(TxIntervals.interval_factor(interval_half_steps_count) * freq)
 
 
-def freqs_mult(freq, mults):
-    for mult in mults:
-        yield freq_mult(freq, mult)
+@beartype
+def do_interval_jumps_to_freq(freq, half_steps_count_list: list[int]):
+    """ gets freqs for chord, etc"""
+    for half_steps_count in half_steps_count_list:
+        yield do_interval_jump_to_freq(freq, half_steps_count)
 
 
-def freqs_mult_accumulate(base_freq: float, mults):
+@beartype
+def get_note_freqs_for_intervals(base_freq: float, interval_half_steps_count_list: list[int]):
     accumulated = 0
-    for mult in (0,) + mults:
-        added = mult + accumulated
-        yield freq_mult(base_freq, added)
+    for current_half_step_count in (0,) + interval_half_steps_count_list:
+        added = current_half_step_count + accumulated
+        yield do_interval_jump_to_freq(base_freq, added)
         accumulated = added
 
 
-class TxInterval:
-    def __init__(self, khe_note_from: str, khe_note_to: str):
+class TxIntervalExample:
+    @beartype
+    def __init__(self, khe_note_from: str, khe_note_to: str, description: str, sort_description):
         self.start = khe_note_from
         self.end = khe_note_to
+        self.description = description
+        self.sort_description = sort_description
 
 
-interval_example_perfect_consonant_octave = TxInterval(txnote.note_C4,
-                                                       txnote.note_C5)  # Perfect Consonance (Octave)
-interval_example_imperfect_consonance_major_third = TxInterval(txnote.note_C4,
-                                                               txnote.note_E4)  # Imperfect Consonance (Major Thirds)
-interval_example_dissonance_minor_seconds = TxInterval(txnote.note_C4,
-                                                       txnote.note_c4)  # Dissonance (Minor Seconds)
+interval_example_perfect_consonant_octave = TxIntervalExample(txnote.note_C4,
+                                                              txnote.note_C5, "Perfect Consonance (Octave)", "Octave")
+interval_example_imperfect_consonance_major_third = TxIntervalExample(txnote.note_C4,
+                                                                      txnote.note_E4,
+                                                                      "Imperfect Consonance (Major Thirds)",
+                                                                      'Major Thirds')
+interval_example_dissonance_minor_seconds = TxIntervalExample(txnote.note_C4,
+                                                              txnote.note_c4, "Dissonance (Minor Seconds)",
+                                                              'Minor Seconds')

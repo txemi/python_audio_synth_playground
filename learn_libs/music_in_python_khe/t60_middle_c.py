@@ -17,7 +17,7 @@ from txpymusiclib.synt_wave import synt_song_khe, sample_rates
 plt.style.use('seaborn-dark')
 
 # Get middle C frequency
-note_freqs = note_freq_khe.get_piano_notes_khe()
+note_freqs = note_freq_khe.get_piano_note_to_freq_map_from_khe_names()
 frequency = note_freqs[txnote.note_C4.name]
 
 # Pure sine synt_wave

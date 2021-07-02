@@ -2,8 +2,8 @@ import numpy as np
 from beartype import beartype
 
 from txpymusiclib.note_package import txnote
+from txpymusiclib.note_package.note_convert_khe import note_khe_name_to_sci
 from txpymusiclib.note_package.note_convert_mingus import note_name_str_2_mingus_note_int
-from txpymusiclib.note_package.note_convert_khe import note_khe_to_sci
 
 
 @beartype
@@ -38,7 +38,7 @@ def _get_piano_keys():
 
 
 @beartype
-def get_piano_notes_khe() -> dict[str, float]:
+def get_piano_note_to_freq_map_from_khe_names() -> dict[str, float]:
     """
     Get the frequency in hertz for all keys on a standard piano.
 
@@ -54,25 +54,26 @@ def get_piano_notes_khe() -> dict[str, float]:
     return note_freqs
 
 
-def get_piano_notes_sci():
-    old_dict = get_piano_notes_khe()
+@beartype
+def get_piano_note_to_freq_map_from_sci_name() -> dict[str, float]:
+    old_dict = get_piano_note_to_freq_map_from_khe_names()
     new_dict = {}
     for old_key in old_dict:
         if old_key == '':
             continue
-        new_dict[note_khe_to_sci(old_key)] = old_dict[old_key]
+        new_dict[note_khe_name_to_sci(old_key)] = old_dict[old_key]
 
     return new_dict
 
 
-def get_piano_notes_mingus():
-    old_dict = get_piano_notes_khe()
-    new_dict1111 = {}
+def get_piano_note_mingus_int_code_to_freq_map():
+    old_dict = get_piano_note_to_freq_map_from_khe_names()
+    new_dict = {}
     for old_key in old_dict:
         if old_key == '':
             continue
         mingus_note_int = note_name_str_2_mingus_note_int(old_key)
-        assert mingus_note_int not in new_dict1111
-        new_dict1111[mingus_note_int] = old_dict[old_key]
+        assert mingus_note_int not in new_dict
+        new_dict[mingus_note_int] = old_dict[old_key]
 
-    return new_dict1111
+    return new_dict

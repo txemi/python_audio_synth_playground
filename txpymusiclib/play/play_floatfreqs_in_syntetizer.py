@@ -33,7 +33,7 @@ def play_chord_from_freqs(player1: Player, synthesizer1: Synthesizer, freqs, dur
 
 @beartype
 def play_chord_from_freq_and_chord(player1: Player, synthesizer1: Synthesizer, freq: float, chord, duration):
-    freqs = list(txintervals.freqs_mult(freq, chord))
+    freqs = list(txintervals.do_interval_jumps_to_freq(freq, chord))
     play_chord_from_freqs(player1, synthesizer1, freqs, duration)
 
 

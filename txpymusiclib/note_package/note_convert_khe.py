@@ -2,7 +2,7 @@ from beartype import beartype
 
 
 @beartype
-def note_khe_to_sci(note: str) -> str:
+def note_khe_name_to_sci(note: str) -> str:
     if len(note) != 2:
         raise ValueError()
     if not note[1].isdigit():

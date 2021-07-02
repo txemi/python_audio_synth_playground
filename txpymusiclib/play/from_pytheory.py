@@ -57,7 +57,7 @@ def print_and_play_khe_tone_from_name_and_freq(kati_note_str: str, note_freq: fl
 
 @beartype
 def print_and_play_khe_tone_from_name(note: str):
-    note_freqs = note_freq_khe.get_piano_notes_khe()
+    note_freqs = note_freq_khe.get_piano_note_to_freq_map_from_khe_names()
     print_and_play_khe_tone_from_name_and_freq(note, note_freqs[note])
 
 

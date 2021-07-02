@@ -15,7 +15,7 @@ def play_sequence_txnotes(notes: TxNoteContainer, duration_secs: float = 1.0):
 
 @beartype
 def play_scale_from_freq(freq: float, scale_semitone_intervals: TxScaleSt, duration_secons: float):
-    freqs = list(txintervals.freqs_mult_accumulate(freq, scale_semitone_intervals.semitones))
+    freqs = list(txintervals.get_note_freqs_for_intervals(freq, scale_semitone_intervals.semitones))
     tail = list(reversed(freqs))[1:]
     play_sequence_freqs(freqs + tail, duration_secons)
 

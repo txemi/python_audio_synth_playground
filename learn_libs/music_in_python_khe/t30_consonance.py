@@ -14,7 +14,7 @@ from txpymusiclib.note_package import note_freq_khe
 
 plt.style.use('seaborn-dark')
 
-note_freqs = note_freq_khe.get_piano_notes_khe()
+note_freqs = note_freq_khe.get_piano_note_to_freq_map_from_khe_names()
 
 synth_and_play_and_plot_and_writewav_khe_interval(note_freqs, interval_example_perfect_consonant_octave,
                                              'Perfect Consonance (Octave)',
