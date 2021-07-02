@@ -3,13 +3,13 @@
 from __future__ import division
 
 from txpymusiclib.play.synt_with_math_and_play_with_pyaudio import sine_tone_play1
-from txpymusiclib.note_package import txnote
+from txpymusiclib.note_package import txnote_khe_wrap
 from txpymusiclib.synt_wave.sample_rates import sample_rate_22050
 
 if __name__ == "__main__":
     sine_tone_play1(
         # see http://www.phy.mtu.edu/~suits/notefreqs.html
-        frequency=txnote.note_A4.freq,  # Hz, waves per second A4
+        frequency=txnote_khe_wrap.note_A4.freq,  # Hz, waves per second A4
         duration=3.21,  # seconds to play sound
         volume=.01,  # 0..1 how loud it is
         # see http://en.wikipedia.org/wiki/Bit_rate#Audio

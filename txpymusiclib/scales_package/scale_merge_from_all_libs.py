@@ -8,7 +8,7 @@ from mingus import core as mingus_core
 from musthe import Scale as MustheScale
 
 import txpymusiclib.play.play_musthe_in_synthetizer
-from txpymusiclib.note_package import txnote
+from txpymusiclib.note_package import txnote_khe_wrap
 from txpymusiclib.play.play_mingus_in_synthesizer import mingus_play
 from txpymusiclib.play.play_txnote_in_synthetizer import play_txscale
 from txpymusiclib.scales_package import txscales_examples
@@ -107,7 +107,7 @@ class ScaleMergedFromLibs:
     def _get_TxScaleSt_from_musthe(self) -> Optional[TxScaleSt]:
         if self.musthe is not None:
             musthe_semitones = musthescale_semitones(self.musthe)
-            musthe_semitones.name = list(self.names)[0]
+            musthe_semitones.khe_name = list(self.names)[0]
             return musthe_semitones
         return None
 
@@ -217,7 +217,7 @@ class ScaleMergedFromLibs:
 @beartype
 def mingus_scale_name(scale1):
     try:
-        current_name = '_'.join(scale1.name.split()[1:])
+        current_name = '_'.join(scale1.khe_name.split()[1:])
     except:
         raise
     return current_name
@@ -236,12 +236,12 @@ def musthe_get_scales_key_hashed():
     musthe_scales_translated_key = {}
     for a, b in musthe_scales.items():
         musthe_scales_translated_key[hash_scale_name(a)] = MustheScale(name=a,
-                                                                       root=txnote.note_C4.name)
+                                                                       root=txnote_khe_wrap.note_C4.khe_name)
     return musthe_scales_translated_key
 
 
 class ScaleFinder:
-    pytheory_c4_scales = pytheory.TonedScale(tonic=txnote.note_C4.name)._scales
+    pytheory_c4_scales = pytheory.TonedScale(tonic=txnote_khe_wrap.note_C4.khe_name)._scales
 
     def __init__(self):
         self.map = {}
@@ -275,7 +275,7 @@ class ScaleFinder:
         scale_merged.mingus = mingus_scales_found
 
         for a in txscales_examples.all:
-            if a.name == scale_to_find_name:
+            if a.khe_name == scale_to_find_name:
                 scale_merged.txscale = a
 
         self.map[scale_to_find_name] = scale_merged
@@ -301,7 +301,7 @@ def scale_get_from_all_libs() -> ScaleFinder:
         finder.find(cur_name)
 
     for a in txscales_examples.all:
-        finder.find(a.name)
+        finder.find(a.khe_name)
 
     return finder
 

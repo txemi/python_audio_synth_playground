@@ -9,7 +9,7 @@ from mingus.containers.note_container import Note as MingusNote
 from mingus.core import scales
 
 import txpymusiclib.scales_package.txscales
-from txpymusiclib.note_package import txnote
+from txpymusiclib.note_package import txnote_khe_wrap
 from txpymusiclib.scales_package.txscales import TxScaleSt
 
 
@@ -149,9 +149,9 @@ def mingus_iterate_scales():
             continue
 
         try:
-            mingus_scale_instance = MingusScaleSubclass(txnote.note_C4.name[0])
+            mingus_scale_instance = MingusScaleSubclass(txnote_khe_wrap.note_C4.khe_name[0])
         except:
-            mingus_scale_instance = MingusScaleSubclass(txnote.note_C4.name)
+            mingus_scale_instance = MingusScaleSubclass(txnote_khe_wrap.note_C4.khe_name)
         yield mingus_scale_instance
 
 

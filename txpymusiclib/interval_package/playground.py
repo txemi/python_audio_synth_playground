@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 from beartype import beartype
 from matplotlib import pyplot as plt
@@ -11,16 +13,15 @@ from txpymusiclib.synt_wave import sample_rates
 
 
 @beartype
-def synth_and_play_and_plot_and_writewav_khe_interval(consonant_interval_example: txintervals.TxIntervalExample
-                                                      ):
-    note_freqs = note_freq_khe.get_piano_note_to_freq_map_from_khe_names()
+def synth_and_play_and_plot_and_writewav_khe_interval(consonant_interval_example: txintervals.TxKheIntervalExample):
+    khe_note_name_2_freq_map = note_freq_khe.get_piano_note_to_freq_map_from_khe_names()
     plot_title1: str = consonant_interval_example.description
     plot_label1: str = consonant_interval_example.sort_description
-    start_note_name = consonant_interval_example.start.name
-    end_note_name = consonant_interval_example.end.name
-    wave1 = from_numpy_khe.get_sine_wave(note_freqs[start_note_name], 2,
+    start_note_name = consonant_interval_example.start.khe_name
+    end_note_name = consonant_interval_example.end.khe_name
+    wave1 = from_numpy_khe.get_sine_wave(khe_note_name_2_freq_map[start_note_name], 2,
                                          amplitude=2048)  # Middle C
-    wave2 = from_numpy_khe.get_sine_wave(note_freqs[end_note_name], 2,
+    wave2 = from_numpy_khe.get_sine_wave(khe_note_name_2_freq_map[end_note_name], 2,
                                          amplitude=2048)  # C one octave above
     print_and_play_khe_tones_from_names(start_note_name, end_note_name)
     filename = plot_label1.lower().replace(" ", "_")

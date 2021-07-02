@@ -18,7 +18,7 @@ def write_wav_for_toned_scale(scale: Scale):
     # el cambio de octava suena mal
     for tone in scale.tones:
         if False:
-            mixer.add_note(0, note=tone.name, octave=tone.octave, duration=1.0)
+            mixer.add_note(0, note=tone.khe_name, octave=tone.octave, duration=1.0)
         else:
             mixer.add_tone(0, frequency=tone.pitch())
     mixer.write_wav('tones.wav')

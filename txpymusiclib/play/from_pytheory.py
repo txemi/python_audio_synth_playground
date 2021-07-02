@@ -4,7 +4,7 @@ from beartype import beartype
 from pytheory import Tone as PyTheoryTone
 
 from txpymusiclib.note_package import note_freq_khe
-from txpymusiclib.note_package.note_convert_khe import khe_2_pytheory
+from txpymusiclib.note_package.convert_khe_pytheory import khe_2_pytheory
 from txpymusiclib.note_package.note_freq_khe import get_frequency
 from txpymusiclib.wavfile_write.from_tones_mixer import write_wav_for_note
 

@@ -1,7 +1,7 @@
 from beartype import beartype
 from mingus.containers import Note as MingusNote
 
-from txpymusiclib.note_package.note_convert_khe import khe_2_pytheory
+from txpymusiclib.note_package.convert_khe_pytheory import khe_2_pytheory
 
 
 @beartype
