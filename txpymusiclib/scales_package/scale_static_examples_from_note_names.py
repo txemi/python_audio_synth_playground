@@ -1,12 +1,12 @@
-from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import txnote
 from txpymusiclib.scales_package.txnotecontainer import TxNoteContainer
 
 c_major_scale_notes_2 = TxNoteContainer(
-    (note_names_and_freq_static.note_C4,
-     note_names_and_freq_static.note_D4,
-     note_names_and_freq_static.note_E4,
-     note_names_and_freq_static.note_F4,
-     note_names_and_freq_static.note_G4,
-     note_names_and_freq_static.note_A4,
-     note_names_and_freq_static.note_B4,
-     note_names_and_freq_static.note_C5))
+    (txnote.note_C4,
+     txnote.note_D4,
+     txnote.note_E4,
+     txnote.note_F4,
+     txnote.note_G4,
+     txnote.note_A4,
+     txnote.note_B4,
+     txnote.note_C5))

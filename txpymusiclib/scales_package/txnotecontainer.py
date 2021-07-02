@@ -5,7 +5,7 @@ from mingus import core as mingus_core
 from mingus.containers import Note as MingusNote
 from mingus.containers.note_container import NoteContainer
 
-from txpymusiclib.note_package.txnote import TxNote2
+from txpymusiclib.note_package.txnote_mingus_wrap import TxNoteMingusWrap
 from txpymusiclib.scales_package.scale_mingus import mingus_names_to_mingusnotes, mingus_scale_to_container
 
 
@@ -31,9 +31,9 @@ class TxNoteContainer:
         return out
 
     @beartype
-    def get_txnotes(self) -> Generator[TxNote2, None, None]:
+    def get_txnotes(self) -> Generator[TxNoteMingusWrap, None, None]:
         for a in self.__notes:
-            yield TxNote2(a)
+            yield TxNoteMingusWrap(a)
 
     @property
     def notes(self):

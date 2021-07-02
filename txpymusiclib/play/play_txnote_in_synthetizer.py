@@ -1,7 +1,7 @@
 from beartype import beartype
 
 from txpymusiclib.interval_package import txintervals
-from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import txnote
 from txpymusiclib.play.play_floatfreqs_in_syntetizer import play_sequence_freqs
 from txpymusiclib.scales_package.txnotecontainer import TxNoteContainer
 from txpymusiclib.scales_package.txscales import TxScaleSt
@@ -22,5 +22,5 @@ def play_scale_from_freq(freq: float, scale_semitone_intervals: TxScaleSt, durat
 
 @beartype
 def play_txscale(txscale: TxScaleSt):
-    base = note_names_and_freq_static.note_C4
+    base = txnote.note_C4
     play_scale_from_freq(base.freq, txscale, 1.0)

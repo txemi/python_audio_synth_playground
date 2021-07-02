@@ -1,13 +1,13 @@
 import numpy as np
 from beartype import beartype
 
-from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import txnote
 from txpymusiclib.note_package.note_convert_mingus import note_name_str_2_mingus_note_int
 from txpymusiclib.note_package.note_convert_khe import note_khe_to_sci
 
 
 @beartype
-def get_frequency(note: str, note_freq=note_names_and_freq_static.note_A4.freq):
+def get_frequency(note: str, note_freq=txnote.note_A4.freq):
     notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
 
     octave = int(note[2]) if len(note) == 3 else int(note[1])
@@ -22,7 +22,7 @@ def get_frequency(note: str, note_freq=note_names_and_freq_static.note_A4.freq):
 
 
 def _get_key_freq(n):
-    base_freq = note_names_and_freq_static.note_A4.freq  # Frequency of Note A4
+    base_freq = txnote.note_A4.freq  # Frequency of Note A4
     return 2 ** ((n + 1 - 49) / 12) * base_freq
 
 

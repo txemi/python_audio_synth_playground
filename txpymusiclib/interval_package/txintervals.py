@@ -1,4 +1,4 @@
-from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import txnote
 
 
 class TxIntervals:
@@ -38,9 +38,9 @@ class TxInterval:
         self.end = khe_note_to
 
 
-interval_example_perfect_consonant_octave = TxInterval(note_names_and_freq_static.note_C4,
-                                                       note_names_and_freq_static.note_C5)  # Perfect Consonance (Octave)
-interval_example_imperfect_consonance_major_third = TxInterval(note_names_and_freq_static.note_C4,
-                                                               note_names_and_freq_static.note_E4)  # Imperfect Consonance (Major Thirds)
-interval_example_dissonance_minor_seconds = TxInterval(note_names_and_freq_static.note_C4,
-                                                       note_names_and_freq_static.note_c4)  # Dissonance (Minor Seconds)
+interval_example_perfect_consonant_octave = TxInterval(txnote.note_C4,
+                                                       txnote.note_C5)  # Perfect Consonance (Octave)
+interval_example_imperfect_consonance_major_third = TxInterval(txnote.note_C4,
+                                                               txnote.note_E4)  # Imperfect Consonance (Major Thirds)
+interval_example_dissonance_minor_seconds = TxInterval(txnote.note_C4,
+                                                       txnote.note_c4)  # Dissonance (Minor Seconds)

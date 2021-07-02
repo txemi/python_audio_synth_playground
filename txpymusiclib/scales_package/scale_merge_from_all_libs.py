@@ -8,7 +8,7 @@ from mingus import core as mingus_core
 from musthe import Scale as MustheScale
 
 import txpymusiclib.play.play_musthe_in_synthetizer
-from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import txnote
 from txpymusiclib.play.play_mingus_in_synthesizer import mingus_play
 from txpymusiclib.play.play_txnote_in_synthetizer import play_txscale
 from txpymusiclib.scales_package import txscales_examples
@@ -236,12 +236,12 @@ def musthe_get_scales_key_hashed():
     musthe_scales_translated_key = {}
     for a, b in musthe_scales.items():
         musthe_scales_translated_key[hash_scale_name(a)] = MustheScale(name=a,
-                                                                       root=note_names_and_freq_static.note_C4.name)
+                                                                       root=txnote.note_C4.name)
     return musthe_scales_translated_key
 
 
 class ScaleFinder:
-    pytheory_c4_scales = pytheory.TonedScale(tonic=note_names_and_freq_static.note_C4.name)._scales
+    pytheory_c4_scales = pytheory.TonedScale(tonic=txnote.note_C4.name)._scales
 
     def __init__(self):
         self.map = {}

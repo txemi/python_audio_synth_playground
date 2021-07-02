@@ -2,10 +2,10 @@
 from pytheory import TonedScale
 
 import txpymusiclib.scales_package.txscales_examples
-from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import txnote
 
 # From scale
-tsC4 = TonedScale(tonic=note_names_and_freq_static.note_C4.name)
+tsC4 = TonedScale(tonic=txnote.note_C4.name)
 c4_minor = tsC4['minor']
 # c_minor
 first = c4_minor[0]

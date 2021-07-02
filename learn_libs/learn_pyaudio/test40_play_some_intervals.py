@@ -1,7 +1,7 @@
 import time
 
 from txpymusiclib.interval_package.txintervals import TxIntervals
-from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import txnote
 from txpymusiclib.play import synt_with_math_and_play_with_pyaudio
 
 
@@ -37,4 +37,4 @@ def play_intervals(tone_freq):
 
 
 if __name__ == "__main__":
-    play_intervals(note_names_and_freq_static.note_A4.freq)
+    play_intervals(txnote.note_A4.freq)

@@ -1,28 +1,19 @@
-from mingus.containers import Note as MingusNote
+class TxNote:
+    """ For simple list of hardcoded notes and freqs"""
 
-from txpymusiclib.note_package import note_freq_khe
-from txpymusiclib.note_package.note_convert_khe import note_mingus_to_khe_name
+    def __init__(self, name, freq=None):
+        self.freq = freq
+        self.name = name
 
 
-class TxNote2:
-    def __init__(self, mingusnote: MingusNote):
-        self.mingusnote = mingusnote
+note_C3 = TxNote('C3')
+note_E3 = TxNote('E3')
+note_G3 = TxNote('G3')
 
-    def get_freq(self):
-        note2freq_mingus = note_freq_khe.get_piano_notes_mingus()
-        freq_from_mingus = note2freq_mingus[int(self.mingusnote)]
+note_A4 = TxNote('A4', 440.0)  # Frequency of Note A4
+note_C4 = TxNote('C4', 261.626)  # Middle C
+note_G4 = TxNote('G4', 391.996)
+note_E4 = TxNote('E4', 329.628)
+note_c4 = TxNote('c4')
 
-        if False:
-            # We disable this extra check, needs to implement bemols for khe table lookup, perhaps it does not worht
-            note_freqs_khe = note_freq_khe.get_piano_notes_khe()
-            mingusnote1 = self.mingusnote
-            note_mingus_to_khe_name(mingusnote1.name)
-            khe_fullname = note_mingus_to_khe_name(mingusnote1.name) + str(mingusnote1.octave)
-            try:
-                freq_from_khe = note_freqs_khe[khe_fullname]
-            except:
-                raise
-
-            if freq_from_khe != freq_from_mingus:
-                raise Exception()
-        return freq_from_mingus
+note_C5 = TxNote('C5')  # C one octave above

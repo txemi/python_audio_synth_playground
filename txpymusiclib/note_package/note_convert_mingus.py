@@ -5,10 +5,11 @@ from txpymusiclib.note_package.note_convert_khe import khe_2_pytheory
 
 
 @beartype
-def note_name_2_mingus_note_name(note: str):
+def note_name_2_mingus_note_name(note: str) -> str:
     return note[:1] + "-" + note[-1:]
 
 
+@beartype
 def note_names_2_mingus_note_names(chord_notes):
     for note in chord_notes:
         yield note_name_2_mingus_note_name(note)

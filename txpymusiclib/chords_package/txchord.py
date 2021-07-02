@@ -1,4 +1,4 @@
-from txpymusiclib.note_package import note_names_and_freq_static
+from txpymusiclib.note_package import txnote
 
 
 class TxChord:
@@ -9,9 +9,9 @@ class TxChord:
         aug = 0, 4, 8
         all = (major, minor, dim, aug)
 
-    c3_major_chord_names = [note_names_and_freq_static.note_C3.name, note_names_and_freq_static.note_E3.name,
-                            note_names_and_freq_static.note_G3.name]
+    c3_major_chord_names = [txnote.note_C3.name, txnote.note_E3.name,
+                            txnote.note_G3.name]
 
-    C4_major_chord_freqs = [note_names_and_freq_static.note_C4.freq, note_names_and_freq_static.note_E4.freq,
-                            note_names_and_freq_static.note_G4.freq]
+    C4_major_chord_freqs = [txnote.note_C4.freq, txnote.note_E4.freq,
+                            txnote.note_G4.freq]
     otro_chord_mingus = ["D-4", "F#-4", "A-4"]  # no pilla el #
