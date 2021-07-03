@@ -11,22 +11,32 @@ from txpymusiclib.scales_package.scale_merge_from_all_libs import ScaleMergedFro
 from txpymusiclib.scales_package.scale_merge_from_all_libs import scales_merge_and_detect_same
 from txpymusiclib.scales_package.txscales_examples import phrygian
 
-# test scale (phrygian) mingus
-mingus_phrygian_c = mingus_core.scales.Phrygian("C", octaves=1)
-mingus_phrygian_c.octaves = 1
-mingus_play(mingus_phrygian_c, octave=4)
 
-# pytherory
-pytheory_c4 = pytheory.TonedScale(tonic=txnote_khe_wrap.note_C4.khe_name)
-pytherory_phrygian_C4 = pytheory_c4[txpymusiclib.scales_package.txscales_examples.phrygian.name]
+def test_playing_phrygian():
+    duration_secs_per_note = 0.5
+    base_note = txnote_khe_wrap.note_C4
+    octaves = 1
+    scale_name = txpymusiclib.scales_package.txscales_examples.phrygian.name
 
-# musthe
-musthe_phrygian_C4 = musthe.Scale(musthe.Note(txnote_khe_wrap.note_C4.khe_name),
-                                  txpymusiclib.scales_package.txscales_examples.phrygian.name)
-play_scale_from_musthescale(musthe_phrygian_C4)
+    # test scale (phrygian) mingus
+    mingus_phrygian_c = mingus_core.scales.Phrygian("C", octaves=octaves)
+    mingus_phrygian_c.octaves = octaves
+    mingus_play(mingus_phrygian_c, octave=base_note.get_octave())
 
-# txscale
-play_txscale(phrygian)
+    # pytherory
+    pytheory_c4 = pytheory.TonedScale(tonic=base_note.khe_name)
+    pytherory_phrygian_C4 = pytheory_c4[scale_name]
+
+    # musthe
+    musthe_phrygian_C4 = musthe.Scale(musthe.Note(base_note.khe_name),
+                                      scale_name)
+    play_scale_from_musthescale(musthe_phrygian_C4, duration_secs_per_note=duration_secs_per_note)
+
+    # txscale
+    play_txscale(base_note, phrygian, duration_secs=duration_secs_per_note)
+
+
+test_playing_phrygian()
 
 
 def play_all_scales_found_in_libs():

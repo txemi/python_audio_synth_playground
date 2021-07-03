@@ -206,7 +206,7 @@ class ScaleMergedFromLibs:
         duration_secs = 0.5
         if self.musthe is not None:
             txpymusiclib.play.play_musthe_in_synthetizer.play_scale_from_musthescale(self.musthe,
-                                                                                     duration_secs=duration_secs)
+                                                                                     duration_secs_per_note=duration_secs)
             return
         if self.mingus is not None and len(self.mingus) > 0:
             assert len(self.mingus) == 1

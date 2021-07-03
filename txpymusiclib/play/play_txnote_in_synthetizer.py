@@ -6,7 +6,7 @@ from txpymusiclib.play.play_floatfreqs_in_syntetizer import play_sequence_freqs
 from txpymusiclib.scales_package.txnotecontainer import TxNoteContainer
 from txpymusiclib.scales_package.txscales import TxScaleSt
 
-
+from txpymusiclib.note_package.txnote_khe_wrap import TxNoteKheWrap
 @beartype
 def play_sequence_txnotes(tx_note_container: TxNoteContainer, duration_secs: float = 1.0):
     note_freqs = [note.get_freq() for note in tx_note_container.get_txnotes()]
@@ -21,6 +21,6 @@ def play_scale_from_freq(freq: float, scale_semitone_intervals: TxScaleSt, durat
 
 
 @beartype
-def play_txscale(txscale: TxScaleSt, duration_secs: float = 0.1):
-    base = txnote_khe_wrap.note_C4
+def play_txscale(base_note:TxNoteKheWrap,txscale: TxScaleSt, duration_secs: float = 0.1):
+    base = base_note
     play_scale_from_freq(base.freq, txscale, duration_secs)

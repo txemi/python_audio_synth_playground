@@ -9,8 +9,8 @@ from txpymusiclib.scales_package.txnotecontainer import TxNoteContainer
 
 
 @beartype
-def play_scale_from_musthescale(current_scale: MustheScale):
+def play_scale_from_musthescale(current_scale: MustheScale, duration_secs_per_note:float):
     notes_in_scale, description = musthescale_notes(current_scale)
     nc = TxNoteContainer().build_from_mingus_notes_str(notes_in_scale)
-    play_sequence_txnotes(tx_note_container=nc, duration_secs=0.5)
+    play_sequence_txnotes(tx_note_container=nc, duration_secs=duration_secs_per_note)
     time.sleep(1)

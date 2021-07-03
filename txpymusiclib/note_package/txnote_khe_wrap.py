@@ -5,6 +5,9 @@ class TxNoteKheWrap:
         self.freq = freq
         self.khe_name = khe_name
 
+    def get_octave(self):
+        return int(self.khe_name[-1:])
+
 
 note_C3 = TxNoteKheWrap('C3')
 note_E3 = TxNoteKheWrap('E3')
