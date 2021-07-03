@@ -11,9 +11,10 @@ from txpymusiclib.scales_package.scale_merge_from_all_libs import ScaleMergedFro
 from txpymusiclib.scales_package.scale_merge_from_all_libs import scales_merge_and_detect_same
 from txpymusiclib.scales_package.txscales_examples import phrygian
 
+duration_secs_per_note = 0.3
+
 
 def test_playing_phrygian():
-    duration_secs_per_note = 0.5
     base_note = txnote_khe_wrap.note_C4
     octaves = 1
     scale_name = txpymusiclib.scales_package.txscales_examples.phrygian.name
@@ -21,7 +22,7 @@ def test_playing_phrygian():
     # test scale (phrygian) mingus
     mingus_phrygian_c = mingus_core.scales.Phrygian("C", octaves=octaves)
     mingus_phrygian_c.octaves = octaves
-    mingus_play(mingus_phrygian_c, octave=base_note.get_octave())
+    mingus_play(mingus_phrygian_c, duration_secs=duration_secs_per_note, octave=base_note.get_octave())
 
     # pytherory
     pytheory_c4 = pytheory.TonedScale(tonic=base_note.khe_name)
@@ -47,7 +48,7 @@ def play_all_scales_found_in_libs():
     for current_scale in scales_set:
         assert isinstance(current_scale, ScaleMergedFromLibs)
         print("<" + current_scale.format() + ">")
-        current_scale.play()
+        current_scale.play(duration_secs=duration_secs_per_note)
         print("\n")
 
 

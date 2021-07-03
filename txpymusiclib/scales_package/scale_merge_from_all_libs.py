@@ -202,8 +202,8 @@ class ScaleMergedFromLibs:
             formatted = formatted + " pytheory:" + str(self.pytheory).replace("\n", "") + "\n"
         return formatted
 
-    def play(self):
-        duration_secs = 0.5
+    def play(self,duration_secs :float):
+
         if self.musthe is not None:
             txpymusiclib.play.play_musthe_in_synthetizer.play_scale_from_musthescale(self.musthe,
                                                                                      duration_secs_per_note=duration_secs)
