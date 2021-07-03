@@ -125,13 +125,13 @@ def _get_semitones_from_mingus_notes(ascending: Iterable[Note]):
 
 
 @beartype
-def _get_semitones_from_mingus_scale(mingus_scale: scales._Scale):
-    return _get_semitones_from_mingus_notes(mingus_scale_to_notes(mingus_scale))
+def _get_semitones_from_mingus_scale(mingus_scale: scales._Scale, octave: int):
+    return _get_semitones_from_mingus_notes(mingus_scale_to_notes(mingus_scale, octave=octave))
 
 
 @beartype
-def get_semitones_from_mingus_scale(mingus_scale: scales._Scale) -> TxScaleSt:
-    return TxScaleSt(list(_get_semitones_from_mingus_scale(mingus_scale)))
+def get_semitones_from_mingus_scale(mingus_scale: scales._Scale, octave: int) -> TxScaleSt:
+    return TxScaleSt(list(_get_semitones_from_mingus_scale(mingus_scale, octave=octave)))
 
 
 @beartype

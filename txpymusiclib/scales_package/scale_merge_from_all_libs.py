@@ -63,6 +63,7 @@ def merge_txscale(s1, s2):
 
 
 class ScaleMergedFromLibs:
+    octave = 4
 
     @beartype
     def __init__(self, name: str = None):
@@ -90,17 +91,20 @@ class ScaleMergedFromLibs:
         self.check_integrity()
         # FIXME: disabled due to note numbering not working self._get_TxScaleSt_from_pytheory
         for semitone_builder in self._get_TxScaleSt_from_musthe, self._get_TxScaleSt_from_mingus, self._get_TxScaleSt_from_txscale:
-            semitones = semitone_builder()
+            if 'mingus' in str(semitone_builder):
+                semitones = semitone_builder(octave=4)
+            else:
+                semitones = semitone_builder()
             if semitones is not None:
                 return semitones
 
         raise NotImplementedError()
 
     @beartype
-    def _get_TxScaleSt_from_mingus(self) -> Optional[TxScaleSt]:
+    def _get_TxScaleSt_from_mingus(self, octave: int) -> Optional[TxScaleSt]:
         if self.mingus is not None and len(self.mingus) > 0:
             assert_that(self.mingus).is_length(1)
-            return get_semitones_from_mingus_scale(self.mingus[0])
+            return get_semitones_from_mingus_scale(self.mingus[0], octave)
         return None
 
     @beartype
@@ -129,13 +133,16 @@ class ScaleMergedFromLibs:
             # FIXME: disabled due to ionian not working
             if current_semitones_func is self._get_TxScaleSt_from_pytheory or 'pytheory' in str(current_semitones_func):
                 continue
-            current_semitones = current_semitones_func()
+            if 'mingus' in str(current_semitones_func):
+                current_semitones = current_semitones_func(octave=4)
+            else:
+                current_semitones = current_semitones_func()
             if last_semitones is not None:
                 if current_semitones is not None:
                     if current_semitones != last_semitones:
                         uuuu = current_semitones_func()
                         u3 = self._get_TxScaleSt_from_musthe()
-                        u4 = self._get_TxScaleSt_from_mingus()
+                        u4 = self._get_TxScaleSt_from_mingus(octave=self.octave)
                         u5 = self._get_TxScaleSt_from_pytheory()
                         raise NotImplementedError()
             if current_semitones is not None:
@@ -196,20 +203,21 @@ class ScaleMergedFromLibs:
         return formatted
 
     def play(self):
-        duration_secs=0.5
+        duration_secs = 0.5
         if self.musthe is not None:
-            txpymusiclib.play.play_musthe_in_synthetizer.play_scale_from_musthescale(self.musthe,duration_secs=duration_secs)
+            txpymusiclib.play.play_musthe_in_synthetizer.play_scale_from_musthescale(self.musthe,
+                                                                                     duration_secs=duration_secs)
             return
         if self.mingus is not None and len(self.mingus) > 0:
             assert len(self.mingus) == 1
             try:
                 # assert isinstance(self.mingus, mingus_core.scales._Scale)
-                mingus_play(self.mingus[0],duration_secs=duration_secs)
+                mingus_play(self.mingus[0], duration_secs=duration_secs)
             except:
                 raise
             return
         if self.txscale is not None:
-            play_txscale(self.txscale,duration_secs=duration_secs)
+            play_txscale(self.txscale, duration_secs=duration_secs)
             return
 
         raise NotImplementedError()

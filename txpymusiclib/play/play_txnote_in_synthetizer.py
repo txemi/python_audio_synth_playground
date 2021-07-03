@@ -9,15 +9,15 @@ from txpymusiclib.scales_package.txscales import TxScaleSt
 
 @beartype
 def play_sequence_txnotes(tx_note_container: TxNoteContainer, duration_secs: float = 1.0):
-    freqs = [note.get_freq() for note in tx_note_container.get_txnotes()]
-    play_sequence_freqs(freqs, duration_secs)
+    note_freqs = [note.get_freq() for note in tx_note_container.get_txnotes()]
+    play_sequence_freqs(note_freqs, duration_secs)
 
 
 @beartype
 def play_scale_from_freq(freq: float, scale_semitone_intervals: TxScaleSt, duration_secons: float):
-    freqs = list(txintervals.get_note_freqs_for_intervals(freq, scale_semitone_intervals.semitones))
-    tail = list(reversed(freqs))[1:]
-    play_sequence_freqs(freqs + tail, duration_secons)
+    note_freqs = list(txintervals.get_note_freqs_for_intervals(freq, scale_semitone_intervals.semitones))
+    tail = list(reversed(note_freqs))[1:]
+    play_sequence_freqs(note_freqs + tail, duration_secons)
 
 
 @beartype
