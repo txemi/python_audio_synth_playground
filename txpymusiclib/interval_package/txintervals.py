@@ -1,3 +1,5 @@
+from typing import Union
+
 from beartype import beartype
 
 from txpymusiclib.note_package import txnote_khe_wrap
@@ -32,7 +34,7 @@ def do_interval_jumps_to_freq(freq, half_steps_count_list: list[int]):
 
 
 @beartype
-def get_note_freqs_for_intervals(base_freq: float, interval_half_steps_count_list: list[int]):
+def get_note_freqs_for_intervals(base_freq: float, interval_half_steps_count_list: Union[list[int], tuple]):
     accumulated = 0
     for current_half_step_count in (0,) + interval_half_steps_count_list:
         added = current_half_step_count + accumulated
@@ -42,7 +44,8 @@ def get_note_freqs_for_intervals(base_freq: float, interval_half_steps_count_lis
 
 class TxKheIntervalExample:
     @beartype
-    def __init__(self, khe_note_from: txnote_khe_wrap.TxNoteKheWrap, khe_note_to: txnote_khe_wrap.TxNoteKheWrap, description: str,
+    def __init__(self, khe_note_from: txnote_khe_wrap.TxNoteKheWrap, khe_note_to: txnote_khe_wrap.TxNoteKheWrap,
+                 description: str,
                  sort_description: str):
         self.start = khe_note_from
         self.end = khe_note_to
@@ -51,11 +54,12 @@ class TxKheIntervalExample:
 
 
 interval_example_perfect_consonant_octave = TxKheIntervalExample(txnote_khe_wrap.note_C4,
-                                                                 txnote_khe_wrap.note_C5, "Perfect Consonance (Octave)", "Octave")
+                                                                 txnote_khe_wrap.note_C5, "Perfect Consonance (Octave)",
+                                                                 "Octave")
 interval_example_imperfect_consonance_major_third = TxKheIntervalExample(txnote_khe_wrap.note_C4,
                                                                          txnote_khe_wrap.note_E4,
-                                                                      "Imperfect Consonance (Major Thirds)",
-                                                                      'Major Thirds')
+                                                                         "Imperfect Consonance (Major Thirds)",
+                                                                         'Major Thirds')
 interval_example_dissonance_minor_seconds = TxKheIntervalExample(txnote_khe_wrap.note_C4,
                                                                  txnote_khe_wrap.note_c4, "Dissonance (Minor Seconds)",
-                                                              'Minor Seconds')
+                                                                 'Minor Seconds')

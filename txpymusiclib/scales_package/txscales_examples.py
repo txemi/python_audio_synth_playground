@@ -1,11 +1,17 @@
 from txpymusiclib.scales_package.txscales import TxScaleSt
 
-blues = TxScaleSt(semitones=(3, 2, 1, 1, 3, 2), name="blues")
-doble_armonica = TxScaleSt((1, 3, 1, 2, 1, 3, 1), name='doble_armonica')
-major = TxScaleSt((2, 2, 1, 2, 2, 2, 1), name='major')
-minor = TxScaleSt((2, 1, 2, 2, 1, 2, 2), name='minor')
-phrygian = TxScaleSt((1, 2, 2, 2, 1, 2, 2), name='phrygian')
-chromatic = TxScaleSt((1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="chromatic")
-ionian = TxScaleSt(name='ionian')
+# https://www.offtonic.com/theory/book/7-4.html
 
-all = (blues, doble_armonica, major, minor, phrygian, chromatic)
+major = TxScaleSt(semitones=(2, 2, 1, 2, 2, 2, 1), names=('major', 'ionian'), mode=1, alt="natural")
+dorian = TxScaleSt(names=("dorian",), mode=2, alt="#6")
+phrygian = TxScaleSt(semitones=(1, 2, 2, 2, 1, 2, 2), names=('phrygian',), mode=3, alt="b2")
+lydian = TxScaleSt(names=('lydian',), mode=4, alt="#2")
+mixolydian = TxScaleSt(names=('mixolydian',), mode=5, alt="b7")
+minor = TxScaleSt(semitones=(2, 1, 2, 2, 1, 2, 2), names=('minor', 'aeolian'), mode=6, alt="natural")
+locrian = TxScaleSt(names=('locrian',), mode=7, alt="b2 b5")  # not used
+
+blues = TxScaleSt(semitones=(3, 2, 1, 1, 3, 2), names=("blues",))
+doble_armonica = TxScaleSt(semitones=(1, 3, 1, 2, 1, 3, 1), names=('doble_armonica',))
+chromatic = TxScaleSt(semitones=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), names=("chromatic",))
+
+all = (major, dorian, phrygian, lydian, mixolydian, minor, locrian, blues, doble_armonica, chromatic)
