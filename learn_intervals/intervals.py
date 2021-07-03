@@ -17,14 +17,10 @@ from txpymusiclib.interval_package.txintervals import interval_example_perfect_c
     interval_example_imperfect_consonance_major_third, interval_example_dissonance_minor_seconds
 from txpymusiclib.note_package import txnote_khe_wrap
 from txpymusiclib.note_package.convert_khe_musthe import musthe_note_to_txkhenote
+from txpymusiclib.note_package.convert_mingus_muse import note_musthe_2_mingus_name
 from txpymusiclib.note_package.txnote_khe_wrap import TxNoteKheWrap
 
 plt.style.use('seaborn-dark')
-
-
-def note_musthe_2_mingus_name(musthe_note: musthe.Note):
-    # TODO: handel octave
-    return musthe_note.letter.name
 
 
 def check_interval(musthe_interval_name: str, mingus_interval: int, description: str):
