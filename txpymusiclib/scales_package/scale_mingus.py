@@ -78,13 +78,14 @@ def _get_semitones_from_mingus_notes_2(ascending):
 
 
 @beartype
-def mingus_note_str_to_mingus_note(note_str: str) -> Note:
+def mingus_note_str_to_mingus_note(note_str: str, octave: int) -> Note:
     try:
         if len(note_str) < 1:
             raise NotImplementedError()
     except:
         raise
-    mingus_note = Note().from_shorthand(note_str[:1])
+    # mingus_note = Note().from_shorthand(note_str[:1])
+    mingus_note = Note(name=note_str[:1], octave=octave)
     for note_decorator in note_str[1:]:
         if note_decorator == 'b':
             mingus_note.diminish()
@@ -96,14 +97,14 @@ def mingus_note_str_to_mingus_note(note_str: str) -> Note:
 
 
 @beartype
-def mingus_scale_to_notes(mingus_scale: scales._Scale) -> Generator[Note, None, None]:
+def mingus_scale_to_notes(mingus_scale: scales._Scale, octave: int) -> Generator[Note, None, None]:
     # scales._Scale
     try:
         ascending = mingus_scale.ascending()
     except:
         raise
-    for a in ascending:
-        yield mingus_note_str_to_mingus_note(a)
+    for note in ascending:
+        yield mingus_note_str_to_mingus_note(note, octave=octave)
 
 
 @beartype
@@ -155,8 +156,8 @@ def mingus_iterate_scales():
         yield mingus_scale_instance
 
 
-def mingus_scale_to_container(mingus_tal: mingus_core.scales._Scale) -> NoteContainer:
-    mingus_notes = list(mingus_scale_to_notes(mingus_tal))
+def mingus_scale_to_container(mingus_scale: mingus_core.scales._Scale, octave: int) -> NoteContainer:
+    mingus_notes = list(mingus_scale_to_notes(mingus_scale, octave=octave))
     for mingus_note in mingus_notes:
         assert isinstance(mingus_note, Note)
     container = NoteContainer(mingus_notes)

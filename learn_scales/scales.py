@@ -12,8 +12,9 @@ from txpymusiclib.scales_package.scale_merge_from_all_libs import scales_merge_a
 from txpymusiclib.scales_package.txscales_examples import phrygian
 
 # test scale (phrygian) mingus
-mingus_phrygian_c = mingus_core.scales.Phrygian("C")
-mingus_play(mingus_phrygian_c)
+mingus_phrygian_c = mingus_core.scales.Phrygian("C", octaves=1)
+mingus_phrygian_c.octaves = 1
+mingus_play(mingus_phrygian_c, octave=4)
 
 # pytherory
 pytheory_c4 = pytheory.TonedScale(tonic=txnote_khe_wrap.note_C4.khe_name)

@@ -196,19 +196,20 @@ class ScaleMergedFromLibs:
         return formatted
 
     def play(self):
+        duration_secs=0.5
         if self.musthe is not None:
-            txpymusiclib.play.play_musthe_in_synthetizer.play_scale_from_musthescale(self.musthe)
+            txpymusiclib.play.play_musthe_in_synthetizer.play_scale_from_musthescale(self.musthe,duration_secs=duration_secs)
             return
         if self.mingus is not None and len(self.mingus) > 0:
             assert len(self.mingus) == 1
             try:
                 # assert isinstance(self.mingus, mingus_core.scales._Scale)
-                mingus_play(self.mingus[0])
+                mingus_play(self.mingus[0],duration_secs=duration_secs)
             except:
                 raise
             return
         if self.txscale is not None:
-            play_txscale(self.txscale)
+            play_txscale(self.txscale,duration_secs=duration_secs)
             return
 
         raise NotImplementedError()

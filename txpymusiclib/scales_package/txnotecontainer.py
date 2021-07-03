@@ -54,7 +54,7 @@ class TxNoteContainer:
         self.__notes.add_note(a)
 
     @beartype
-    def build_from_mingus_scale(self, mingus_tal: mingus_core.scales._Scale):
-        container = mingus_scale_to_container(mingus_tal)
+    def build_from_mingus_scale(self, mingus_scale: mingus_core.scales._Scale):
+        container = mingus_scale_to_container(mingus_scale, octave=4)
         self.__notes = container
         return self

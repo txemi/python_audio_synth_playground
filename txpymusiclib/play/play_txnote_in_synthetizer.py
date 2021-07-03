@@ -8,8 +8,8 @@ from txpymusiclib.scales_package.txscales import TxScaleSt
 
 
 @beartype
-def play_sequence_txnotes(notes: TxNoteContainer, duration_secs: float = 1.0):
-    freqs = [note.get_freq() for note in notes.get_txnotes()]
+def play_sequence_txnotes(tx_note_container: TxNoteContainer, duration_secs: float = 1.0):
+    freqs = [note.get_freq() for note in tx_note_container.get_txnotes()]
     play_sequence_freqs(freqs, duration_secs)
 
 
@@ -21,6 +21,6 @@ def play_scale_from_freq(freq: float, scale_semitone_intervals: TxScaleSt, durat
 
 
 @beartype
-def play_txscale(txscale: TxScaleSt):
+def play_txscale(txscale: TxScaleSt, duration_secs: float = 0.1):
     base = txnote_khe_wrap.note_C4
-    play_scale_from_freq(base.freq, txscale, 1.0)
+    play_scale_from_freq(base.freq, txscale, duration_secs)
