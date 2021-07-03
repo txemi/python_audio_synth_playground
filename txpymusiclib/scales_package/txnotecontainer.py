@@ -27,7 +27,7 @@ class TxNoteContainer:
 
     @beartype
     def get_original(self) -> list:
-        out = [x.khe_name + str(x.octave) for x in self.__notes.notes]
+        out = [x.name + str(x.octave) for x in self.__notes.notes]
         return out
 
     @beartype

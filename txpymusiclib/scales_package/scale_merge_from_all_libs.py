@@ -217,7 +217,7 @@ class ScaleMergedFromLibs:
 @beartype
 def mingus_scale_name(scale1):
     try:
-        current_name = '_'.join(scale1.khe_name.split()[1:])
+        current_name = '_'.join(scale1.name.split()[1:])
     except:
         raise
     return current_name
@@ -275,7 +275,7 @@ class ScaleFinder:
         scale_merged.mingus = mingus_scales_found
 
         for a in txscales_examples.all:
-            if a.khe_name == scale_to_find_name:
+            if a.name == scale_to_find_name:
                 scale_merged.txscale = a
 
         self.map[scale_to_find_name] = scale_merged
@@ -301,7 +301,7 @@ def scale_get_from_all_libs() -> ScaleFinder:
         finder.find(cur_name)
 
     for a in txscales_examples.all:
-        finder.find(a.khe_name)
+        finder.find(a.name)
 
     return finder
 
