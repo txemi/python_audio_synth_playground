@@ -1,0 +1,12 @@
+js:
+
+    https://www.offtonic.com/theory/book/1-2.html
+
+
+https://github.com/jomimc/imperfect_fifths/tree/c53f5ceba933d7a128578886516332405fdeb875
+
+https://github.com/Modrigue/WebMusicScaleGenerator
+
+https://github.com/mauro7inf/offtonic-theory/tree/acd8c02b968d4a0219abfd4a0ddaf17adeeda4f6
+
+https://github.com/mauro7inf/audiolib.js
