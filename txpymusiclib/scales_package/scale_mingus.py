@@ -16,8 +16,13 @@ from txpymusiclib.scales_package.txscales import TxScaleSt
 @beartype
 def _mingus_names_to_notes(scale_notes: Iterable[str]):
     for note_str in scale_notes:
+        assert isinstance(note_str, str)
         if True:
-            mingus_note = containers.Note(name=note_str[:-1], octave=int(note_str[-1:]))
+            try:
+                mingus_note = containers.Note(name=note_str[:-1], octave=int(note_str[-1:]))
+            except:
+                mingus_note = containers.Note(name=note_str[:-1], octave=int(note_str[-1:]))
+                raise
         else:
             # from_shorthand es otra cosa NO USAR
             mingus_note = containers.Note().from_shorthand(note_str)
@@ -26,7 +31,7 @@ def _mingus_names_to_notes(scale_notes: Iterable[str]):
 
 
 @beartype
-def mingus_names_to_mingusnotes(scale_notes: Iterable[str]) -> NoteContainer:
+def mingus_names_to_mingusnotecontainer(scale_notes: Iterable[str]) -> NoteContainer:
     return NoteContainer(_mingus_names_to_notes(scale_notes))
 
 
@@ -162,3 +167,11 @@ def mingus_scale_to_container(mingus_scale: mingus_core.scales._Scale, octave: i
         assert isinstance(mingus_note, Note)
     container = NoteContainer(mingus_notes)
     return container
+
+
+def mingus_scale_build_from_name(scale_name: str, base_note: str, octaves: int):
+    if scale_name == txpymusiclib.scales_package.txscales_examples.phrygian.name:
+        return mingus_core.scales.Phrygian(note=base_note, octaves=octaves)
+    if scale_name == txpymusiclib.scales_package.txscales_examples.major.name:
+        return mingus_core.scales.Major(note=base_note, octaves=octaves)
+    raise NotImplementedError()

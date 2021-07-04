@@ -1,3 +1,5 @@
+import copy
+
 from beartype import beartype
 from mingus import core as mingus_core
 from mingus.containers import NoteContainer as MingusNoteContainer
@@ -5,6 +7,7 @@ from synthesizer import Player, Synthesizer
 
 from txpymusiclib.chords_package import chord_conversion
 from txpymusiclib.play.play_floatfreqs_in_syntetizer import play_init
+from txpymusiclib.play.play_mode import ScalePlayMode
 from txpymusiclib.play.play_txnote_in_synthetizer import play_sequence_txnotes
 from txpymusiclib.scales_package import txnotecontainer
 
@@ -45,8 +48,20 @@ def play_progressions(progressions: tuple[str]):
 
 
 @beartype
-def mingus_play(mingus_scale: mingus_core.scales._Scale, duration_secs: float = 0.5, octave=4):
+def mingus_play(mingus_scale: mingus_core.scales._Scale, duration_secs: float = 0.5, octave=4,
+                mode: ScalePlayMode = ScalePlayMode.octave_and_return):
+    # octave=4
     assert isinstance(mingus_scale, mingus_core.scales._Scale)
-    tx_note_container_1 = txnotecontainer.TxNoteContainer().build_from_mingus_scale(mingus_scale)
+    tx_note_container_1 = txnotecontainer.TxNoteContainer().build_from_mingus_scale(mingus_scale, octave=octave)
+
+    if mode is ScalePlayMode.octave_and_return or mode is ScalePlayMode.octave:
+        first = tx_note_container_1.get_mingus_note_list()[0]
+        last = copy.deepcopy(first)
+        last.octave = last.octave + 1
+        tx_note_container_1.append(last)
+
+    if mode is ScalePlayMode.octave_and_return:
+        mingus_notes = list(reversed(tx_note_container_1.get_mingus_note_list()[0:-1]))
+        tx_note_container_1.append_all(mingus_notes)
 
     play_sequence_txnotes(tx_note_container_1, duration_secs=duration_secs)

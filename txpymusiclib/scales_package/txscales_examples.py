@@ -15,3 +15,18 @@ doble_armonica = TxScaleSt(semitones=(1, 3, 1, 2, 1, 3, 1), names=('doble_armoni
 chromatic = TxScaleSt(semitones=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), names=("chromatic",))
 
 all = (major, dorian, phrygian, lydian, mixolydian, minor, locrian, blues, doble_armonica, chromatic)
+
+
+def find_scale_by_name(scale_name: str):
+    for current_scale in all:
+        if scale_name in current_scale.names:
+            yield current_scale
+
+
+def single(mylist):
+    assert len(mylist) == 1
+    return mylist[0]
+
+
+def find_scale_by_name_unique(scale_name: str) -> TxScaleSt:
+    return single(list(find_scale_by_name(scale_name)))
