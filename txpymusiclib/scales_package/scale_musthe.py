@@ -13,9 +13,5 @@ def musthescale_semitones(current_scale: MustheScale):
     return TxScaleSt(semitone_diffs)
 
 
-@beartype
-def musthescale_notes(current_scale: MustheScale):
-    semitone_diffs = musthescale_semitones(current_scale)
-    notes_in_scale = [current_scale[i].scientific_notation() for i in range(len(current_scale))]
-    description = str(current_scale) + ":" + str(semitone_diffs.semitones) + ":" + str(notes_in_scale)
-    return notes_in_scale, description
+
+

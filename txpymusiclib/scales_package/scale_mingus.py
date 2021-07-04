@@ -175,3 +175,5 @@ def mingus_scale_build_from_name(scale_name: str, base_note: str, octaves: int):
     if scale_name == txpymusiclib.scales_package.txscales_examples.major.name:
         return mingus_core.scales.Major(note=base_note, octaves=octaves)
     raise NotImplementedError()
+
+

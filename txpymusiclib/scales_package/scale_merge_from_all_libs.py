@@ -8,6 +8,7 @@ from mingus import core as mingus_core
 from musthe import Scale as MustheScale
 
 import txpymusiclib.play.play_musthe_in_synthetizer
+import txpymusiclib.scales_package.scale_musthe_wrap
 from txpymusiclib.note_package import txnote_khe_wrap
 from txpymusiclib.play.play_mingus_in_synthesizer import mingus_play
 from txpymusiclib.play.play_txnote_in_synthetizer import play_txscale
@@ -205,8 +206,8 @@ class ScaleMergedFromLibs:
     def play(self, duration_secs: float):
 
         if self.musthe is not None:
-            txpymusiclib.play.play_musthe_in_synthetizer.play_scale_from_musthescale(self.musthe,
-                                                                                     duration_secs_per_note=duration_secs)
+            txpymusiclib.scales_package.scale_musthe_wrap.play_scale_from_musthescale(self.musthe,
+                                                                                      duration_secs_per_note=duration_secs)
             return
         if self.mingus is not None and len(self.mingus) > 0:
             assert len(self.mingus) == 1
