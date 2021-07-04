@@ -38,7 +38,7 @@ def do_interval_jumps_to_freq(freq, half_steps_count_list: list[int]):
 def get_note_freqs_for_intervals(base_freq: float, interval_half_steps_count_list: Union[list[int], tuple],
                                  mode: ScalePlayMode):
     accumulated = 0
-    for current_half_step_count in (0,) + interval_half_steps_count_list:
+    for current_half_step_count in list((0,)) + list(interval_half_steps_count_list):
         added = current_half_step_count + accumulated
         if added == 12 and mode == ScalePlayMode.simple:
             # no completamos con octava

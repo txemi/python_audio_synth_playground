@@ -16,7 +16,7 @@ duration_secs_per_note = 0.5
 def test_playing_scale_by_name(scale_name, base_note):
     octaves = 1
     scale_play_mode = ScalePlayMode.octave_and_return
-    time_to_wait = 5
+    time_to_wait_in_seconds = 5
 
     for current_scale_builder in (
             TxTxScaleWrapper, TxMingusScaleWrapper,
@@ -24,7 +24,7 @@ def test_playing_scale_by_name(scale_name, base_note):
         print(current_scale_builder.wrapped_lib_name)
         scale = current_scale_builder(scale_name=scale_name, base_note=base_note, octaves=octaves)
         scale.play(scale_play_mode=scale_play_mode, duration_secs_per_note=duration_secs_per_note)
-        time.sleep(time_to_wait)
+        time.sleep(time_to_wait_in_seconds)
 
 
 test_playing_scale_by_name(scale_name=txpymusiclib.scales_package.txscales_examples.major.name,

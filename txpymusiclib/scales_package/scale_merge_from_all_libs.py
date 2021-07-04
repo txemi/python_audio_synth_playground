@@ -7,14 +7,14 @@ from beartype import beartype
 from mingus import core as mingus_core
 from musthe import Scale as MustheScale
 
-import txpymusiclib.play.play_musthe_in_synthetizer
-import txpymusiclib.scales_package.scale_musthe_wrap
 from txpymusiclib.note_package import txnote_khe_wrap
 from txpymusiclib.play.play_mingus_in_synthesizer import mingus_play
+from txpymusiclib.play.play_mode import ScalePlayMode
 from txpymusiclib.play.play_txnote_in_synthetizer import play_txscale
 from txpymusiclib.scales_package import txscales_examples
 from txpymusiclib.scales_package.scale_mingus import get_semitones_from_mingus_scale, mingus_iterate_scales
 from txpymusiclib.scales_package.scale_musthe import musthescale_semitones
+from txpymusiclib.scales_package.scale_musthe_wrap import TxMustheScaleWrapper
 from txpymusiclib.scales_package.scale_pytheory import scale_pytheory2txscale
 from txpymusiclib.scales_package.txscales import TxScaleSt
 
@@ -204,10 +204,12 @@ class ScaleMergedFromLibs:
         return formatted
 
     def play(self, duration_secs: float):
-
+        base_note = txnote_khe_wrap.note_C4
+        mode = ScalePlayMode.octave
         if self.musthe is not None:
-            txpymusiclib.scales_package.scale_musthe_wrap.play_scale_from_musthescale(self.musthe,
-                                                                                      duration_secs_per_note=duration_secs)
+            player1234 = TxMustheScaleWrapper(scale_name=list(self.names)[0], base_note=base_note,
+                                              musthe_scale=self.musthe)
+            player1234.play(scale_play_mode=mode, duration_secs_per_note=duration_secs)
             return
         if self.mingus is not None and len(self.mingus) > 0:
             assert len(self.mingus) == 1
@@ -218,7 +220,7 @@ class ScaleMergedFromLibs:
                 raise
             return
         if self.txscale is not None:
-            play_txscale(self.txscale, duration_secs=duration_secs)
+            play_txscale(txscale=self.txscale, base_note=base_note, duration_secs=duration_secs, mode=mode)
             return
 
         raise NotImplementedError()
