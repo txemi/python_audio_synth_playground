@@ -1,4 +1,5 @@
 import copy
+from typing import Union
 
 from beartype import beartype
 from mingus import core as mingus_core
@@ -40,7 +41,7 @@ def play_chords_loop_chord_notation(chordseq: (list[str], tuple), times: int):
 
 
 @beartype
-def play_progressions(progressions: tuple[str]):
+def play_progressions(progressions: Union[tuple, list]):
     player, synthesizer_instance = play_init()
     for prog in progressions:
         nc = chord_conversion.mingus_progression_to_notes(prog)
