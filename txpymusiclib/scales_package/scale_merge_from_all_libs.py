@@ -8,7 +8,7 @@ from mingus import core as mingus_core
 from musthe import Scale as MustheScale
 
 from txpymusiclib.note_package import txnote_khe_wrap
-from txpymusiclib.play.play_mingus_in_synthesizer import mingus_play
+from txpymusiclib.play.play_mingus_in_synthesizer import mingus_scale_play
 from txpymusiclib.play.play_mode import ScalePlayMode
 from txpymusiclib.play.play_txnote_in_synthetizer import play_txscale
 from txpymusiclib.scales_package import txscales_examples
@@ -215,7 +215,7 @@ class ScaleMergedFromLibs:
             assert len(self.mingus) == 1
             try:
                 # assert isinstance(self.mingus, mingus_core.scales._Scale)
-                mingus_play(self.mingus[0], duration_secs=duration_secs)
+                mingus_scale_play(self.mingus[0], duration_secs=duration_secs)
             except:
                 raise
             return

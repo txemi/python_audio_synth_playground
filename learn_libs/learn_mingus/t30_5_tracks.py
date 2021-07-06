@@ -1,17 +1,17 @@
-from mingus import containers
+from mingus import containers as mingus_containers
 
 from txpymusiclib.chords_package import chord_progression_examples
 
 
 def aa():
-    t = containers.Track(containers.Piano())
-    b = containers.Bar()
+    t = mingus_containers.Track(mingus_containers.Piano())
+    b = mingus_containers.Bar()
     t + b
     t + "C-4"
 
 
 def bb():
-    t = containers.Track(containers.Piano()).from_chords(chord_progression_examples.NiceChordSeqExample)
+    t = mingus_containers.Track(mingus_containers.Piano()).from_chords(chord_progression_examples.NiceChordSeqExample)
     b = list(t.get_notes())
     print(1)
 

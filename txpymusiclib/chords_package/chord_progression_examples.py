@@ -6,9 +6,11 @@ from txpymusiclib.chords_package.chord_progression import TxChordPogression
 NiceChordSeqExample = ('Am', 'CM', 'EM', 'FM')
 LordOfRings = ('CM', 'Em', 'FM', 'CM', 'FM', 'GM', 'CM', 'GM')
 
-Example2 = TxChordPogression().from_roman(("I", 'V', 'I'))
+chord_progression_example_1 = TxChordPogression().from_roman(("I", 'V', 'I'))
 chord_progression_examples = (
-    Example2,
+    TxChordPogression().from_chords(NiceChordSeqExample).with_name("NiceChordSeqExample"),
+    TxChordPogression().from_chords(LordOfRings).with_name("LordOfRings"),
+    chord_progression_example_1,
     TxChordPogression().from_roman(("VI", "III", "IV", "V")),
     TxChordPogression().from_roman(["I", "bIV", "VIIdim7"]).with_name("bad example"),
     TxChordPogression().from_roman(["I", "IV", "V", "I"]),

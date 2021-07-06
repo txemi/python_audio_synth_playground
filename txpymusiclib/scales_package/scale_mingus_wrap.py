@@ -1,4 +1,4 @@
-from txpymusiclib.play.play_mingus_in_synthesizer import mingus_play
+from txpymusiclib.play.play_mingus_in_synthesizer import mingus_scale_play
 from txpymusiclib.play.play_mode import ScalePlayMode
 from txpymusiclib.scales_package.scale_mingus import mingus_scale_build_from_name
 
@@ -13,7 +13,7 @@ class TxMingusScaleWrapper:
                                                            octaves=octaves)
 
     def play(self, scale_play_mode: ScalePlayMode, duration_secs_per_note: float):
-        mingus_play(self.__mingus_scale, duration_secs=duration_secs_per_note, octave=self.__base_note.get_octave(),
-                    mode=scale_play_mode)
+        mingus_scale_play(self.__mingus_scale, duration_secs=duration_secs_per_note, octave=self.__base_note.get_octave(),
+                          mode=scale_play_mode)
 
     pass
