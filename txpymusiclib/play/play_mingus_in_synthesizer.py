@@ -24,7 +24,7 @@ def play_chord_from_mingus_note_container(player: Player, synthesizer_instance: 
 
 @beartype
 def play_chord_chord_notation_with_mingus(player: Player, synthesizer_instance: Synthesizer, current_chord_name: str):
-    chord_notes = chord_conversion.mingus_chord_to_notes(current_chord_name)
+    chord_notes = chord_conversion.mingus_chord_to_note_container(current_chord_name)
     assert isinstance(chord_notes, MingusNoteContainer)
     play_chord_from_mingus_note_container(player, synthesizer_instance, chord_notes, 1.0)
 
@@ -46,7 +46,7 @@ def play_chords_loop_chord_notation(chordseq: (list[str], tuple), times: int):
 def play_progressions_roman(progressions: Union[tuple, list]):
     player, synthesizer_instance = play_init()
     for prog in progressions:
-        mingus_note_container = chord_conversion.mingus_progression_to_notes(prog)
+        mingus_note_container = chord_conversion.mingus_progression_to_note_container(prog)
         assert isinstance(mingus_note_container, MingusNoteContainer)
         if mingus_note_container is False:
             raise NotImplementedError()

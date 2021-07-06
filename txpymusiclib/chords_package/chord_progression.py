@@ -1,10 +1,26 @@
 import time
 from typing import Union
 
+import mingus.containers.note_container
 from beartype import beartype
 from mingus.core import progressions
+from mingus.core import progressions as mingus_progressions
 
+from txpymusiclib.chords_package import chord_conversion
 from txpymusiclib.play import play_mingus_in_synthesizer
+
+
+def culo1(chord):
+    assert isinstance(chord, mingus.containers.note_container.NoteContainer)
+    uuu = chord.get_note_names()
+    aaaa3 = mingus_progressions.determine(uuu, key='C', shorthand=True)
+    return aaaa3
+
+
+def culo(chords):
+    aaa11 = list(chord_conversion.mingus_chords_to_note_containers(list(chords)))
+    for uu in aaa11:
+        yield culo1(uu)
 
 
 class TxChordPogression:
@@ -35,6 +51,8 @@ class TxChordPogression:
         if self.__roman is None:
             print(self.__chords)
             play_mingus_in_synthesizer.play_chords_loop_chord_notation(self.__chords, times=1)
+            aaa = list(culo(self.__chords))
+            print(aaa)
         else:
             print(self.__roman)
             key = "C"
