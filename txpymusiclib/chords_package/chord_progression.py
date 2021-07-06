@@ -10,17 +10,24 @@ from txpymusiclib.chords_package import chord_conversion
 from txpymusiclib.play import play_mingus_in_synthesizer
 
 
-def culo1(chord):
+def mingus_progressions_from_note_container(chord, key):
     assert isinstance(chord, mingus.containers.note_container.NoteContainer)
-    uuu = chord.get_note_names()
-    aaaa3 = mingus_progressions.determine(uuu, key='C', shorthand=True)
-    return aaaa3
+    note_names = chord.get_note_names()
+    progression_name = mingus_progressions.determine(note_names, key=key, shorthand=True)
+    return progression_name
 
 
-def culo(chords):
-    aaa11 = list(chord_conversion.mingus_chords_to_note_containers(list(chords)))
-    for uu in aaa11:
-        yield culo1(uu)
+def mingus_progressions_from_note_containers(chords, key):
+    chords_as_note_containers = list(chord_conversion.mingus_chords_to_note_containers(list(chords)))
+    for chord in chords_as_note_containers:
+        yield mingus_progressions_from_note_container(chord, key)
+
+
+def mingus_get_all_roman_progressions(chords):
+    from mingus.core import notes
+    for a in range(11):
+        b = notes.int_to_note(a)
+        yield list(mingus_progressions_from_note_containers(chords, b))
 
 
 class TxChordPogression:
@@ -51,8 +58,8 @@ class TxChordPogression:
         if self.__roman is None:
             print(self.__chords)
             play_mingus_in_synthesizer.play_chords_loop_chord_notation(self.__chords, times=1)
-            aaa = list(culo(self.__chords))
-            print(aaa)
+            roman_progressions = list(mingus_get_all_roman_progressions(self.__chords))
+            print(roman_progressions)
         else:
             print(self.__roman)
             key = "C"
