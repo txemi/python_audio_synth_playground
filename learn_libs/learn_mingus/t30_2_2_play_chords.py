@@ -4,7 +4,7 @@ from txpymusiclib.chords_package import chord_progression_examples
 # from mingus.midi import fluidsynth
 # la menor, do mayor, mi mayor, fa mayor
 
-for a in chord_progression_examples.Examples3:
+for a in chord_progression_examples.chord_progression_examples:
     print(a)
     txpymusiclib.play.play_mingus_in_synthesizer.play_progressions(a)
     print('\n')

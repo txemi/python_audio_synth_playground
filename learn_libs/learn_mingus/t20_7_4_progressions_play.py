@@ -5,7 +5,7 @@ from txpymusiclib.chords_package import chord_progression_examples
 
 # la menor, do mayor, mi mayor, fa mayor
 
-for current_progression in chord_progression_examples.Examples3:
+for current_progression in chord_progression_examples.chord_progression_examples:
     current_progression.progression_test()
 
 print(1)
