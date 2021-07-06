@@ -3,7 +3,7 @@ from txpymusiclib.chords_package.chord_progression import TxChordPogression
 # la menor, do mayor , mi mayor, fa mayor
 
 
-NiceChordSeqExample = ('Am', 'CM', 'EM', 'FM')
+NiceChordSeqExample = ('Am', 'CM', 'EM', 'FM')  # la menor, do mayor, mi mayor, fa mayor
 LordOfRings = ('CM', 'Em', 'FM', 'CM', 'FM', 'GM', 'CM', 'GM')
 
 chord_progression_example_1 = TxChordPogression().from_roman(("I", 'V', 'I'))
